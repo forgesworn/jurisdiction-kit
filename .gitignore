@@ -12,3 +12,4 @@ credentials.json
 serviceAccountKey.json
 *.tgz
 coverage/
+docs/

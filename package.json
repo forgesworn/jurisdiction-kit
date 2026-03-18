@@ -1,7 +1,7 @@
 {
   "name": "jurisdiction-kit",
   "version": "1.0.0",
-  "description": "Professional body registries and jurisdiction intelligence for 30+ countries — compliance, data protection, mutual recognition",
+  "description": "Professional body registries and jurisdiction intelligence for 28 countries — compliance, data protection, mutual recognition",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

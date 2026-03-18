@@ -16,7 +16,7 @@ All jurisdiction data lives in `src/jurisdictions.ts`. Each jurisdiction is an e
 A jurisdiction entry contains:
 
 - **Core metadata** — code, English name, local name, legal system, languages, currency.
-- **Professional bodies** — an array of `ProfessionalBody` objects (id, name, abbreviation, profession type, website, public register, digital credentials).
+- **Professional bodies** — an array of `ProfessionalBody` objects (id, name, nameEn, profession type, website, public register, digital credentials).
 - **Data protection law** — a `DataProtectionLaw` object (law name, year enacted, consent rules, breach notification, erasure/portability rights, cross-border restrictions, supervisory authority).
 - **Child protection** — a `ChildProtectionLaw` object (digital consent age, age of majority, parental consent, enhanced protections, profiling restrictions).
 - **Mutual recognition** — ISO codes of jurisdictions with formal credential recognition agreements.
@@ -30,7 +30,8 @@ Professional body arrays are defined as constants above the `JURISDICTIONS` reco
 2. Define `DataProtectionLaw` and `ChildProtectionLaw` objects.
 3. Add the entry to `JURISDICTIONS` using the ISO 3166-1 alpha-2 code as key.
 4. Run `npm run typecheck` — the compiler will catch any missing required fields.
-5. Run `npm test` — the data integrity test automatically validates all jurisdictions.
+5. Add a row for the new jurisdiction to the **Covered jurisdictions** table in `README.md`.
+6. Run `npm test` — the data integrity test automatically validates all jurisdictions.
 
 ## Code style
 

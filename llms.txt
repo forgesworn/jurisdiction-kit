@@ -52,7 +52,7 @@ legal, medical, notary, accounting, engineering, teaching, financial, veterinary
 ## Types
 
 - `Jurisdiction` — code, name, nameLocal, legalSystem, languages, currency, professionalBodies, dataProtection, childProtection, eSignatureRecognised, mutualRecognition, notes.
-- `ProfessionalBody` — id, name, abbreviation, profession, website, hasPublicRegister, registerUrl, issuesDigitalCredentials, notes.
+- `ProfessionalBody` — id, name, nameEn, profession, website, hasPublicRegister, registerUrl, issuesDigitalCredentials, notes.
 - `DataProtectionLaw` — name, fullName, year, digitalConsentAge, requiresExplicitConsent, breachNotificationHours, rightToErasure, rightToPortability, crossBorderRestrictions, maxRetentionDays, supervisoryAuthority, notes.
 - `ChildProtectionLaw` — name, minAgeDigitalConsent, ageOfMajority, requiresParentalConsent, enhancedProtections, profilingRestrictions.
 - `LegalSystem` — 'common-law' | 'civil-law' | 'mixed' | 'religious' | 'customary'.
@@ -82,7 +82,7 @@ import { getJurisdiction, canTransferData, getProfessionalBodies } from 'jurisdi
 
 const gb = getJurisdiction('GB');
 // gb.name === 'United Kingdom'
-// gb.dataProtection.name === 'UK GDPR'
+// gb.dataProtection.name === 'UK GDPR + DPA 2018'
 
 const transfer = canTransferData('FR', 'GB');
 // transfer.allowed === true, transfer.mechanism === 'adequacy-decision'

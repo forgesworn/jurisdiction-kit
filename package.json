@@ -1,0 +1,39 @@
+{
+  "name": "jurisdiction-kit",
+  "version": "0.0.0-development",
+  "description": "Professional body registries and jurisdiction intelligence for 30+ countries — compliance, data protection, mutual recognition",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["jurisdiction", "compliance", "legal", "professional-body", "kyc", "regulation", "data-protection", "gdpr"],
+  "author": "Darren",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forgesworn/jurisdiction-kit.git"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "semantic-release": "^25.0.3",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

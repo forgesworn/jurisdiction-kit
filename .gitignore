@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.idea/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+serviceAccountKey.json
+*.tgz
+coverage/

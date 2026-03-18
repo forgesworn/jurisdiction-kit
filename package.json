@@ -1,6 +1,6 @@
 {
   "name": "jurisdiction-kit",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Professional body registries and jurisdiction intelligence for 30+ countries — compliance, data protection, mutual recognition",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,14 +11,25 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "node node_modules/vitest/vitest.mjs run",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["jurisdiction", "compliance", "legal", "professional-body", "kyc", "regulation", "data-protection", "gdpr"],
+  "keywords": [
+    "jurisdiction",
+    "compliance",
+    "legal",
+    "professional-body",
+    "kyc",
+    "regulation",
+    "data-protection",
+    "gdpr"
+  ],
   "author": "Darren",
   "license": "MIT",
   "repository": {

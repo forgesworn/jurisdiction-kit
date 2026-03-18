@@ -1,4 +1,4 @@
-// Global Jurisdiction Registry for Signet Protocol
+// Global Jurisdiction Registry for jurisdiction-kit
 // Defines professional bodies, legal systems, data protection laws,
 // and regulatory frameworks for 30+ jurisdictions worldwide.
 
@@ -105,7 +105,7 @@ export interface Jurisdiction {
   eSignatureRecognised: boolean;
   /** Whether the jurisdiction has mutual recognition agreements */
   mutualRecognition: string[];
-  /** Signet-specific notes */
+  /** Additional notes */
   notes?: string;
 }
 
@@ -3185,6 +3185,8 @@ export const JURISDICTIONS: Record<string, Jurisdiction> = {
   },
 };
 
+Object.freeze(JURISDICTIONS);
+
 // --- Helper Functions ---
 
 /** Get a jurisdiction by ISO code */
@@ -3312,7 +3314,8 @@ export function getAllLanguages(): string[] {
 
 /** Get jurisdictions by language */
 export function getJurisdictionsByLanguage(languageCode: string): Jurisdiction[] {
-  return Object.values(JURISDICTIONS).filter((j) => j.languages.includes(languageCode));
+  const normalised = languageCode.toLowerCase();
+  return Object.values(JURISDICTIONS).filter((j) => j.languages.includes(normalised));
 }
 
 // --- Jurisdiction Confidence ---
@@ -3343,7 +3346,7 @@ export interface JurisdictionConfidence {
 
 /**
  * Compute a confidence score for a jurisdiction based on how well its
- * professional bodies and legal framework support Signet verification.
+ * professional bodies and legal framework support credential verification.
  * Higher scores mean credentials from this jurisdiction carry more weight.
  */
 export function computeJurisdictionConfidence(jurisdictionCode: string): JurisdictionConfidence | undefined {

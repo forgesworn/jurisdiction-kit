@@ -1,0 +1,92 @@
+# jurisdiction-kit
+
+> Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, check cross-border data transfer legality, find regulated professions, and rank jurisdictions by confidence score.
+
+## What it does
+
+jurisdiction-kit is a static, curated dataset of jurisdiction metadata — professional bodies, data protection laws, child protection rules, mutual recognition agreements, and e-signature status — exposed through a typed query API. No network requests, no external dependencies.
+
+## Covered jurisdictions (28)
+
+GB, US, FR, DE, ES, IT, NL, CA, AU, NZ, JP, KR, BR, MX, AR, IN, SG, AE, SA, ZA, CN, HK, IE, TR, ID, NG, KE, IL.
+
+## Profession types
+
+legal, medical, notary, accounting, engineering, teaching, financial, veterinary, pharmacy, architecture, social-work.
+
+## API surface
+
+### Data lookup
+
+- `getJurisdiction(code)` — returns a `Jurisdiction` object by ISO 3166-1 alpha-2 code. Case-insensitive.
+- `getJurisdictionCodes()` — returns all available jurisdiction codes.
+- `getProfessionalBodies(code, profession?)` — returns professional bodies, optionally filtered by profession type.
+- `getMutualRecognitionPartners(code)` — returns jurisdictions with mutual recognition agreements.
+- `isProfessionRegulated(code, profession)` — checks whether a profession is regulated in a jurisdiction.
+- `findJurisdictionsForProfession(profession)` — finds all jurisdictions where a given profession is regulated.
+
+### Age and consent
+
+- `getDigitalConsentAge(code)` — minimum age for digital services without parental consent. Defaults to 16 for unknown jurisdictions.
+- `getAgeOfMajority(code)` — legal age of majority. Defaults to 18 for unknown jurisdictions.
+
+### Data transfer
+
+- `canTransferData(from, to)` — determines whether a cross-border data transfer is permitted and by which mechanism (domestic, eu-internal, adequacy-decision, mutual-recognition, safeguards-required, no-restrictions).
+
+### Language
+
+- `getAllLanguages()` — returns a sorted array of all language codes across jurisdictions.
+- `getJurisdictionsByLanguage(lang)` — returns jurisdictions that list the given language. Case-insensitive.
+
+### Confidence scoring
+
+- `computeJurisdictionConfidence(code)` — returns a detailed confidence breakdown (0-100) covering professional body coverage, public register availability, digital credentials, data protection maturity, mutual recognition, e-signature, and legal system.
+- `getJurisdictionConfidence(code)` — returns just the numeric confidence score.
+- `rankJurisdictionsByConfidence()` — returns all jurisdictions ranked by confidence score (highest first).
+
+### Exported data
+
+- `JURISDICTIONS` — frozen `Record<string, Jurisdiction>` containing all jurisdiction data. Read-only at runtime.
+
+## Types
+
+- `Jurisdiction` — code, name, nameLocal, legalSystem, languages, currency, professionalBodies, dataProtection, childProtection, eSignatureRecognised, mutualRecognition, notes.
+- `ProfessionalBody` — id, name, abbreviation, profession, website, hasPublicRegister, registerUrl, issuesDigitalCredentials, notes.
+- `DataProtectionLaw` — name, fullName, year, digitalConsentAge, requiresExplicitConsent, breachNotificationHours, rightToErasure, rightToPortability, crossBorderRestrictions, maxRetentionDays, supervisoryAuthority, notes.
+- `ChildProtectionLaw` — name, minAgeDigitalConsent, ageOfMajority, requiresParentalConsent, enhancedProtections, profilingRestrictions.
+- `LegalSystem` — 'common-law' | 'civil-law' | 'mixed' | 'religious' | 'customary'.
+- `ProfessionType` — 'legal' | 'medical' | 'notary' | 'accounting' | 'engineering' | 'teaching' | 'financial' | 'veterinary' | 'pharmacy' | 'architecture' | 'social-work'.
+- `JurisdictionConfidence` — code, score, breakdown (7 sub-scores).
+
+## Use cases
+
+- **Legal-tech compliance** — determine which professional bodies are authorised to practise in a jurisdiction.
+- **KYC jurisdictional intelligence** — look up data protection law, digital consent age, and breach notification requirements.
+- **Cross-border data transfer analysis** — check transfer legality under GDPR adequacy decisions, mutual recognition, or safeguards.
+- **Professional body lookups** — find regulated bodies by country and profession.
+- **Age verification** — retrieve digital consent age and age of majority per jurisdiction.
+- **Mutual recognition** — discover which jurisdictions have formal credential recognition agreements.
+- **Jurisdiction ranking** — score and rank jurisdictions by how well they support credential verification.
+
+## Install
+
+```
+npm install jurisdiction-kit
+```
+
+## Example
+
+```typescript
+import { getJurisdiction, canTransferData, getProfessionalBodies } from 'jurisdiction-kit';
+
+const gb = getJurisdiction('GB');
+// gb.name === 'United Kingdom'
+// gb.dataProtection.name === 'UK GDPR'
+
+const transfer = canTransferData('FR', 'GB');
+// transfer.allowed === true, transfer.mechanism === 'adequacy-decision'
+
+const lawyers = getProfessionalBodies('GB', 'legal');
+// [{ name: 'The Law Society of England and Wales', ... }, ...]
+```

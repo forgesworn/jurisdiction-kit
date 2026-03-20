@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/forgesworn/jurisdiction-kit/compare/v1.0.0...v1.0.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* correct copyright to ForgeSworn ([0dc84ef](https://github.com/forgesworn/jurisdiction-kit/commit/0dc84ef5bad58b05fd1b29e2d5973a325a45a6ef))
+
 # 1.0.0 (2026-03-18)
 
 

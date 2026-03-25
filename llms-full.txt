@@ -1,0 +1,462 @@
+# jurisdiction-kit
+
+> Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, check cross-border data transfer legality, find regulated professions, and rank jurisdictions by confidence score.
+
+## Install
+
+```
+npm install jurisdiction-kit
+```
+
+ESM only. Zero runtime dependencies. Works in Node 14+.
+
+## Covered jurisdictions (28)
+
+GB, US, FR, DE, ES, IT, NL, CA, AU, NZ, JP, KR, BR, MX, AR, IN, SG, AE, SA, ZA, CN, HK, IE, TR, ID, NG, KE, IL.
+
+## Profession types
+
+`legal` | `medical` | `notary` | `accounting` | `engineering` | `teaching` | `financial` | `veterinary` | `pharmacy` | `architecture` | `social-work`
+
+---
+
+## Full API Reference
+
+### `getJurisdiction(code: string): Jurisdiction | undefined`
+
+Returns the full jurisdiction object by ISO 3166-1 alpha-2 code. Case-insensitive. Returns `undefined` for unknown codes.
+
+```typescript
+import { getJurisdiction } from 'jurisdiction-kit'
+
+const gb = getJurisdiction('GB')
+// gb.name === 'United Kingdom'
+// gb.nameLocal === 'United Kingdom'
+// gb.legalSystem === 'common-law'
+// gb.languages === ['en']
+// gb.currency === 'GBP'
+// gb.eSignatureRecognised === true
+// gb.mutualRecognition === ['AU', 'NZ', 'CA', 'SG', 'HK', 'IE', ...]
+// gb.dataProtection.name === 'UK GDPR + DPA 2018'
+// gb.dataProtection.breachNotificationHours === 72
+// gb.dataProtection.rightToErasure === true
+// gb.childProtection.minAgeDigitalConsent === 13
+
+const sg = getJurisdiction('sg')  // case-insensitive
+// sg.name === 'Singapore'
+```
+
+---
+
+### `getJurisdictionCodes(): string[]`
+
+Returns all available jurisdiction codes as an array of uppercase strings.
+
+```typescript
+import { getJurisdictionCodes } from 'jurisdiction-kit'
+
+const codes = getJurisdictionCodes()
+// → ['GB', 'US', 'FR', 'DE', 'ES', 'IT', 'NL', 'CA', 'AU', 'NZ', ...]
+// 28 entries total
+```
+
+---
+
+### `getProfessionalBodies(code: string, profession?: ProfessionType): ProfessionalBody[]`
+
+Returns professional bodies for a jurisdiction, optionally filtered by profession type. Returns `[]` for unknown codes.
+
+```typescript
+import { getProfessionalBodies } from 'jurisdiction-kit'
+
+// All bodies in the UK
+const allBodies = getProfessionalBodies('GB')
+// → 21 professional bodies
+
+// UK legal bodies only
+const lawyers = getProfessionalBodies('GB', 'legal')
+// → [
+//     { id: 'law-society-ew', name: 'The Law Society of England and Wales',
+//       profession: 'legal', hasPublicRegister: true,
+//       registerUrl: 'https://www.lawsociety.org.uk/find-a-solicitor',
+//       issuesDigitalCredentials: false, website: '...' },
+//     { id: 'law-society-scotland', ... },
+//     { id: 'law-society-ni', ... },
+//     { id: 'bar-standards-board', ... },
+//   ]
+
+// Australian accounting bodies
+const accountants = getProfessionalBodies('AU', 'accounting')
+// → [{ name: 'Chartered Accountants Australia and New Zealand', ... }, ...]
+```
+
+---
+
+### `getMutualRecognitionPartners(code: string): Jurisdiction[]`
+
+Returns full Jurisdiction objects for all jurisdictions with formal mutual recognition agreements with the given jurisdiction.
+
+```typescript
+import { getMutualRecognitionPartners } from 'jurisdiction-kit'
+
+const partners = getMutualRecognitionPartners('AU')
+// → [Jurisdiction(NZ), Jurisdiction(GB), Jurisdiction(CA), Jurisdiction(SG), Jurisdiction(HK)]
+
+const frPartners = getMutualRecognitionPartners('FR')
+// → EU/EEA neighbours plus adequacy-decision jurisdictions
+```
+
+---
+
+### `isProfessionRegulated(code: string, profession: ProfessionType): boolean`
+
+Checks whether a profession type has any registered bodies in the jurisdiction.
+
+```typescript
+import { isProfessionRegulated } from 'jurisdiction-kit'
+
+isProfessionRegulated('GB', 'legal')       // true
+isProfessionRegulated('GB', 'notary')      // true
+isProfessionRegulated('US', 'medical')     // true
+isProfessionRegulated('AE', 'social-work') // false (no registered body)
+```
+
+---
+
+### `findJurisdictionsForProfession(profession: ProfessionType): Jurisdiction[]`
+
+Returns all jurisdictions where a given profession is regulated (has at least one professional body).
+
+```typescript
+import { findJurisdictionsForProfession } from 'jurisdiction-kit'
+
+const medical = findJurisdictionsForProfession('medical')
+// → Array of ~26 Jurisdiction objects
+
+const architecture = findJurisdictionsForProfession('architecture')
+// → Fewer jurisdictions — not all 28 regulate architecture
+
+const veterinary = findJurisdictionsForProfession('veterinary')
+// → Jurisdictions with registered veterinary bodies
+```
+
+---
+
+### `getDigitalConsentAge(code: string): number`
+
+Returns the minimum age for digital services without parental consent. Returns `16` for unknown jurisdictions (the GDPR default).
+
+```typescript
+import { getDigitalConsentAge } from 'jurisdiction-kit'
+
+getDigitalConsentAge('GB')  // 13
+getDigitalConsentAge('DE')  // 16
+getDigitalConsentAge('US')  // 13 (COPPA)
+getDigitalConsentAge('IN')  // 18
+getDigitalConsentAge('BR')  // 12
+getDigitalConsentAge('KR')  // 14
+getDigitalConsentAge('XX')  // 16 (unknown — defaults to GDPR baseline)
+```
+
+---
+
+### `getAgeOfMajority(code: string): number`
+
+Returns the legal age of majority. Returns `18` for unknown jurisdictions.
+
+```typescript
+import { getAgeOfMajority } from 'jurisdiction-kit'
+
+getAgeOfMajority('GB')  // 18
+getAgeOfMajority('KR')  // 19
+getAgeOfMajority('SG')  // 21
+getAgeOfMajority('JP')  // 18 (lowered from 20 in 2022)
+getAgeOfMajority('XX')  // 18 (safe default)
+```
+
+---
+
+### `canTransferData(from: string, to: string): { allowed: boolean; mechanism?: string; notes?: string }`
+
+Determines the legal mechanism for a cross-border personal data transfer. Returns `{ allowed: false }` only for unknown jurisdictions — all known transfers have a mechanism, though some require additional safeguards.
+
+```typescript
+import { canTransferData } from 'jurisdiction-kit'
+
+canTransferData('FR', 'DE')
+// → { allowed: true, mechanism: 'eu-internal' }
+
+canTransferData('FR', 'GB')
+// → { allowed: true, mechanism: 'adequacy-decision' }
+
+canTransferData('GB', 'AU')
+// → { allowed: true, mechanism: 'mutual-recognition' }
+
+canTransferData('US', 'BR')
+// → { allowed: true, mechanism: 'no-restrictions' }
+
+canTransferData('DE', 'IN')
+// → { allowed: true, mechanism: 'safeguards-required',
+//     notes: 'Requires Standard Contractual Clauses (SCCs) or equivalent safeguards.' }
+
+canTransferData('GB', 'GB')
+// → { allowed: true, mechanism: 'domestic' }
+
+canTransferData('XX', 'GB')
+// → { allowed: false }
+```
+
+Transfer mechanisms:
+
+| Mechanism | Meaning |
+|-----------|---------|
+| `domestic` | Same jurisdiction — no transfer |
+| `eu-internal` | Both parties are EU/EEA member states |
+| `adequacy-decision` | Destination has an EU or UK adequacy decision |
+| `mutual-recognition` | Formal bilateral recognition agreement |
+| `no-restrictions` | Source jurisdiction has no outbound data transfer restrictions |
+| `safeguards-required` | Transfer permitted but requires SCCs or equivalent safeguards |
+
+---
+
+### `getAllLanguages(): string[]`
+
+Returns a sorted array of all unique ISO 639-1 language codes represented across jurisdictions.
+
+```typescript
+import { getAllLanguages } from 'jurisdiction-kit'
+
+getAllLanguages()
+// → ['af', 'ar', 'ca', 'de', 'en', 'es', 'eu', 'fr', 'ga', 'gl', 'he',
+//    'hi', 'id', 'it', 'ja', 'ko', 'ms', 'nl', 'pt', 'tr', 'ur', 'zh', ...]
+```
+
+---
+
+### `getJurisdictionsByLanguage(lang: string): Jurisdiction[]`
+
+Returns jurisdictions that list the given language code. Case-insensitive.
+
+```typescript
+import { getJurisdictionsByLanguage } from 'jurisdiction-kit'
+
+const frenchSpeaking = getJurisdictionsByLanguage('fr')
+// → [Jurisdiction(FR), Jurisdiction(CA), Jurisdiction(BE), ...]
+
+const spanishSpeaking = getJurisdictionsByLanguage('ES')  // case-insensitive
+// → [Jurisdiction(ES), Jurisdiction(MX), Jurisdiction(AR), ...]
+
+const arabicSpeaking = getJurisdictionsByLanguage('ar')
+// → [Jurisdiction(AE), Jurisdiction(SA), Jurisdiction(IL), ...]
+```
+
+---
+
+### `computeJurisdictionConfidence(code: string): JurisdictionConfidence | undefined`
+
+Returns a detailed confidence breakdown (0–100) for how well a jurisdiction supports credential verification. Returns `undefined` for unknown codes.
+
+```typescript
+import { computeJurisdictionConfidence } from 'jurisdiction-kit'
+
+const confidence = computeJurisdictionConfidence('GB')
+// → {
+//     code: 'GB',
+//     score: 80,
+//     breakdown: {
+//       professionalBodyCoverage: 20,   // 0–20: 1 pt per body, capped at 20
+//       publicRegisterAvailability: 20, // 0–20: proportion with public registers × 20
+//       digitalCredentialIssuance: 0,   // 0–15: proportion issuing digital credentials × 15
+//       dataProtectionMaturity: 15,     // 0–15: composite of data protection features
+//       mutualRecognition: 5,           // 0–10: 1 pt per partner, capped at 10
+//       eSignatureRecognition: 10,      // 0 or 10
+//       legalSystemScore: 10,           // 0–10: common-law/civil-law = 10, others lower
+//     }
+//   }
+
+computeJurisdictionConfidence('XX')  // undefined
+```
+
+---
+
+### `getJurisdictionConfidence(code: string): number`
+
+Returns just the numeric confidence score (0–100). Returns `0` for unknown jurisdictions.
+
+```typescript
+import { getJurisdictionConfidence } from 'jurisdiction-kit'
+
+getJurisdictionConfidence('GB')  // 80
+getJurisdictionConfidence('US')  // ~75
+getJurisdictionConfidence('XX')  // 0
+```
+
+---
+
+### `rankJurisdictionsByConfidence(): JurisdictionConfidence[]`
+
+Returns all 28 jurisdictions ranked by confidence score, highest first.
+
+```typescript
+import { rankJurisdictionsByConfidence } from 'jurisdiction-kit'
+
+const ranked = rankJurisdictionsByConfidence()
+// ranked[0].code === 'GB', ranked[0].score === 80
+// ranked[1].code === 'AU', ...
+// ranked[27].code === '...' (lowest scoring jurisdiction)
+```
+
+---
+
+### `JURISDICTIONS: Record<string, Jurisdiction>`
+
+The full jurisdiction dataset. Frozen with `Object.freeze` — read-only at runtime. Direct property access when you want to iterate or process in bulk.
+
+```typescript
+import { JURISDICTIONS } from 'jurisdiction-kit'
+
+Object.keys(JURISDICTIONS).length  // 28
+JURISDICTIONS['GB'].name           // 'United Kingdom'
+
+// Iterate all jurisdictions
+for (const [code, jurisdiction] of Object.entries(JURISDICTIONS)) {
+  console.log(code, jurisdiction.dataProtection.name)
+}
+```
+
+---
+
+## Types
+
+### `Jurisdiction`
+
+```typescript
+interface Jurisdiction {
+  code: string                     // ISO 3166-1 alpha-2 (e.g. 'GB')
+  name: string                     // English country name
+  nameLocal: string                // Local language name
+  legalSystem: LegalSystem         // 'common-law' | 'civil-law' | 'mixed' | 'religious' | 'customary'
+  languages: string[]              // ISO 639-1 language codes
+  currency: string                 // ISO 4217 currency code
+  professionalBodies: ProfessionalBody[]
+  dataProtection: DataProtectionLaw
+  childProtection: ChildProtectionLaw
+  eSignatureRecognised: boolean    // e-signatures legally recognised
+  mutualRecognition: string[]      // ISO codes of mutual recognition partners
+  notes?: string
+}
+```
+
+### `ProfessionalBody`
+
+```typescript
+interface ProfessionalBody {
+  id: string                       // Short identifier (e.g. 'law-society-ew')
+  name: string                     // Full name in original language
+  nameEn?: string                  // English name (if different)
+  profession: ProfessionType
+  website: string
+  hasPublicRegister: boolean       // Maintains a searchable public register
+  registerUrl?: string             // URL of the public register
+  issuesDigitalCredentials: boolean
+  notes?: string
+}
+```
+
+### `DataProtectionLaw`
+
+```typescript
+interface DataProtectionLaw {
+  name: string                     // Short name (e.g. 'GDPR', 'UK GDPR + DPA 2018')
+  fullName: string                 // Full legislative name
+  year: number                     // Year enacted
+  requiresExplicitConsent: boolean
+  digitalConsentAge: number        // Minimum age for digital services without parental consent
+  breachNotificationHours: number  // 0 = no statutory deadline
+  rightToErasure: boolean
+  rightToPortability: boolean
+  crossBorderRestrictions: boolean
+  maxRetentionDays: number         // 0 = no specific limit
+  supervisoryAuthority: string
+  notes?: string
+}
+```
+
+### `ChildProtectionLaw`
+
+```typescript
+interface ChildProtectionLaw {
+  name: string
+  minAgeDigitalConsent: number
+  ageOfMajority: number
+  requiresParentalConsent: boolean
+  enhancedProtections: boolean
+  profilingRestrictions: boolean
+}
+```
+
+### `JurisdictionConfidence`
+
+```typescript
+interface JurisdictionConfidence {
+  code: string
+  score: number   // 0–100 overall
+  breakdown: {
+    professionalBodyCoverage: number    // 0–20
+    publicRegisterAvailability: number  // 0–20
+    digitalCredentialIssuance: number   // 0–15
+    dataProtectionMaturity: number      // 0–15
+    mutualRecognition: number           // 0–10
+    eSignatureRecognition: number       // 0 or 10
+    legalSystemScore: number            // 0–10
+  }
+}
+```
+
+### Union types
+
+```typescript
+type LegalSystem = 'common-law' | 'civil-law' | 'mixed' | 'religious' | 'customary'
+
+type ProfessionType =
+  | 'legal'         // lawyers, solicitors, barristers
+  | 'medical'       // doctors, dentists, nurses, opticians, osteopaths, chiropractors
+  | 'notary'        // notaries public
+  | 'accounting'    // chartered accountants, CPAs, auditors
+  | 'engineering'   // chartered and professional engineers
+  | 'teaching'      // teachers and educators
+  | 'financial'     // financial advisers and actuaries
+  | 'veterinary'    // veterinary surgeons
+  | 'pharmacy'      // pharmacists
+  | 'architecture'  // architects
+  | 'social-work'   // social workers
+```
+
+---
+
+## Use cases
+
+- **Legal-tech compliance** — determine which professional bodies are authorised to practise in a target jurisdiction before launching a service
+- **KYC / identity verification** — look up data protection law, digital consent age, and breach notification requirements for a user's jurisdiction
+- **Cross-border data transfer analysis** — determine transfer mechanism (GDPR adequacy, SCCs, mutual recognition) before sharing personal data internationally
+- **Age-gating** — retrieve `getDigitalConsentAge` per jurisdiction to set the correct minimum age for digital services
+- **Professional credential verification** — find regulated bodies by country and profession, check whether a body maintains a searchable public register
+- **Mutual recognition** — discover which jurisdictions have formal credential recognition agreements with a target jurisdiction
+- **Jurisdiction ranking** — score and rank jurisdictions by how well they support professional credential verification
+
+---
+
+## Data methodology
+
+- **Sources**: publicly available government registries, official regulatory authority websites, and legal databases
+- **Currency**: data compiled in 2025 and reflects legislation as of that date — always verify with the relevant regulatory authority before production compliance decisions
+- **Coverage**: 28 countries, weighted towards common-law and EU/EEA jurisdictions
+- **Bundle size**: the full frozen dataset is always included (~3,400 lines of source). Not tree-shakeable — the data is the library.
+
+---
+
+## Links
+
+- [npm](https://www.npmjs.com/package/jurisdiction-kit)
+- [GitHub](https://github.com/forgesworn/jurisdiction-kit)
+- [README](https://github.com/forgesworn/jurisdiction-kit/blob/main/README.md)

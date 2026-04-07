@@ -1,0 +1,9 @@
+{
+  "projectTitle": "jurisdiction-kit",
+  "description": "Professional body registries and jurisdiction intelligence for 30+ countries. Compliance data as code. TypeScript.",
+  "excludeFolders": ["node_modules", "dist", "coverage", "src", "tests", ".github", ".changeset"],
+  "rules": [
+    "Registry data is structured per jurisdiction — use getRegistries(countryCode) to list available professional bodies.",
+    "Includes regulatory metadata: licensing requirements, verification URLs, data freshness dates."
+  ]
+}

@@ -12,7 +12,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "context7.json"
   ],
   "scripts": {
     "build": "tsc",

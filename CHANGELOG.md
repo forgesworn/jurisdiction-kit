@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/forgesworn/jurisdiction-kit/compare/v1.0.1...v1.0.2) (2026-04-12)
+
+
+### Bug Fixes
+
+* resolve development dependency vulnerabilities ([4af5ec3](https://github.com/forgesworn/jurisdiction-kit/commit/4af5ec3a4f0d24b00a4853b9277f89efa4080811))
+
 ## [1.0.1](https://github.com/forgesworn/jurisdiction-kit/compare/v1.0.0...v1.0.1) (2026-03-20)
 
 

@@ -6,6 +6,7 @@
 [![CI](https://github.com/forgesworn/jurisdiction-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/forgesworn/jurisdiction-kit/actions/workflows/ci.yml)
 [![licence](https://img.shields.io/npm/l/jurisdiction-kit)](./LICENSE)
 ![zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/TheCryptoDonkey?logo=githubsponsors&color=ea4aaa&label=Sponsor)](https://github.com/sponsors/TheCryptoDonkey)
 
 Professional body registries, data protection law details, and jurisdiction intelligence for 28 countries — zero dependencies, fully typed.
 

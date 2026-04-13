@@ -2,7 +2,7 @@
 
 ## What this is
 
-Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Published as `jurisdiction-kit` on npm via semantic-release.
+Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Published as `jurisdiction-kit` on npm via [forgesworn/anvil](https://github.com/forgesworn/anvil).
 
 ## Architecture
 
@@ -38,7 +38,7 @@ npm test             # vitest run (54 tests)
 - **British English** — colour, normalise, licence, recognise, authorise.
 - **Commit messages** — `type: description` format (e.g. `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`).
 - **No Co-Authored-By lines** in commits.
-- **Branching** — work on feature/fix branches, merge to main only when complete. Semantic-release auto-publishes on push to main.
+- **Branching** — work on feature/fix branches, merge to main only when complete. `forgesworn/anvil@v0` auto-publishes on push to main.
 - **Zero runtime dependencies** — the library must stay dependency-free.
 - **Single source file** — all jurisdiction data and query functions live in `src/jurisdictions.ts`. Do not split into multiple files unless there is a strong reason.
 - **JURISDICTIONS is frozen** — `Object.freeze(JURISDICTIONS)` is called at module scope. Do not remove this.
@@ -59,4 +59,4 @@ All query functions accept ISO 3166-1 alpha-2 codes and are case-insensitive. Un
 - **Org:** forgesworn
 - **Repo:** `https://github.com/forgesworn/jurisdiction-kit`
 - **CI:** GitHub Actions (`.github/workflows/ci.yml`) — build, typecheck, test on Node 24.
-- **Publishing:** semantic-release with OIDC npm provenance.
+- **Publishing:** `forgesworn/anvil@v0` (`auto-release.yml` bumps version and creates a GitHub Release; `release.yml` runs pre-publish gates and publishes to npm via OIDC trusted publishing).

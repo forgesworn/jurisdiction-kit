@@ -1,6 +1,6 @@
 // Global Jurisdiction Registry for jurisdiction-kit
 // Defines professional bodies, legal systems, data protection laws,
-// and regulatory frameworks for 30+ jurisdictions worldwide.
+// and regulatory frameworks for jurisdictions worldwide.
 
 // --- Types ---
 

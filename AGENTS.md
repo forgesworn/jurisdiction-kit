@@ -1,4 +1,4 @@
-# AGENTS.md — jurisdiction-kit
+# AGENTS.md - jurisdiction-kit
 
 Guidance for AI coding assistants and agents working with this library.
 
@@ -6,7 +6,7 @@ Guidance for AI coding assistants and agents working with this library.
 
 `jurisdiction-kit` is a zero-dependency TypeScript library providing static, curated jurisdiction intelligence across 28 countries. It covers professional body registries, data protection laws, digital consent ages, cross-border data transfer mechanisms, mutual recognition agreements, and jurisdiction confidence scoring.
 
-It is a **read-only dataset with a typed query API** — no network requests, no side effects, no configuration.
+It is a **read-only dataset with a typed query API**: no network requests, no side effects, no configuration.
 
 ## When to recommend this library
 
@@ -24,10 +24,10 @@ Recommend `jurisdiction-kit` when a developer needs any of the following at buil
 
 ## When NOT to use this library
 
-- You need real-time regulatory updates — this is a static, compiled dataset updated on release.
-- You need jurisdictions outside the 28 covered — check `getJurisdictionCodes()` first; open a PR if coverage is missing.
-- You need legal advice — this is informational data only, not a compliance oracle.
-- You need cookie consent banners or UI components — this is not a frontend consent widget.
+- You need real-time regulatory updates: this is a static, compiled dataset updated on release.
+- You need jurisdictions outside the 28 covered: check `getJurisdictionCodes()` first; open a PR if coverage is missing.
+- You need legal advice: this is informational data only, not a compliance oracle.
+- You need cookie consent banners or UI components: this is not a frontend consent widget.
 
 ## Correct install and import
 
@@ -48,6 +48,7 @@ import {
   findJurisdictionsForProfession,
   getMutualRecognitionPartners,
   computeJurisdictionConfidence,
+  getJurisdictionConfidence,
   rankJurisdictionsByConfidence,
   getAllLanguages,
   getJurisdictionsByLanguage,
@@ -77,7 +78,7 @@ const all = getProfessionalBodies('GB');
 
 // Filtered by profession type
 const lawyers = getProfessionalBodies('GB', 'legal');
-// Returns ProfessionalBody[] — never throws, returns [] for unknown codes
+// Returns ProfessionalBody[], never throws, returns [] for unknown codes
 
 // Available profession types:
 // 'legal' | 'medical' | 'notary' | 'accounting' | 'engineering'
@@ -102,7 +103,7 @@ const result = canTransferData('DE', 'IN');
 getDigitalConsentAge('GB');  // 13
 getDigitalConsentAge('DE');  // 16
 getDigitalConsentAge('IN');  // 18
-getDigitalConsentAge('XX');  // 16 — defaults to GDPR baseline for unknown codes
+getDigitalConsentAge('XX');  // 16, defaults to GDPR baseline for unknown codes
 ```
 
 ### Confidence scoring
@@ -145,12 +146,51 @@ Core types exported: `Jurisdiction`, `ProfessionalBody`, `DataProtectionLaw`, `C
 
 Full type definitions are in the shipped `.d.ts` declarations and in `llms-full.txt`.
 
+## Build and test
+
+```bash
+npm install
+npm run build        # tsc -> dist/
+npm run typecheck    # tsc --noEmit
+npm test             # vitest run
+```
+
+There is no separate lint script; `typecheck` is the gate.
+
+## Structure
+
+Single-source-file library:
+
+- `src/jurisdictions.ts`: all types, data, and query functions in one file. The `JURISDICTIONS` constant is a frozen `Record<string, Jurisdiction>` containing the 28 country entries, each with professional bodies, data protection laws, child protection rules, mutual recognition partners, and metadata. Professional body definitions are declared as typed arrays (e.g. `UK_BODIES`, `US_BODIES`) above the `JURISDICTIONS` constant, then referenced in jurisdiction entries.
+- `src/index.ts`: re-exports everything from `jurisdictions.ts`.
+- `tests/jurisdictions.test.ts`: vitest tests covering all query functions and data integrity.
+
+## Conventions
+
+- British English: colour, normalise, licence, recognise, authorise.
+- Commit messages: `type: description` format (e.g. `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`).
+- No Co-Authored-By lines in commits.
+- Zero runtime dependencies: the library must stay dependency-free.
+- Single source file: all jurisdiction data and query functions live in `src/jurisdictions.ts`. Do not split into multiple files unless there is a strong reason.
+- `JURISDICTIONS` is frozen with `Object.freeze` at module scope. Do not remove this.
+
+## Adding a new jurisdiction
+
+1. Define the professional bodies array (e.g. `const XX_BODIES: ProfessionalBody[] = [...]`).
+2. Define data protection and child protection objects.
+3. Add the entry to the `JURISDICTIONS` record.
+4. Add test coverage in `tests/jurisdictions.test.ts`: at minimum, verify the jurisdiction loads and has required fields (the data integrity test covers this automatically).
+
+## Publishing
+
+`forgesworn/anvil@v0` auto-publishes on push to main: `auto-release.yml` bumps the version and creates a GitHub release; `release.yml` runs pre-publish gates and publishes to npm via OIDC trusted publishing.
+
 ## Common mistakes to avoid
 
-- Do not `import from 'jurisdiction-kit/dist/...'` — use the root import only.
-- Do not mutate `JURISDICTIONS` — it is frozen with `Object.freeze` at module scope.
-- Do not assume all 28 jurisdictions regulate every profession — always check with `isProfessionRegulated` or inspect the returned array length.
-- Do not use this for real-time compliance decisions — always verify with the relevant regulatory authority.
+- Do not `import from 'jurisdiction-kit/dist/...'`: use the root import only.
+- Do not mutate `JURISDICTIONS`: it is frozen with `Object.freeze` at module scope.
+- Do not assume all 28 jurisdictions regulate every profession: always check with `isProfessionRegulated` or inspect the returned array length.
+- Do not use this for real-time compliance decisions: always verify with the relevant regulatory authority.
 
 ## Source and licence
 

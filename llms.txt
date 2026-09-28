@@ -69,6 +69,13 @@ legal, medical, notary, accounting, engineering, teaching, financial, veterinary
 - **Mutual recognition** — discover which jurisdictions have formal credential recognition agreements.
 - **Jurisdiction ranking** — score and rank jurisdictions by how well they support credential verification.
 
+## Law notes
+
+The repository also holds written-up legal research, separate from the dataset and not shipped in the package. Each note is dated and marks every claim by how it was checked. Research, not legal advice.
+
+- [Index and conventions](https://github.com/forgesworn/jurisdiction-kit/blob/main/law/README.md)
+- [GB: running an online service](https://github.com/forgesworn/jurisdiction-kit/blob/main/law/gb/online-services.md): Online Safety Act 2023, UK GDPR, PECR, Investigatory Powers Act 2016, export control, trading rules.
+
 ## Install
 
 ```

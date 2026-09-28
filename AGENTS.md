@@ -29,6 +29,17 @@ Recommend `jurisdiction-kit` when a developer needs any of the following at buil
 - You need legal advice: this is informational data only, not a compliance oracle.
 - You need cookie consent banners or UI components: this is not a frontend consent widget.
 
+## Law notes
+
+`law/` holds written-up research on the law that applies to publishing software and running online services, one note per jurisdiction and subject. Read `law/README.md` first.
+
+- Before researching a jurisdiction's law for a project, read its note. Re-research only what is past its review date, on its watch list, or marked `[S]` or `[U]` and material to the decision.
+- The notes are not part of the npm package and the library does not read them.
+- A note says what the law is. A project's own documents say how the project meets it. Keep project facts out of the notes.
+- Notes are research, not legal advice.
+
+Current notes: [GB, running an online service](law/gb/online-services.md).
+
 ## Correct install and import
 
 ```bash

@@ -342,7 +342,11 @@ delay `[S]`. The privacy notice must mention the right `[P]`.
 | 2 | £78 | Turnover up to £36 million, or no more than 250 staff |
 | 3 | £3,763 | Everybody else |
 
-£5 less by direct debit `[S]`.
+£5 less by direct debit (regulation 3(5)) `[P]`.
+
+The test is all or nothing. A controller must pay "unless all of the
+processing of personal data they undertake is exempt processing"
+(regulation 2(1)) `[P]`. One purpose off the list brings the fee.
 
 Exempt only if personal data is processed **solely** for one or more of:
 staff administration; advertising, marketing and public relations;
@@ -357,6 +361,21 @@ membership or support, or for "providing or administering activities for
 individuals who are either a member of the body or association or who have
 regular contact with it" `[P]`. Whether an informal project of a few people
 is such a body is not settled here `[U]`. The ICO's self-assessment is free.
+
+What a publisher that runs no service is usually left with `[U]`:
+
+| Processing | On the list? |
+|---|---|
+| A closed server for private life with household and friends | Yes: personal, family or household affairs (3.9) |
+| A closed server for an unpaid project's own work | Probably, as recreation or as a not-for-profit body. Not settled |
+| The logs of a site the publisher hosts itself | Not named. The ICO page read for this note says nothing about sites or logs |
+| Messages and reports people send | Not named |
+
+A publisher that hosts its site with somebody else, keeps no logs of its
+own, and takes reports through a platform somebody else runs has little
+left to bring within the fee, or within section 3 at all `[U]`.
+
+Taking money changes the answer (section 8).
 
 There is no exemption for sole traders as such `[S]`.
 
@@ -675,6 +694,7 @@ of the documents; they are drafts and carry no authority.
 | 28 September 2026 | 2.3: the risk assessment is kept, not filed |
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
 | 28 September 2026 | Ofcom's own words on "significant", decentralised services, groups on another platform and small services (2.1, 2.2, 2.9). 3.4: the not-for-profit exemption in full. New 6.1, what other people do with published software |
+| 28 September 2026 | 3.4: the fee is owed unless all processing is exempt, and what a publisher is usually left with |
 
 ## 15. Sources
 
@@ -687,7 +707,7 @@ Primary, read 28 September 2026:
 - Ofcom: [illegal content duties](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/illegal-content-duties-under-the-online-safety-act), [duty to report CSEA content](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/duty-to-report-child-sexual-exploitation-and-abuse-csea-content-know-the-rules-and-how-to-comply)
 - GOV.UK: [under-16 announcement, 15 June 2026](https://www.gov.uk/government/news/social-media-to-be-banned-for-under-16s-in-landmark-government-move-to-givekids-their-childhood-back)
 - UK GDPR: [Article 2](https://www.legislation.gov.uk/eur/2016/679/article/2), [Article 13](https://www.legislation.gov.uk/eur/2016/679/article/13), [Article 33](https://www.legislation.gov.uk/eur/2016/679/article/33)
-- [Data Protection (Charges and Information) Regulations 2018, SI 2018/480, Schedule](https://www.legislation.gov.uk/uksi/2018/480/schedule)
+- Data Protection (Charges and Information) Regulations 2018, SI 2018/480: [regulation 2](https://www.legislation.gov.uk/uksi/2018/480/regulation/2), [regulation 3](https://www.legislation.gov.uk/uksi/2018/480/regulation/3), [Schedule](https://www.legislation.gov.uk/uksi/2018/480/schedule)
 - ICO: [fee exemptions](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/exemptions/), [information collected and published](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/information-we-will-collect-and-publish/), [registration questions](https://ico.org.uk/for-organisations/data-protection-fee/faqs-data-protection-fee-payment-and-online-registration/), [services covered by the Children's code](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/services-covered-by-this-code/)
 - Privacy and Electronic Communications Regulations 2003: [regulation 6](https://www.legislation.gov.uk/uksi/2003/2426/regulation/6), [Schedule A1](https://www.legislation.gov.uk/uksi/2003/2426/schedule/A1)
 - [Investigatory Powers Act 2016, section 261](https://www.legislation.gov.uk/ukpga/2016/25/section/261)

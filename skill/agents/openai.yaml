@@ -1,0 +1,4 @@
+interface:
+  display_name: "Legal cover"
+  short_description: "Check a project against the written-up law notes; draft or refresh its legal documents"
+  default_prompt: "Use $legal-cover to check this project against the UK law note: inventory what it runs and ships, say which regimes apply, what is in place and what is owed."

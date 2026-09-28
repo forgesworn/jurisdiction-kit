@@ -75,6 +75,7 @@ The repository also holds written-up legal research, separate from the dataset a
 
 - [Index and conventions](https://github.com/forgesworn/jurisdiction-kit/blob/main/law/README.md)
 - [GB: running an online service](https://github.com/forgesworn/jurisdiction-kit/blob/main/law/gb/online-services.md): Online Safety Act 2023, UK GDPR, PECR, Investigatory Powers Act 2016, export control, trading rules.
+- [legal-cover skill](https://github.com/forgesworn/jurisdiction-kit/blob/main/skill/SKILL.md): an agent skill for Claude Code and Codex that applies the notes to a project.
 
 ## Install
 

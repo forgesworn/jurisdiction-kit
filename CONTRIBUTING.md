@@ -70,7 +70,8 @@ Do **not** include `Co-Authored-By` lines in commit messages.
 
 ## Testing expectations
 
-- All 54 existing tests must continue to pass.
+- All existing tests must continue to pass.
+- Law notes and the skill are held to their shape by `tests/law-notes.test.ts`: both dates in the header, a row in the index, a watch list, a change log and sources.
 - New jurisdictions are automatically covered by the data integrity test, which validates all required fields on every jurisdiction entry.
 - New query functions should have dedicated test cases covering happy path, edge cases, and unknown jurisdiction handling.
 - Run the full suite with `npm test` before pushing.

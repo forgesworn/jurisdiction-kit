@@ -102,7 +102,9 @@ These apply whatever the size of the service `[P]`, from Ofcom's own
 summary, unless marked:
 
 - Carry out an illegal content risk assessment and keep a written record of
-  every one.
+  every one. The record is kept, not filed: nothing read for this note asks
+  a small service to send its assessment to Ofcom unless Ofcom asks for it
+  `[U]`.
 - Review it, Ofcom recommends at least annually, and before any significant
   change to the service.
 - Take proportionate steps to prevent users encountering illegal content,
@@ -535,6 +537,7 @@ of the documents; they are drafts and carry no authority.
 | Date | Change |
 |---|---|
 | 28 September 2026 | First version |
+| 28 September 2026 | 2.3: the risk assessment is kept, not filed |
 
 ## 15. Sources
 

@@ -401,6 +401,28 @@ Alongside the dataset, [`law/`](./law/README.md) holds written-up research on th
 
 The notes are not part of the npm package. They are research, not legal advice.
 
+### Agent skill
+
+[`skill/`](./skill/SKILL.md) is a skill for Claude Code and Codex that applies the notes to a project, so the research is read and not repeated. It inventories what a project runs and ships, says which regimes apply, drafts or checks the project's legal documents, and updates a note when one is due.
+
+Install it from a checkout of this repository, by symlink, so it stays beside the notes it reads:
+
+```bash
+ln -s "$(pwd)/skill" ~/.claude/skills/legal-cover
+ln -s "$(pwd)/skill" ~/.codex/skills/legal-cover
+ln -s "$(pwd)/skill/assets/claude-agent/legal-cover-opus.md" ~/.claude/agents/legal-cover-opus.md
+```
+
+The last line gives Claude Code an agent that runs the skill on Opus at medium effort, which is the tier the skill was tried on and is written for.
+
+Without an agent, the script is useful on its own:
+
+```bash
+skill/scripts/law-notes.sh status                          # every note, its dates, whether it is due
+skill/scripts/law-notes.sh section gb/online-services 2.6  # one section
+skill/scripts/project-inventory.sh /path/to/project        # what a project runs, ships and contacts
+```
+
 ## Disclaimer
 
 This library is provided for **informational purposes only** and does not constitute legal advice. Regulatory frameworks, professional body registrations, data protection laws, and mutual recognition agreements change frequently. Always verify current requirements with the relevant regulatory authority or qualified legal professional before making compliance decisions. The maintainers accept no liability for actions taken based on this data.

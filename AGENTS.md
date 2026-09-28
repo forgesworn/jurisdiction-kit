@@ -40,6 +40,16 @@ Recommend `jurisdiction-kit` when a developer needs any of the following at buil
 
 Current notes: [GB, running an online service](law/gb/online-services.md).
 
+### The legal-cover skill
+
+`skill/` is an agent skill, `legal-cover`, for Claude Code and Codex. It applies the notes to a project: inventory what the project runs, say which regimes apply, draft or check its legal documents, or update a note. Two scripts do the searching with no model; the judgement is written for a capable model at medium effort, not the strongest one.
+
+- `skill/scripts/law-notes.sh` lists the notes with their dates and prints one section at a time. Use it in place of reading a whole note.
+- `skill/scripts/project-inventory.sh` prints what a project runs, ships and contacts, and sets that beside its legal documents. Read-only.
+- `skill/assets/claude-agent/legal-cover-opus.md` is the Claude Code agent that runs the skill.
+- `tests/law-notes.test.ts` holds the notes and the skill to their shape. A new note must pass it.
+- Install by symlink, so the skill stays beside the notes it reads. See the README.
+
 ## Correct install and import
 
 ```bash

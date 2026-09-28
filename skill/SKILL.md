@@ -41,7 +41,8 @@ Which duties attach depends on what the operator runs and for whom, far more tha
 
 | Position | The operator runs | Note sections (GB) |
 |---|---|---|
-| Publisher | Nothing a user's device is sent to, or a static site only | 1, 6 |
+| User | Nothing. They use a service somebody else provides, or run a group on it | 2.2 |
+| Publisher | Nothing a user's device is sent to, or a static site only | 1, 6, 6.1 |
 | Publisher with defaults | Nothing, and ships defaults that point at servers other people run | 2.2, 3.2 |
 | Closed operator | Servers for themselves, their household, or the people who work on the project | 2.10, 3.9 |
 | Public operator | Any server open to whoever loads the app or finds the address | 2, 3, 4, 5 |

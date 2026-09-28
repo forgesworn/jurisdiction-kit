@@ -36,7 +36,7 @@ Open the file at each `path:line` that matters and read around it before answeri
 | 12 | When did the service start? | 12 | The note's deadlines run from launch |
 | 13 | Who do the documents say runs it? | 13 | Record it as written. Do not investigate the person |
 | 14 | Who may use each server the operator runs? | 3 | The last three lists in the section: what the web host passes to a service, what the app calls on its own origin, and the lines that say who may use it. Anybody, a closed group, or the operator alone |
-| 15 | Which position is the project in today? | 1, 3 | One of the four in `SKILL.md`, per deployment. Then ask the owner which they mean to be in |
+| 15 | Which position is the project in today? | 1, 3 | One of the positions in `SKILL.md`, per deployment. Then ask the owner which they mean to be in |
 
 ## Traps
 

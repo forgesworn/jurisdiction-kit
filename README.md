@@ -391,6 +391,16 @@ type ProfessionType =
 - **Professional bodies**: covers 11 profession types across major regulated professions. Smaller or jurisdiction-specific professions may be absent.
 - **Bundle size**: the full frozen dataset is always included (~3,400 lines of source). This is not tree-shakeable — the data IS the library.
 
+## Law notes
+
+Alongside the dataset, [`law/`](./law/README.md) holds written-up research on the law that applies to publishing software and running online services. Each note is dated, marks every claim by how it was checked, and lists what to watch.
+
+| Jurisdiction | Note |
+|--------------|------|
+| GB | [Running an online service](./law/gb/online-services.md): Online Safety Act, data protection, device storage, investigatory powers, export control, trading rules |
+
+The notes are not part of the npm package. They are research, not legal advice.
+
 ## Disclaimer
 
 This library is provided for **informational purposes only** and does not constitute legal advice. Regulatory frameworks, professional body registrations, data protection laws, and mutual recognition agreements change frequently. Always verify current requirements with the relevant regulatory authority or qualified legal professional before making compliance decisions. The maintainers accept no liability for actions taken based on this data.

@@ -22,6 +22,7 @@ software attracts almost none of them. Work out which you do.
 | Question | If yes, read |
 |---|---|
 | Do you only publish source code or binaries? | Section 6. Nothing else here attaches to publication alone |
+| Do you only use a service somebody else provides, as a member or as the person who runs a group on it? | 2.2. The duties are the provider's |
 | Do you host an app that talks only to servers the user names, with no defaults of yours? | 2.2, then section 3 for your web host's logs |
 | Do you ship defaults that point only at servers somebody else runs? | 2.2, then 3.2 for naming them |
 | Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | Sections 2, 3, 4 and 5 |
@@ -53,7 +54,9 @@ It is regulated if it has links with the UK and no exemption applies
   to believe there is a material risk of significant harm to individuals in
   the UK from its content `[P]`.
 
-The Act does not define "significant". Ofcom has read it, in an enforcement
+The Act does not define "significant". Ofcom: "Service providers should be
+able to explain their judgement, especially if they think they do not have a
+significant number of UK users" `[P]`. Ofcom has read it, in an enforcement
 decision, as UK user numbers that are "material in the context of the
 service, rather than necessarily large or substantial" `[S]`. The lowest
 figure in a published decision is an average of 855 UK visitors a month
@@ -86,6 +89,17 @@ that entity alone)". Where individuals and not an entity have that control,
 the provider is those individuals.
 
 An individual can therefore be a provider in their own right.
+
+Somebody who runs a group on another provider's platform is not the
+provider. Asked who answers for a volunteer community group run on a social
+media platform, Ofcom pointed to "the provider of the regulated service"
+`[P]`.
+
+Ofcom on decentralised services `[P]`: "services should approach it in the
+same way, whether they are decentralised or not", and "If a user operates a
+decentralised service, and the above applies, it is possible that they are
+the provider." So each deployment has its own provider: whoever runs it and
+controls who can use it.
 
 **Open question: designs where nobody controls admission.** No Ofcom
 guidance on where publishing software ends and providing a service begins
@@ -223,6 +237,22 @@ As reported on 17 September 2026: eleven providers fined, over £7 million in
 total, mainly pornography services and a suicide forum `[S]`. That describes
 where Ofcom has started, not who owes the duties.
 
+Ofcom on small services `[P]`:
+
+- "We are not setting out to penalise small, low risk services trying to
+  comply in good faith."
+- "We will take a reasonable approach to enforcement with smaller services
+  that present low risk to UK users, only taking action where it is
+  proportionate and appropriate."
+- "Regulated services cannot apply for an exemption."
+- A small service that has assessed its risks as low across all harms is
+  expected to have terms that are easy to find and understand, a way to
+  report illegal material with a process behind it, the ability to review
+  content and take it down quickly, and "a specific individual responsible
+  for compliance who we can contact if we need to".
+
+That is an approach to enforcement. It does not take a service out of scope.
+
 ### 2.10 Closed and personal services
 
 Running servers for your own use is lawful. What varies is whether the Act's
@@ -320,6 +350,13 @@ accounts and records; not-for-profit purposes; personal, family or
 household affairs; maintaining a public register; judicial functions; or
 without an automated system `[P]`. Running a public online service is not
 on the list.
+
+The not-for-profit exemption is for "a body or association which is not
+established or conducted for profit", processing to establish or maintain
+membership or support, or for "providing or administering activities for
+individuals who are either a member of the body or association or who have
+regular contact with it" `[P]`. Whether an informal project of a few people
+is such a body is not settled here `[U]`. The ICO's self-assessment is free.
 
 There is no exemption for sole traders as such `[S]`.
 
@@ -493,6 +530,31 @@ Still applies:
 - Software that is not published, or published with restrictions on passing
   it on, does not get the release.
 
+### 6.1 What other people do with published software
+
+Somebody who installs and runs the software is the provider of their own
+deployment (2.2). The duties in sections 2 to 5 are theirs.
+
+Publishing general-purpose software does not make the publisher a party to
+an offence somebody else commits with it. The offences of encouraging or
+assisting crime, Serious Crime Act 2007 Part 2 `[P]`, need a state of mind:
+
+- Section 44: the person "intends to encourage or assist" the offence, and
+  "is not to be taken to have intended to encourage or assist the
+  commission of an offence merely because such encouragement or assistance
+  was a foreseeable consequence of his act".
+- Section 45: the person "believes" that the offence "will be committed" and
+  that the act "will encourage or assist its commission".
+- Section 50 gives a defence of acting reasonably.
+
+What would change the picture `[U]`: presenting the software as a means to
+break the law, or helping a particular person in the belief that they are
+committing an offence.
+
+A licence grants permission and disclaims warranty. It does not make the
+publisher answerable for the use. Licence compliance is not covered
+(section 13).
+
 ## 7. Telecoms regulation
 
 Communications Act 2003. Regulator: Ofcom.
@@ -612,6 +674,7 @@ of the documents; they are drafts and carry no authority.
 | 28 September 2026 | First version |
 | 28 September 2026 | 2.3: the risk assessment is kept, not filed |
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
+| 28 September 2026 | Ofcom's own words on "significant", decentralised services, groups on another platform and small services (2.1, 2.2, 2.9). 3.4: the not-for-profit exemption in full. New 6.1, what other people do with published software |
 
 ## 15. Sources
 
@@ -619,6 +682,8 @@ Primary, read 28 September 2026:
 
 - Online Safety Act 2023: [section 3](https://www.legislation.gov.uk/ukpga/2023/50/section/3), [section 4](https://www.legislation.gov.uk/ukpga/2023/50/section/4), [section 226](https://www.legislation.gov.uk/ukpga/2023/50/section/226), [section 227](https://www.legislation.gov.uk/ukpga/2023/50/section/227), [Schedule 1](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1)
 - [Online Safety (CSEA Content Reporting by Regulated User-to-User Service Providers) Regulations 2026, SI 2026/268](https://www.legislation.gov.uk/uksi/2026/268/made)
+- Ofcom: [Online Safety Act explained, questions and answers, updated 28 May 2025](https://www.ofcom.org.uk/siteassets/resources/documents/online-safety/information-for-industry/other/online-safety-act-explained-qa-web.pdf?v=409647), [helping small services navigate the Act](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/helping-small-services-navigate-the-online-safety-act)
+- Serious Crime Act 2007: [section 44](https://www.legislation.gov.uk/ukpga/2007/27/section/44), [section 45](https://www.legislation.gov.uk/ukpga/2007/27/section/45), [section 50](https://www.legislation.gov.uk/ukpga/2007/27/section/50)
 - Ofcom: [illegal content duties](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/illegal-content-duties-under-the-online-safety-act), [duty to report CSEA content](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/duty-to-report-child-sexual-exploitation-and-abuse-csea-content-know-the-rules-and-how-to-comply)
 - GOV.UK: [under-16 announcement, 15 June 2026](https://www.gov.uk/government/news/social-media-to-be-banned-for-under-16s-in-landmark-government-move-to-givekids-their-childhood-back)
 - UK GDPR: [Article 2](https://www.legislation.gov.uk/eur/2016/679/article/2), [Article 13](https://www.legislation.gov.uk/eur/2016/679/article/13), [Article 33](https://www.legislation.gov.uk/eur/2016/679/article/33)

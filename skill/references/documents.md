@@ -23,6 +23,14 @@ Read the one closer to the project for shape. Do not copy its facts.
 
 If the position is "software, not a service", the position document and a short privacy notice may be all that is needed. Say what would change that position.
 
+By position (see `SKILL.md`). Draft for the position the owner has chosen, and only once the deployment matches it:
+
+| Position | Documents | Note sections (GB) |
+|---|---|---|
+| Publisher, with or without defaults | Position on scope. A short privacy notice: the site's logs, update checks, and every third party a default contacts. A report page that says who can act, since the project holds nothing to remove | 2.2, 3.1, 3.2 |
+| Closed operator | Position on scope, with the reasoning for the exemption, kept and not published | 2.10, 3.9 |
+| Public operator | All of them | 2, 3, 4, 5 |
+
 ## Every document
 
 - Opens with a banner: draft, date, not legal advice, not reviewed by a lawyer, drafted from the code at a named commit.

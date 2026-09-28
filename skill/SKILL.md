@@ -35,13 +35,29 @@ Read `law/README.md` once for the evidence marks: `[P]` primary source read, `[S
 | The project has legal documents. Are they still true? | [references/gap-check.md](references/gap-check.md) |
 | A note is overdue, a watch list item moved, or the subject is not covered | [references/updating-notes.md](references/updating-notes.md) |
 
+## Name the position first
+
+Which duties attach depends on what the operator runs and for whom, far more than on what the software can do.
+
+| Position | The operator runs | Note sections (GB) |
+|---|---|---|
+| Publisher | Nothing a user's device is sent to, or a static site only | 1, 6 |
+| Publisher with defaults | Nothing, and ships defaults that point at servers other people run | 2.2, 3.2 |
+| Closed operator | Servers for themselves, their household, or the people who work on the project | 2.10, 3.9 |
+| Public operator | Any server open to whoever loads the app or finds the address | 2, 3, 4, 5 |
+
+- Say which position the code and the deployment put the project in **today**, with evidence. One open endpoint on the public site is enough for the last row.
+- Then ask which position the owner **means** to be in, before drafting anything. Moving to a lighter position is often less work than meeting the duties of a heavier one, and it is the owner's choice.
+- If they differ, list what the move takes: each default, path and open endpoint that has to go or be closed. Documents are true only once that is done.
+- One project can be in two positions: a public site that runs nothing, and the owner's own closed deployment on another host. Take each deployment separately.
+
 ## The check
 
 1. **Inventory what the project runs and ships.** Run `scripts/project-inventory.sh` and follow [references/inventory.md](references/inventory.md). Every finding carries `path:line`. This is reading code, not reading law.
 2. **Look at section 13 of the inventory.** If the project already has legal documents, this is a gap check, not a fresh start: go to [references/gap-check.md](references/gap-check.md).
-3. **Answer the note's scoping questions** (section 1 of the note) from the inventory. They name the sections that apply. Read those sections and the watch list, and nothing else.
+3. **Answer the note's scoping questions** (section 1 of the note) from the inventory, and name the position. They name the sections that apply. Read those sections and the watch list, and nothing else.
 4. **Report**, in this order:
-   - what the project is in law's eyes, and the evidence;
+   - what the project is in law's eyes, and the evidence: the position today, and the one the owner means to be in if they have said;
    - what applies, by regime, with the note's section number;
    - what is already in place;
    - what is owed, in order, with any deadline the note gives;

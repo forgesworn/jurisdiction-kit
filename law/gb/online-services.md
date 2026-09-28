@@ -23,7 +23,9 @@ software attracts almost none of them. Work out which you do.
 |---|---|
 | Do you only publish source code or binaries? | Section 6. Nothing else here attaches to publication alone |
 | Do you host an app that talks only to servers the user names, with no defaults of yours? | 2.2, then section 3 for your web host's logs |
+| Do you ship defaults that point only at servers somebody else runs? | 2.2, then 3.2 for naming them |
 | Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | Sections 2, 3, 4 and 5 |
+| Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
 | Do you take money? | Section 8 |
@@ -51,6 +53,13 @@ It is regulated if it has links with the UK and no exemption applies
   to believe there is a material risk of significant harm to individuals in
   the UK from its content `[P]`.
 
+The Act does not define "significant". Ofcom has read it, in an enforcement
+decision, as UK user numbers that are "material in the context of the
+service, rather than necessarily large or substantial" `[S]`. The lowest
+figure in a published decision is an average of 855 UK visitors a month
+`[S]`. Ofcom counts a visitor as a user, registered or not `[S]`; the Act
+says registration does not matter (section 227(2)) `[P]`.
+
 Exemptions, Schedule 1 Part 1 `[P]`:
 
 | Exempt where the only user content is | Note |
@@ -59,7 +68,7 @@ Exemptions, Schedule 1 Part 1 `[P]`:
 | SMS or MMS | |
 | One-to-one live aural communications | Voice only, two people only. Text, video and group calls are outside it |
 | Comments or reviews on the provider's own content | "Limited functionality" |
-| Internal business use | |
+| Internal business use | A closed group, for the purposes of the business. See 2.10 |
 | A service provided by a public body, or by an education or childcare provider | |
 
 A service with text chat, video, group calls or file sharing fits none of
@@ -80,15 +89,24 @@ An individual can therefore be a provider in their own right.
 
 **Open question: designs where nobody controls admission.** No Ofcom
 guidance on where publishing software ends and providing a service begins
-was found `[U]`. Two positions have been taken in practice, and both are
-readings, not settled law:
+was found `[U]`. Four positions are open. All are readings, not settled
+law:
 
 - **A static app with no defaults and no infrastructure** is software. The
   operator stores nothing, chooses no server, and brokers no encounter
   between users. The reading weakens the moment a default server is shipped,
   or the operator runs anything that stores, lists or indexes content.
+- **An app whose defaults are servers other people run** sits between the
+  two. The publisher chooses the defaults and controls nobody's admission
+  to them, and section 226 turns on control over who can use the service.
+  Each server's own operator is the provider of that server. The publisher
+  still owes the privacy notice an account of the third parties its
+  defaults contact (3.2).
 - **An operator that runs default infrastructure** treats itself as the
   provider, in respect of what it runs. This is the cautious reading.
+
+- **An operator of a closed deployment** is the provider of it, and may be
+  exempt or outside the Act. See 2.10.
 
 Whichever is taken, write the reasoning down and keep it. Revisit it before
 shipping a default, adding discovery, search, a feed, comments or presence,
@@ -205,6 +223,43 @@ As reported on 17 September 2026: eleven providers fined, over £7 million in
 total, mainly pornography services and a suicide forum `[S]`. That describes
 where Ofcom has started, not who owes the duties.
 
+### 2.10 Closed and personal services
+
+Running servers for your own use is lawful. What varies is whether the Act's
+duties attach, and that turns on who else uses them.
+
+| Who uses the servers | Position | Mark |
+|---|---|---|
+| The provider alone | No second user can encounter anything, so the definition in section 3 is not met. A reading | `[U]` |
+| The closed group that works on a business or project | Exempt as an internal business service, Schedule 1 paragraph 7 | `[P]` |
+| Family and friends, by invitation | No exemption names it. Regulated only if it has links with the UK (2.1). No decision on a closed service of a handful of people was found | `[U]` |
+| Anybody who finds it | A service to the public. Section 2 applies in full | `[P]` |
+
+**The internal business exemption**, paragraph 7 `[P]`. All three must hold:
+
+- the service is "an internal resource or tool for a business";
+- the person carrying on the business is the provider;
+- it is "available only to a closed group of people": the provider, officers,
+  "persons who work for" the provider "(including as employees or
+  volunteers)", and others they authorise "for the purposes of any
+  activities of the business", such as a contractor or consultant.
+
+"Business" here "includes trade, profession, educational institution or
+other concern (whether or not carried on for profit)" `[P]`. An unpaid
+open-source project is a concern in that sense `[U]`.
+
+**The provider's own people are not users.** Section 227(3) `[P]`: a provider
+who is an individual, the officers of one that is an entity, the people who
+work for it including volunteers, and its contractors are not users when
+acting in the course of the provider's business.
+
+**Closed means closed.** Because a visitor counts as a user (2.1), keep a
+private deployment free of any public page that shows user content, open
+sign-up, or endpoint that takes content from whoever finds it `[U]`.
+
+If a closed service does turn out to be regulated, what it owes is in 2.3:
+assessments that are made, recorded and kept.
+
 ## 3. Data protection
 
 UK GDPR, Data Protection Act 2018, Data (Use and Access) Act 2025.
@@ -306,6 +361,21 @@ unlikely to result in a risk to people's rights and freedoms (Article 33)
 
 A host or processor outside the UK is a transfer. See `canTransferData` in
 the library for the mechanism between two jurisdictions.
+
+### 3.9 Personal and household use
+
+The UK GDPR does not apply to "the processing of personal data by an
+individual in the course of a purely personal or household activity"
+(Article 2(2)(a)) `[P]`. The fee regulations exempt processing "for the
+purposes of their personal, family or household affairs", including for
+recreational purposes `[P]`.
+
+So an individual who runs closed servers for themselves, their household
+and their friends, as private life and nothing else, is outside both `[U]`.
+
+"Purely" is the limit. Servers used for a project's work, for a business, or
+by the public are not a household activity, and section 3 applies to what
+they log `[U]`.
 
 ## 4. Device storage and cookies
 
@@ -489,6 +559,9 @@ operate nothing. Take advice before choosing.
 | Threshold | What it switches | Section |
 |---|---|---|
 | A significant number of UK users, or the UK as a target market | Online Safety Act duties | 2.1 |
+| An average of 855 UK visitors a month | The lowest figure Ofcom has treated as significant in a published decision. Not a floor | 2.1 |
+| Only a closed group working for the business or project | Exempt from the Online Safety Act | 2.10 |
+| Purely personal or household use | Outside the UK GDPR and the fee | 3.9 |
 | Three months from launch | Risk assessment due | 2.4 |
 | More than 10,000 people served | Interception and equipment interference capability can be required; changes may have to be notified | 5.3 |
 | More than 3 million UK monthly users, with direct messages | Category 2B | 2.7 |
@@ -538,16 +611,18 @@ of the documents; they are drafts and carry no authority.
 |---|---|
 | 28 September 2026 | First version |
 | 28 September 2026 | 2.3: the risk assessment is kept, not filed |
+| 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
 
 ## 15. Sources
 
 Primary, read 28 September 2026:
 
-- Online Safety Act 2023: [section 3](https://www.legislation.gov.uk/ukpga/2023/50/section/3), [section 4](https://www.legislation.gov.uk/ukpga/2023/50/section/4), [section 226](https://www.legislation.gov.uk/ukpga/2023/50/section/226), [Schedule 1](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1)
+- Online Safety Act 2023: [section 3](https://www.legislation.gov.uk/ukpga/2023/50/section/3), [section 4](https://www.legislation.gov.uk/ukpga/2023/50/section/4), [section 226](https://www.legislation.gov.uk/ukpga/2023/50/section/226), [section 227](https://www.legislation.gov.uk/ukpga/2023/50/section/227), [Schedule 1](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1)
 - [Online Safety (CSEA Content Reporting by Regulated User-to-User Service Providers) Regulations 2026, SI 2026/268](https://www.legislation.gov.uk/uksi/2026/268/made)
 - Ofcom: [illegal content duties](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/illegal-content-duties-under-the-online-safety-act), [duty to report CSEA content](https://www.ofcom.org.uk/online-safety/illegal-and-harmful-content/duty-to-report-child-sexual-exploitation-and-abuse-csea-content-know-the-rules-and-how-to-comply)
 - GOV.UK: [under-16 announcement, 15 June 2026](https://www.gov.uk/government/news/social-media-to-be-banned-for-under-16s-in-landmark-government-move-to-givekids-their-childhood-back)
-- UK GDPR: [Article 13](https://www.legislation.gov.uk/eur/2016/679/article/13), [Article 33](https://www.legislation.gov.uk/eur/2016/679/article/33)
+- UK GDPR: [Article 2](https://www.legislation.gov.uk/eur/2016/679/article/2), [Article 13](https://www.legislation.gov.uk/eur/2016/679/article/13), [Article 33](https://www.legislation.gov.uk/eur/2016/679/article/33)
+- [Data Protection (Charges and Information) Regulations 2018, SI 2018/480, Schedule](https://www.legislation.gov.uk/uksi/2018/480/schedule)
 - ICO: [fee exemptions](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/exemptions/), [information collected and published](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/information-we-will-collect-and-publish/), [registration questions](https://ico.org.uk/for-organisations/data-protection-fee/faqs-data-protection-fee-payment-and-online-registration/), [services covered by the Children's code](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/services-covered-by-this-code/)
 - Privacy and Electronic Communications Regulations 2003: [regulation 6](https://www.legislation.gov.uk/uksi/2003/2426/regulation/6), [Schedule A1](https://www.legislation.gov.uk/uksi/2003/2426/schedule/A1)
 - [Investigatory Powers Act 2016, section 261](https://www.legislation.gov.uk/ukpga/2016/25/section/261)
@@ -561,6 +636,8 @@ Primary, read 28 September 2026:
 
 Secondary:
 
+- decoded.legal, 24 March 2026: [what number of UK users is a significant number](https://decoded.legal/blog/2026/03/what-number-of-uk-users-constitutes-a-significant-number-for-the-purposes-of-the-online-safety-act-2023/)
+- Ben Tasker, 9 February 2025: [an assessment for a single-user server](https://www.bentasker.co.uk/posts/blog/law/doing-an-osa-assessment-for-my-single-user-fedi-server.html), for Ofcom's reading of "user"
 - The Register, 17 September 2026: [Online Safety Act fines](https://www.theregister.com/security/2026/09/17/ofcom-discovers-issuing-online-safety-act-fines-is-easier-than-collecting-them/5297110)
 - CMS: [under-16 ban, scope and questions](https://cms.law/en/gbr/legal-updates/the-uk-social-media-ban-for-children-scope-implementation-and-outstanding-questions)
 - House of Commons Library: [proposals to ban social media for children](https://commonslibrary.parliament.uk/research-briefings/cbp-10468/)

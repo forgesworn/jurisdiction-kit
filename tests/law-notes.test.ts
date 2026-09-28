@@ -110,6 +110,14 @@ describe('law-notes.sh', () => {
     expect(out).not.toContain('### 2.7');
   });
 
+  it('tells section 2.10 from section 2.1', () => {
+    const tenth = run(['section', 'gb/online-services', '2.10']).out;
+    expect(tenth.startsWith('### 2.10 ')).toBe(true);
+    const first = run(['section', 'gb/online-services', '2.1']).out;
+    expect(first.startsWith('### 2.1 ')).toBe(true);
+    expect(first).not.toContain('### 2.2');
+  });
+
   it('prints a whole section with its subsections, and stops at the next section', () => {
     const { out } = run(['section', 'gb/online-services', '2']);
     expect(out.startsWith('## 2. ')).toBe(true);
@@ -184,6 +192,7 @@ describe('project-inventory.sh', () => {
       'await fetch(`https://${domain}/.well-known/names.json`)',
       "localStorage.setItem('k', 'v')",
       'const reply = await client.messages.create({ model })',
+      "const credential = await fetch('/turn')",
     ].join('\n'),
     'src/app.test.ts': "const RELAY = 'wss://only-in-a-test.net'",
     'test/fixture.ts': "const RELAY = 'wss://only-in-a-fixture.net'",
@@ -202,6 +211,14 @@ describe('project-inventory.sh', () => {
     'deploy/host.service': '# Unlike the relay, this process DOES hold the room key.',
     'deploy/blind.service': '# It is given the room id and never the room key. It holds nothing.',
     'deploy/paid/README.md': 'A paid endpoint.',
+    'deploy/Caddyfile.site': [
+      'site.example {',
+      '\t# Unauthenticated by design.',
+      '\thandle /turn {',
+      '\t\treverse_proxy 127.0.0.1:8089',
+      '\t}',
+      '}',
+    ].join('\n'),
     'deploy/l402/aperture.yaml': 'listenaddr: "localhost:8081"',
     'package.json': JSON.stringify({ dependencies: { '@anthropic-ai/sdk': '^1.0.0', leftpad: '1.0.0' } }, null, 2),
   });
@@ -240,6 +257,20 @@ describe('project-inventory.sh', () => {
 
   it('lists what could be deployed', () => {
     expect(section(report, 3)).toContain('deploy/host.service');
+  });
+
+  it('finds the paths the web host passes to a service behind it', () => {
+    expect(section(report, 3)).toContain('deploy/Caddyfile.site:3:');
+    expect(section(report, 3)).toContain('deploy/Caddyfile.site:4:');
+  });
+
+  it('finds a call to a path on the app\'s own origin, which names no host', () => {
+    expect(section(report, 3)).toContain('src/app.ts:6:');
+    expect(section(report, 1)).not.toContain('src/app.ts:6');
+  });
+
+  it('finds the line that says who may use a server', () => {
+    expect(section(report, 3)).toContain('deploy/Caddyfile.site:2:');
   });
 
   it('finds a dependency that sends content to a model, and not an ordinary one', () => {

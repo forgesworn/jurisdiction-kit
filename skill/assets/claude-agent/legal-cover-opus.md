@@ -10,6 +10,8 @@ You carry out one job from the `legal-cover` skill for the project the host name
 
 Read `~/.claude/skills/legal-cover/SKILL.md` first and follow it, reading only the reference files the job needs. Run its two scripts before reading any code yourself: `scripts/project-inventory.sh` for the project, `scripts/law-notes.sh` for the law. Read the law note one section at a time.
 
+Name the position first, as the skill sets out: the one the deployment is in today, from the inventory. If the host has said which position the owner means to be in, work to that one and list what the move takes. Do not draft or repair documents for a position the owner has not chosen.
+
 Evidence is code and configuration, never the legal documents being checked. Before testing any claim, answer the inventory's question 7 in one sentence, from section 6 of the script's output: does anything the operator may run hold a key to content?
 
 Unless the host names a worktree to write into, you are read-only: no edits, no new files outside a scratch directory. When you do write, write only drafts under the project's `docs/legal/`, or a note under `law/`, in the worktree named. Never commit unless told to. Never push, publish, deploy, pay, register or contact anybody.

@@ -110,6 +110,27 @@ echo
 grep -E '(^|/)(deploy|infra|ops|server|docker|k8s|helm|terraform)/|(^|/)(Caddyfile|Dockerfile|docker-compose|nginx)[^/]*$|\.(service|timer)$' "$work/all" \
   | grep -Ev "$skip" | head -80 > "$work/deploy" || true
 if [ -s "$work/deploy" ]; then cat "$work/deploy"; else none; fi
+echo
+echo "Passed by the web host to a service behind it. Each path is a server the"
+echo "operator runs for whoever loads the app from that host:"
+echo
+search "$work/deploy" '^[[:space:]]*(reverse_proxy|proxy_pass|ProxyPass)[[:space:]]|^[[:space:]]*(handle|handle_path|route|location)[[:space:]]+[^{#]*/[A-Za-z][^{]*[{]' \
+  | clip 200 | head -30 > "$work/fronted" || true
+if [ -s "$work/fronted" ]; then cat "$work/fronted"; else none; fi
+echo
+echo "Paths on the app's own origin that the code calls. They name no host:"
+echo "whoever serves the app is the server."
+echo
+search "$work/source" "(fetch|fetchImpl|WebSocket|EventSource|new URL)\\([[:space:]]*['\"\`]/[A-Za-z][A-Za-z0-9/_-]*['\"\`]|(ENDPOINT|_URL|_PATH)[A-Za-z_]*(:[^=]*)?[[:space:]]*=[[:space:]]*['\"]/[A-Za-z][A-Za-z0-9/_-]*['\"]" \
+  | clip 200 | head -30 > "$work/sameorigin" || true
+if [ -s "$work/sameorigin" ]; then cat "$work/sameorigin"; else none; fi
+echo
+echo "Lines that say who may use a server. Where nothing states a limit, take it"
+echo "as open to anybody:"
+echo
+search "$work/deploy" 'unauthenticated|not authenticated|no authentication|without auth|allow-?list|white-?list|allowed[_-]?(pubkeys|users|origins|keys)|invite[- ]only|members only|(from|by|to) (anyone|anybody)|(anyone|anybody) who|open to (the public|all)' -i \
+  | clip 200 | head -30 > "$work/access" || true
+if [ -s "$work/access" ]; then cat "$work/access"; else none; fi
 
 heading "4. Dependencies that send data somewhere, or take money"
 grep -E '(^|/)package\.json$|(^|/)(requirements\.txt|pyproject\.toml|Cargo\.toml|go\.mod|build\.gradle(\.kts)?|Podfile|Gemfile)$' "$work/kept" > "$work/manifests" || true

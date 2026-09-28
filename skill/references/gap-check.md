@@ -4,6 +4,8 @@ Legal documents go stale in two ways: the project changes, or the law does. Chec
 
 Work through all four parts. The first two are where the serious gaps are, and they are the ones a quick read misses.
 
+Before any of them, name the position the deployment is in and the one the documents were written for (`SKILL.md`, "Name the position first"). Documents written for one position are wrong for another, in both directions: a notice that says "we run nothing" over an open endpoint, or a risk assessment for a service the owner never meant to run. If the owner means to change position, say what the move takes and stop there. Do not repair documents for a position about to be left.
+
 ## 1. Test every claim against the code
 
 Do the inventory first ([inventory.md](inventory.md)), and write down the answer to its question 7 in one sentence before going on: does anything the operator may run hold a key to content?
@@ -56,6 +58,7 @@ Then the housekeeping:
 | Assessments not completed and signed by the note's deadline | Same |
 | The operator named only by a project name | See the note's section on who the operator is |
 | Published pages that differ from the drafts | One was edited and the other was not |
+| Documents written for a position the project is not in | What the operator runs changed, or was never what the owner meant |
 
 Use the note's own verbs. If the note says an assessment is carried out and recorded, do not write that it is submitted.
 

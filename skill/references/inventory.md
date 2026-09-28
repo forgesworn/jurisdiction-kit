@@ -35,10 +35,15 @@ Open the file at each `path:line` that matters and read around it before answeri
 | 11 | Do agents or bots read content, and where do they send it? | 4, 7 | A model SDK in the dependencies means content can leave for that provider |
 | 12 | When did the service start? | 12 | The note's deadlines run from launch |
 | 13 | Who do the documents say runs it? | 13 | Record it as written. Do not investigate the person |
+| 14 | Who may use each server the operator runs? | 3 | The last three lists in the section: what the web host passes to a service, what the app calls on its own origin, and the lines that say who may use it. Anybody, a closed group, or the operator alone |
+| 15 | Which position is the project in today? | 1, 3 | One of the four in `SKILL.md`, per deployment. Then ask the owner which they mean to be in |
 
 ## Traps
 
 - **A default is a choice.** A server the user can change is still one the operator chose for everybody who did not.
+- **A path on the app's own origin is a default too.** `/turn` or `/upload` names no host, so no list of hosts shows it. It makes whoever serves the app the server, for everybody who loads the app from them.
+- **Whose server a default is matters as much as that it is one.** A default that points at somebody else's server makes them the operator of it, and the project a publisher that names them.
+- **What the owner means to run is not in the code.** A kit in the repository, even one deployed today, may be there for the owner's own use and open to the public by oversight. Report what is open, and ask.
 - **Present is not deployed.** A deploy kit does not show the thing is running. Say "kit present, deployment not verified" unless it can be seen live.
 - **One exception defeats "never".** If five components cannot read content and one can, the answer to question 7 is yes.
 - **Do not stop at the first hit.** Section 1 lists every host. A lookup or an update check further down the list is as much a third party as the first default.

@@ -5,6 +5,7 @@ Read `law/README.md` in the repository first. It sets the evidence marks and the
 ## When
 
 - A note is past its review date.
+- An owner asks a question the note cannot answer. Answer it from sources, then write the answer into the note in the same piece of work, so that it is asked once.
 - A watch list item has moved.
 - A project needs a subject or jurisdiction the notes do not cover.
 - A claim marked `[S]` or `[U]` matters to a decision and should be checked.
@@ -35,6 +36,8 @@ Reading a provision is not the same as applying it. Where the note draws a concl
 ## What to change
 
 - The section's text and marks.
+- A new subsection goes at the end of its section: 2.10 after 2.9. Never renumber. Projects and the skill's own files refer to sections by number.
+- The scoping questions in section 1, if the new text answers a question they do not ask.
 - The watch list: remove what has happened, add what is now expected.
 - The thresholds table, if a number changed.
 - The change log: date, and what changed.

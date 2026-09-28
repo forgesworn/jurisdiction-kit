@@ -80,7 +80,8 @@ print_section() {
     /^#+ / {
       number = $2; sub(/\.$/, "", number)
       if (printing && level($0) <= depth) exit
-      if (!printing && number == want) { printing = 1; depth = level($0) }
+      # As strings: compared as numbers, 2.10 equals 2.1.
+      if (!printing && (number "") == (want "")) { printing = 1; depth = level($0) }
     }
     printing { print; found = 1 }
     END { if (!found) exit 1 }

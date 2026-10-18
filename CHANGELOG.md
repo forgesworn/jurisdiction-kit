@@ -14,6 +14,14 @@
 
 # 1.0.0 (2026-03-18)
 
+## 1.0.3 (2026-10-18)
+
+### Bug Fixes
+
+- align docs with source on transfer semantics, freeze depth, consent age and Node floor (#29) (docs)
+
+
+
 
 ### Bug Fixes
 

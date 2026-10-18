@@ -1,3 +1,10 @@
+## 1.0.3 (2026-10-18)
+
+### Bug Fixes
+
+- align docs with source on transfer semantics, freeze depth, consent age and Node floor (#29) (docs)
+
+
 ## [1.0.2](https://github.com/forgesworn/jurisdiction-kit/compare/v1.0.1...v1.0.2) (2026-04-12)
 
 
@@ -13,14 +20,6 @@
 * correct copyright to ForgeSworn ([0dc84ef](https://github.com/forgesworn/jurisdiction-kit/commit/0dc84ef5bad58b05fd1b29e2d5973a325a45a6ef))
 
 # 1.0.0 (2026-03-18)
-
-## 1.0.3 (2026-10-18)
-
-### Bug Fixes
-
-- align docs with source on transfer semantics, freeze depth, consent age and Node floor (#29) (docs)
-
-
 
 
 ### Bug Fixes

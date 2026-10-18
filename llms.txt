@@ -1,6 +1,6 @@
 # jurisdiction-kit
 
-> Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, check cross-border data transfer legality, find regulated professions, and rank jurisdictions by confidence score.
+> Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, look up the recorded cross-border data transfer mechanism, find regulated professions, and rank jurisdictions by confidence score.
 
 ## What it does
 
@@ -18,21 +18,24 @@ legal, medical, notary, accounting, engineering, teaching, financial, veterinary
 
 ### Data lookup
 
-- `getJurisdiction(code)` — returns a `Jurisdiction` object by ISO 3166-1 alpha-2 code. Case-insensitive.
+- `getJurisdiction(code)`: returns a `Jurisdiction | undefined` by ISO 3166-1 alpha-2 code. Case-insensitive. Narrow the result before use (required under `strict`).
 - `getJurisdictionCodes()` — returns all available jurisdiction codes.
 - `getProfessionalBodies(code, profession?)` — returns professional bodies, optionally filtered by profession type.
-- `getMutualRecognitionPartners(code)` — returns jurisdictions with mutual recognition agreements.
+- `getMutualRecognitionPartners(code)`: returns jurisdictions with professional credential recognition agreements. One-directional lists; codes outside the 28 covered are dropped.
 - `isProfessionRegulated(code, profession)` — checks whether a profession is regulated in a jurisdiction.
 - `findJurisdictionsForProfession(profession)` — finds all jurisdictions where a given profession is regulated.
 
 ### Age and consent
 
-- `getDigitalConsentAge(code)` — minimum age for digital services without parental consent. Defaults to 16 for unknown jurisdictions.
+- `getDigitalConsentAge(code)`: minimum age for digital services without parental consent. Reads `childProtection.minAgeDigitalConsent` (not `dataProtection.digitalConsentAge`; equal for all 28 today, not enforced). Defaults to 16 for unknown jurisdictions.
 - `getAgeOfMajority(code)` — legal age of majority. Defaults to 18 for unknown jurisdictions.
 
 ### Data transfer
 
-- `canTransferData(from, to)` — determines whether a cross-border data transfer is permitted and by which mechanism (domestic, eu-internal, adequacy-decision, mutual-recognition, safeguards-required, no-restrictions).
+- `canTransferData(from, to)`: returns `{ allowed: boolean; mechanism?: string; notes?: string }`: the transfer mechanism the dataset records for the pair. It is a lookup, not legal clearance: `allowed` is `false` only when either code is unknown (`{ allowed: false, notes: 'Unknown jurisdiction' }`) and `true` for every known pair, including `safeguards-required`.
+  - `mechanism` is typed as a plain string (no exported union). Values: `domestic`, `eu-internal`, `adequacy-decision`, `mutual-recognition`, `no-restrictions`, `safeguards-required`.
+  - Direction matters: rules come from the source jurisdiction (`FR` to `GB` is `adequacy-decision`, `GB` to `FR` is `safeguards-required`). First match wins: unknown code, same code (`domestic`), source has no outbound restrictions (`no-restrictions`, destination ignored; only US and CA today), both EU/EEA (`eu-internal`), EU/EEA source and destination on the EU adequacy list (`adequacy-decision`), destination in source's `mutualRecognition` list (`mutual-recognition`), otherwise `safeguards-required`.
+  - `mutual-recognition` here reuses the professional credential recognition list; it is a heuristic, not evidence of a data-transfer treaty.
 
 ### Language
 
@@ -47,13 +50,13 @@ legal, medical, notary, accounting, engineering, teaching, financial, veterinary
 
 ### Exported data
 
-- `JURISDICTIONS` — frozen `Record<string, Jurisdiction>` containing all jurisdiction data. Read-only at runtime.
+- `JURISDICTIONS`: `Record<string, Jurisdiction>` containing all jurisdiction data. Only the top level is frozen (shallow `Object.freeze`): nested objects and arrays are mutable, and the lookup functions return those live references, so treat everything as read-only and copy before changing anything.
 
 ## Types
 
 - `Jurisdiction` — code, name, nameLocal, legalSystem, languages, currency, professionalBodies, dataProtection, childProtection, eSignatureRecognised, mutualRecognition, notes.
 - `ProfessionalBody` — id, name, nameEn, profession, website, hasPublicRegister, registerUrl, issuesDigitalCredentials, notes.
-- `DataProtectionLaw` — name, fullName, year, digitalConsentAge, requiresExplicitConsent, breachNotificationHours, rightToErasure, rightToPortability, crossBorderRestrictions, maxRetentionDays, supervisoryAuthority, notes.
+- `DataProtectionLaw`: name, fullName, year, digitalConsentAge (not read by `getDigitalConsentAge`), requiresExplicitConsent, breachNotificationHours, rightToErasure, rightToPortability, crossBorderRestrictions, maxRetentionDays, supervisoryAuthority, notes.
 - `ChildProtectionLaw` — name, minAgeDigitalConsent, ageOfMajority, requiresParentalConsent, enhancedProtections, profilingRestrictions.
 - `LegalSystem` — 'common-law' | 'civil-law' | 'mixed' | 'religious' | 'customary'.
 - `ProfessionType` — 'legal' | 'medical' | 'notary' | 'accounting' | 'engineering' | 'teaching' | 'financial' | 'veterinary' | 'pharmacy' | 'architecture' | 'social-work'.
@@ -63,7 +66,7 @@ legal, medical, notary, accounting, engineering, teaching, financial, veterinary
 
 - **Legal-tech compliance** — determine which professional bodies are authorised to practise in a jurisdiction.
 - **KYC jurisdictional intelligence** — look up data protection law, digital consent age, and breach notification requirements.
-- **Cross-border data transfer analysis** — check transfer legality under GDPR adequacy decisions, mutual recognition, or safeguards.
+- **Cross-border data transfer lookup**: find the recorded transfer mechanism (GDPR adequacy decision, mutual recognition or safeguards) for a pair of jurisdictions.
 - **Professional body lookups** — find regulated bodies by country and profession.
 - **Age verification** — retrieve digital consent age and age of majority per jurisdiction.
 - **Mutual recognition** — discover which jurisdictions have formal credential recognition agreements.
@@ -77,11 +80,17 @@ The repository also holds written-up legal research, separate from the dataset a
 - [GB: running an online service](https://github.com/forgesworn/jurisdiction-kit/blob/main/law/gb/online-services.md): Online Safety Act 2023, UK GDPR, PECR, Investigatory Powers Act 2016, export control, trading rules.
 - [legal-cover skill](https://github.com/forgesworn/jurisdiction-kit/blob/main/skill/SKILL.md): an agent skill for Claude Code and Codex that applies the notes to a project.
 
+## Limits
+
+Static data compiled in 2025 with no exact as-of date and no per-entry verification date; the EU adequacy list behind `canTransferData` is annotated as of 2024. Informational only, not legal advice. CHANGELOG.md ships in the package and dates each release.
+
 ## Install
 
 ```
 npm install jurisdiction-kit
 ```
+
+ESM only, with no CommonJS build: use `import`, not `require()`. The compiled output uses nothing newer than ES2020 syntax, so it runs on Node 14 or later (`engines` in `package.json` says the same); it is developed and tested on Node 24.
 
 ## Example
 
@@ -89,11 +98,13 @@ npm install jurisdiction-kit
 import { getJurisdiction, canTransferData, getProfessionalBodies } from 'jurisdiction-kit';
 
 const gb = getJurisdiction('GB');
+if (!gb) throw new Error('GB is not in the dataset'); // Jurisdiction | undefined: narrow before use
 // gb.name === 'United Kingdom'
 // gb.dataProtection.name === 'UK GDPR + DPA 2018'
 
 const transfer = canTransferData('FR', 'GB');
 // transfer.allowed === true, transfer.mechanism === 'adequacy-decision'
+// allowed: true means the dataset has a mechanism for the pair, not that the transfer is lawful
 
 const lawyers = getProfessionalBodies('GB', 'legal');
 // [{ name: 'The Law Society of England and Wales', ... }, ...]

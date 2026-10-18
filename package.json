@@ -1,7 +1,7 @@
 {
   "name": "jurisdiction-kit",
   "version": "1.0.2",
-  "description": "Professional body registries and jurisdiction intelligence for 28 countries — compliance, data protection, mutual recognition",
+  "description": "Professional body registries and jurisdiction intelligence for 28 countries: compliance, data protection, mutual recognition",
   "type": "module",
   "homepage": "https://github.com/forgesworn/jurisdiction-kit#readme",
   "main": "./dist/index.js",
@@ -12,8 +12,12 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "engines": {
+    "node": ">=14"
+  },
   "files": [
     "dist",
+    "CHANGELOG.md",
     "context7.json",
     "llms.txt",
     "llms-full.txt"

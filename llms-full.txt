@@ -1,6 +1,6 @@
 # jurisdiction-kit
 
-> Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, check cross-border data transfer legality, find regulated professions, and rank jurisdictions by confidence score.
+> Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, look up the recorded cross-border data transfer mechanism, find regulated professions, and rank jurisdictions by confidence score.
 
 ## Install
 
@@ -8,7 +8,7 @@
 npm install jurisdiction-kit
 ```
 
-ESM only. Zero runtime dependencies. Works in Node 14+.
+ESM only, with no CommonJS build: use `import`, not `require()`. Zero runtime dependencies. The compiled output uses nothing newer than ES2020 syntax, so it runs on Node 14 or later (`engines` in `package.json` says the same). It is developed and tested on Node 24, and the test tooling needs Node 22.12 or later, so older versions are untested.
 
 ## Covered jurisdictions (28)
 
@@ -24,26 +24,29 @@ GB, US, FR, DE, ES, IT, NL, CA, AU, NZ, JP, KR, BR, MX, AR, IN, SG, AE, SA, ZA, 
 
 ### `getJurisdiction(code: string): Jurisdiction | undefined`
 
-Returns the full jurisdiction object by ISO 3166-1 alpha-2 code. Case-insensitive. Returns `undefined` for unknown codes.
+Returns the full jurisdiction object by ISO 3166-1 alpha-2 code. Case-insensitive. Returns `undefined` for unknown codes, so narrow the result before use (required under `strict`). The object is the live entry in `JURISDICTIONS`, not a copy.
 
 ```typescript
 import { getJurisdiction } from 'jurisdiction-kit'
 
 const gb = getJurisdiction('GB')
+if (!gb) throw new Error('GB is not in the dataset')
 // gb.name === 'United Kingdom'
 // gb.nameLocal === 'United Kingdom'
 // gb.legalSystem === 'common-law'
 // gb.languages === ['en']
 // gb.currency === 'GBP'
 // gb.eSignatureRecognised === true
-// gb.mutualRecognition === ['AU', 'NZ', 'CA', 'SG', 'HK', 'IE', ...]
+// gb.mutualRecognition === ['IE', 'AU', 'NZ', 'CA', 'HK']
 // gb.dataProtection.name === 'UK GDPR + DPA 2018'
 // gb.dataProtection.breachNotificationHours === 72
 // gb.dataProtection.rightToErasure === true
 // gb.childProtection.minAgeDigitalConsent === 13
 
 const sg = getJurisdiction('sg')  // case-insensitive
-// sg.name === 'Singapore'
+if (sg) {
+  // sg.name === 'Singapore'
+}
 ```
 
 ---
@@ -94,7 +97,7 @@ const accountants = getProfessionalBodies('AU', 'accounting')
 
 ### `getMutualRecognitionPartners(code: string): Jurisdiction[]`
 
-Returns full Jurisdiction objects for all jurisdictions with formal mutual recognition agreements with the given jurisdiction.
+Returns full Jurisdiction objects for all jurisdictions with professional credential recognition agreements with the given jurisdiction. The lists are one-directional (a jurisdiction can list a partner that does not list it back), and codes outside the 28 covered jurisdictions are dropped. `canTransferData` also reads this list.
 
 ```typescript
 import { getMutualRecognitionPartners } from 'jurisdiction-kit'
@@ -146,6 +149,8 @@ const veterinary = findJurisdictionsForProfession('veterinary')
 
 Returns the minimum age for digital services without parental consent. Returns `16` for unknown jurisdictions (the GDPR default).
 
+This reads `childProtection.minAgeDigitalConsent`. It does not read `dataProtection.digitalConsentAge`, a separate field with the same description. The two hold the same value for all 28 jurisdictions in this release, but nothing in the types or tests forces that, so they could diverge in a later data update.
+
 ```typescript
 import { getDigitalConsentAge } from 'jurisdiction-kit'
 
@@ -178,7 +183,21 @@ getAgeOfMajority('XX')  // 18 (safe default)
 
 ### `canTransferData(from: string, to: string): { allowed: boolean; mechanism?: string; notes?: string }`
 
-Determines the legal mechanism for a cross-border personal data transfer. Returns `{ allowed: false }` only for unknown jurisdictions — all known transfers have a mechanism, though some require additional safeguards.
+Looks up the mechanism the dataset associates with moving personal data from `from` to `to`.
+
+This is a lookup, not legal clearance. `allowed` is `false` only when either code is unknown. For every pair of known jurisdictions it is `true`, including `safeguards-required`, where a transfer is lawful only if the safeguards are actually in place. Read `mechanism` for the information, treat `allowed` as "the dataset has an answer for this pair", and verify with the relevant regulatory authority or a qualified legal professional before relying on it.
+
+Direction matters. The rules are read from the source jurisdiction, so swapping the arguments can change the result (`FR` to `GB` is `adequacy-decision`, `GB` to `FR` is `safeguards-required`).
+
+Precedence, first match wins:
+
+1. Either code unknown: `{ allowed: false, notes: 'Unknown jurisdiction' }`, whichever argument is the unknown one.
+2. Same code: `domestic`.
+3. The source's `dataProtection.crossBorderRestrictions` is `false`: `no-restrictions`. The destination is not consulted. In this release only `US` and `CA` have no restrictions recorded.
+4. Both codes are EU/EEA members: `eu-internal`.
+5. The source is an EU/EEA member and the destination is on the dataset's EU adequacy list (annotated in the source as of 2024): `adequacy-decision`. Adequacy is only checked for EU/EEA sources.
+6. The destination appears in the source's `mutualRecognition` list: `mutual-recognition`.
+7. Anything else: `safeguards-required`, with `notes` set to `'Requires Standard Contractual Clauses (SCCs) or equivalent safeguards.'`.
 
 ```typescript
 import { canTransferData } from 'jurisdiction-kit'
@@ -189,11 +208,17 @@ canTransferData('FR', 'DE')
 canTransferData('FR', 'GB')
 // → { allowed: true, mechanism: 'adequacy-decision' }
 
+canTransferData('GB', 'FR')
+// → { allowed: true, mechanism: 'safeguards-required', notes: '...' }
+
 canTransferData('GB', 'AU')
 // → { allowed: true, mechanism: 'mutual-recognition' }
 
 canTransferData('US', 'BR')
 // → { allowed: true, mechanism: 'no-restrictions' }
+
+canTransferData('BR', 'US')
+// → { allowed: true, mechanism: 'safeguards-required', notes: '...' }
 
 canTransferData('DE', 'IN')
 // → { allowed: true, mechanism: 'safeguards-required',
@@ -202,20 +227,25 @@ canTransferData('DE', 'IN')
 canTransferData('GB', 'GB')
 // → { allowed: true, mechanism: 'domestic' }
 
+canTransferData('GB', 'XX')
+// → { allowed: false, notes: 'Unknown jurisdiction' }
+
 canTransferData('XX', 'GB')
-// → { allowed: false }
+// → { allowed: false, notes: 'Unknown jurisdiction' }
 ```
 
 Transfer mechanisms:
 
 | Mechanism | Meaning |
 |-----------|---------|
-| `domestic` | Same jurisdiction — no transfer |
+| `domestic` | Same jurisdiction, so no cross-border transfer |
 | `eu-internal` | Both parties are EU/EEA member states |
-| `adequacy-decision` | Destination has an EU or UK adequacy decision |
-| `mutual-recognition` | Formal bilateral recognition agreement |
-| `no-restrictions` | Source jurisdiction has no outbound data transfer restrictions |
-| `safeguards-required` | Transfer permitted but requires SCCs or equivalent safeguards |
+| `adequacy-decision` | Source is an EU/EEA member and the destination is on the dataset's EU adequacy list |
+| `mutual-recognition` | The destination is in the source's `mutualRecognition` list. That list records professional credential recognition arrangements; it is not a data-transfer treaty. The dataset reuses it as a middle tier, so this value is a heuristic and not evidence of any data-transfer instrument |
+| `no-restrictions` | The dataset records no outbound transfer restrictions for the source jurisdiction. The destination is ignored |
+| `safeguards-required` | Fallback: a transfer needs SCCs or equivalent safeguards |
+
+The return type declares `mechanism` as `string | undefined`. No union type for it is exported, so the compiler will not check a comparison against a misspelt mechanism. The six values above are the complete set the function can return today; `mechanism` is `undefined` only when `allowed` is `false`.
 
 ---
 
@@ -302,7 +332,7 @@ import { rankJurisdictionsByConfidence } from 'jurisdiction-kit'
 
 const ranked = rankJurisdictionsByConfidence()
 // ranked[0].code === 'GB', ranked[0].score === 80
-// ranked[1].code === 'AU', ...
+// ranked[1].code === 'AE', ranked[1].score === 75
 // ranked[27].code === '...' (lowest scoring jurisdiction)
 ```
 
@@ -310,13 +340,13 @@ const ranked = rankJurisdictionsByConfidence()
 
 ### `JURISDICTIONS: Record<string, Jurisdiction>`
 
-The full jurisdiction dataset. Frozen with `Object.freeze` — read-only at runtime. Direct property access when you want to iterate or process in bulk.
+The full jurisdiction dataset, for direct property access when you want to iterate or process in bulk. The top-level record is frozen with `Object.freeze`, which is shallow: adding, removing or reassigning a country entry fails (a `TypeError` in strict mode, silently ignored otherwise), but each `Jurisdiction` and everything inside it (`professionalBodies`, `dataProtection`, `childProtection`, `mutualRecognition`, `languages`) is not frozen. The lookup functions return those same live objects, not copies, so mutating a result changes the data every other caller in the process sees. Treat everything the library returns as read-only, and take a copy before changing anything.
 
 ```typescript
 import { JURISDICTIONS } from 'jurisdiction-kit'
 
 Object.keys(JURISDICTIONS).length  // 28
-JURISDICTIONS['GB'].name           // 'United Kingdom'
+JURISDICTIONS['GB'].name           // 'United Kingdom' (possibly undefined under noUncheckedIndexedAccess)
 
 // Iterate all jurisdictions
 for (const [code, jurisdiction] of Object.entries(JURISDICTIONS)) {
@@ -342,7 +372,7 @@ interface Jurisdiction {
   dataProtection: DataProtectionLaw
   childProtection: ChildProtectionLaw
   eSignatureRecognised: boolean    // e-signatures legally recognised
-  mutualRecognition: string[]      // ISO codes of mutual recognition partners
+  mutualRecognition: string[]      // ISO codes with professional credential recognition agreements; one-directional, may name codes outside the 28 covered; also read by canTransferData
   notes?: string
 }
 ```
@@ -371,7 +401,7 @@ interface DataProtectionLaw {
   fullName: string                 // Full legislative name
   year: number                     // Year enacted
   requiresExplicitConsent: boolean
-  digitalConsentAge: number        // Minimum age for digital services without parental consent
+  digitalConsentAge: number        // Minimum age for digital services without parental consent; NOT read by getDigitalConsentAge (see ChildProtectionLaw.minAgeDigitalConsent)
   breachNotificationHours: number  // 0 = no statutory deadline
   rightToErasure: boolean
   rightToPortability: boolean
@@ -387,7 +417,7 @@ interface DataProtectionLaw {
 ```typescript
 interface ChildProtectionLaw {
   name: string
-  minAgeDigitalConsent: number
+  minAgeDigitalConsent: number     // The field getDigitalConsentAge returns
   ageOfMajority: number
   requiresParentalConsent: boolean
   enhancedProtections: boolean
@@ -449,9 +479,10 @@ type ProfessionType =
 ## Data methodology
 
 - **Sources**: publicly available government registries, official regulatory authority websites, and legal databases
-- **Currency**: data compiled in 2025 and reflects legislation as of that date — always verify with the relevant regulatory authority before production compliance decisions
+- **Currency**: data compiled in 2025 and reflects legislation as of then. No exact as-of date is stored in the data and entries carry no per-entry verification date. The one dated marker in the code is the EU adequacy list behind `canTransferData`, annotated in the source as of 2024. Always verify with the relevant regulatory authority before production compliance decisions
+- **Releases**: CHANGELOG.md (included in the npm package) lists each release with its date. It is generated from commit subjects, so it is not a field-by-field record of data changes
 - **Coverage**: 28 countries, weighted towards common-law and EU/EEA jurisdictions
-- **Bundle size**: the full frozen dataset is always included (~3,400 lines of source). Not tree-shakeable — the data is the library.
+- **Bundle size**: the full dataset is always included (~3,400 lines of source). Not tree-shakeable: the data is the library.
 
 ---
 

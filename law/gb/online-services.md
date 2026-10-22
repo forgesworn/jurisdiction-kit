@@ -29,7 +29,7 @@ software attracts almost none of them. Work out which you do.
 | Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
-| Do you take money? | Section 8 |
+| Do you take money? | Section 8. For voluntary donations, 8.1 |
 | Is the operator a project name and not a registered company? | Section 9 |
 
 ## 2. Online Safety Act 2023
@@ -375,7 +375,8 @@ A publisher that hosts its site with somebody else, keeps no logs of its
 own, and takes reports through a platform somebody else runs has little
 left to bring within the fee, or within section 3 at all `[U]`.
 
-Taking money changes the answer (section 8).
+Taking money changes the answer (section 8). Voluntary donations do not, on
+a plain reading (8.1) `[U]`.
 
 There is no exemption for sole traders as such `[S]`.
 
@@ -615,6 +616,61 @@ disclose the individual's name and an address for service:
 
 Failure is an offence, and can defeat a claim brought by the business.
 
+### 8.1 Donations
+
+The case: a free service that charges no fee and sells nothing, whose users
+may give the operator money to keep it running.
+
+**The text.** Regulation 2(1) gives "information society services" the
+meaning in the Directive, summarised as "any service normally provided for
+remuneration, at a distance, by means of electronic equipment ... and at the
+individual request of a recipient of a service" `[P]`. Directive 98/34, which
+regulation 2(1) still names, is marked repealed on legislation.gov.uk;
+Directive 2015/1535, article 1(1)(b), uses the same words, "normally
+provided for remuneration" `[P]`. Recital 18 of
+Directive 2000/31: such services, "in so far as they represent an economic
+activity, extend to services which are not remunerated by those who receive
+them" `[P]`. Government guidance: "The Regulations do not apply to
+non-commercial interactions" `[P]`. That backs the secondary source in
+section 8.
+
+**The case law.** In McFadden (C-484/14, 2016) the Court of Justice held
+that the services must "represent an economic activity", and that
+remuneration "does not require the service to be paid for by those for whom
+it is performed", citing Papasavvas (C-291/13) `[S]`. A free service was an
+information society service where provided "for the purposes of advertising
+the goods sold or services supplied by that service provider" `[S]`.
+Earlier case law: "the essential characteristic of remuneration lies in the
+fact that it constitutes consideration for the service in question"
+(Humbel, 263/86) `[S]`. How far these judgments bind UK courts now was not
+researched `[U]`.
+
+**Readings.** On a plain reading, a voluntary gift that buys nothing is not
+consideration for the service, so donations alone do not make a service
+"normally provided for remuneration" `[U]`. An operator that sells nothing
+has no goods or services for McFadden's advertising test to attach to `[U]`.
+No authority on a donation-funded online service was found: open question
+`[U]`. Whether carrying payments between users is itself an economic
+activity of the operator was not researched; payments are not covered
+(section 13).
+
+**Companies Act.** Sections 1200 to 1206 turn on "carrying on business in
+the United Kingdom under a business name". "Business" is defined only as
+including "a profession" (section 1208) `[P]`. Whether accepting gifts to
+keep a free service running is carrying on business: open question, no
+source found `[U]`.
+
+**The ICO fee.** The test in 3.4 turns on what the service itself processes,
+not on where its money comes from `[U]`. Donor records fit "keeping
+accounts, or records of purchases, sales or other transactions", and, for a
+body not conducted for profit, "maintaining membership or support" (Schedule
+paragraph 2(2)(f) and (g)) `[P]`, on a plain reading `[U]`. The ICO lets a
+not-for-profit make "a profit for its own purposes, as long as the profit is
+not used to enrich others" `[P]`. "Turnover" for the tiers means "amounts
+derived by the data controller from the provision of goods and services"
+(regulation 1) `[P]`; on a plain reading, gifts that buy nothing are not
+turnover `[U]`. So donations do not change the answer in 3.4 `[U]`.
+
 ## 9. Who the operator is
 
 This runs through every section above.
@@ -647,7 +703,7 @@ operate nothing. Take advice before choosing.
 | More than 10,000 people served | Interception and equipment interference capability can be required; changes may have to be notified | 5.3 |
 | More than 3 million UK monthly users, with direct messages | Category 2B | 2.7 |
 | £250 million worldwide and £10 million UK revenue | Ofcom fees | 2.7 |
-| First revenue | Trading rules | 8 |
+| First revenue | Trading rules. Donations alone are not shown to be enough | 8, 8.1 |
 | Turnover over £632,000 and more than 10 staff | ICO fee tier 2 | 3.4 |
 
 ## 11. Worked examples
@@ -677,7 +733,7 @@ of the documents; they are drafts and carry no authority.
 - Consumer law, including the Consumer Rights Act 2015 and the Digital
   Markets, Competition and Consumers Act 2024.
 - Payments, cryptoassets and financial promotion.
-- Tax.
+- Tax, including whether donations are gifts or trading income.
 - Defamation, harassment and other liability for content.
 - Copyright and licence compliance for what you ship.
 - Recording and transcribing calls.
@@ -695,6 +751,7 @@ of the documents; they are drafts and carry no authority.
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
 | 28 September 2026 | Ofcom's own words on "significant", decentralised services, groups on another platform and small services (2.1, 2.2, 2.9). 3.4: the not-for-profit exemption in full. New 6.1, what other people do with published software |
 | 28 September 2026 | 3.4: the fee is owed unless all processing is exempt, and what a publisher is usually left with |
+| 22 October 2026 | New 8.1, donations: whether they bring a free service within the trading rules, and the ICO fee. Pointers in 1, 3.4, 10 and 13. Only those sections were re-read |
 
 ## 15. Sources
 
@@ -719,6 +776,16 @@ Primary, read 28 September 2026:
 - [Electronic Commerce (EC Directive) Regulations 2002, regulation 6](https://www.legislation.gov.uk/uksi/2002/2013/regulation/6)
 - [Companies Act 2006, Part 41 Chapter 2](https://www.legislation.gov.uk/ukpga/2006/46/part/41/chapter/2)
 
+Primary, read 22 October 2026:
+
+- Electronic Commerce (EC Directive) Regulations 2002: [regulation 2](https://www.legislation.gov.uk/uksi/2002/2013/regulation/2)
+- [Directive 2000/31/EC as adopted, recital 18](https://www.legislation.gov.uk/eudr/2000/31/pdfs/eudr_20000031_adopted_en.pdf)
+- [Directive (EU) 2015/1535, article 1](https://www.legislation.gov.uk/eudr/2015/1535/article/1)
+- DCMS: [Electronic Commerce Directive and Regulations, guidance and FAQs](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/607478/livelink-livelink-livelink.exe-43464131-eCommerce-guidance.rtf-funcdoc.....pdf), undated
+- Companies Act 2006: [section 1200](https://www.legislation.gov.uk/ukpga/2006/46/section/1200), [section 1208](https://www.legislation.gov.uk/ukpga/2006/46/section/1208)
+- Data Protection (Charges and Information) Regulations 2018, SI 2018/480: [regulation 1](https://www.legislation.gov.uk/uksi/2018/480/regulation/1), [regulation 3](https://www.legislation.gov.uk/uksi/2018/480/regulation/3), [Schedule](https://www.legislation.gov.uk/uksi/2018/480/schedule)
+- ICO: [fee self-assessment, not-for-profit question](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee-self-assessment/shared/questions/nfp/), [registration questions](https://ico.org.uk/for-organisations/data-protection-fee/faqs-data-protection-fee-payment-and-online-registration/)
+
 Secondary:
 
 - decoded.legal, 24 March 2026: [what number of UK users is a significant number](https://decoded.legal/blog/2026/03/what-number-of-uk-users-constitutes-a-significant-number-for-the-purposes-of-the-online-safety-act-2023/)
@@ -732,3 +799,5 @@ Secondary:
 - Dechert: [export controls on encryption products](https://www.dechert.com/knowledge/onpoint/2016/9/uk-eu-export-controls-on-encryption-products.html)
 - Wiggin: [UK treatment of messaging services](https://www.wiggin.co.uk/insight/european-electronic-communications-code-uk-deprioritised-regulation-of-otts-ofcoms-focus-on-consumer-protection/)
 - Pinsent Masons: [the UK's E-Commerce Regulations](https://www.pinsentmasons.com/out-law/guides/the-uks-e-commerce-regulations)
+- Court of Justice, McFadden, C-484/14, 15 September 2016: [copy of the judgment](https://globalfreedomofexpression.columbia.edu/wp-content/uploads/2018/02/ECJ-McFadden-v-Sony-Music.html) hosted by Columbia Global Freedom of Expression, read 22 October 2026. The court's own sites would not load
+- Commission Services note to the Council, 10865/04, 25 June 2004: [the concept of a service](https://data.consilium.europa.eu/doc/document/ST-10865-2004-INIT/en/pdf), for Humbel, read 22 October 2026

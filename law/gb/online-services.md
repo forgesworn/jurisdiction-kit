@@ -31,6 +31,7 @@ software attracts almost none of them. Work out which you do.
 | Do you hold a key to anybody's content? | 5.4 |
 | Do you take money? | Section 8 |
 | Is the operator a project name and not a registered company? | Section 9 |
+| Will a company run the service? What its directors take on personally | 9.1 |
 
 ## 2. Online Safety Act 2023
 
@@ -628,12 +629,209 @@ This runs through every section above.
 - Once trading, the individual's name goes on business documents
   (section 8).
 - A company's directors are named on the public register at Companies
-  House, and must verify their identity `[U]`.
+  House, and must verify their identity `[P]`. What else a director takes
+  on is in 9.1.
 
 None of these regimes makes room for running a regulated service under a
 pseudonym. The alternatives are to have a registered entity operate the
 service, which names its directors instead, or to publish software only and
 operate nothing. Take advice before choosing.
+
+### 9.1 Directors of the operating company
+
+In short, on a plain reading of the provisions below `[U]`:
+
+- Ofcom's and the ICO's penalties for the service's failings are imposed
+  on the company, as provider or controller. They are the company's to pay,
+  except as the fourth point says.
+- A director answers personally for an offence the company commits with the
+  director's consent or connivance, or through the director's neglect.
+- A director whom the company names to Ofcom as a senior manager answers
+  personally if the company commits certain information offences and the
+  director did not take all reasonable steps to prevent them.
+- A director who also controls the company can be made jointly liable for an
+  Ofcom penalty.
+- Every director owes the company the general duties of company law, must
+  verify their identity at Companies House, and has some personal details on
+  the public register.
+
+The detail follows.
+
+**Offences by the company, Online Safety Act section 202.** This applies
+where the provider is a legal person. The officer commits the offence "as
+well as the entity" where it was "committed with the consent or connivance
+of an officer of the entity" or "is attributable to any neglect on the part
+of an officer of the entity" `[P]`. "Officer" means "a director, manager,
+associate, secretary or other similar officer", or a person purporting to
+act as one `[P]`. It covers offences under the Act except those in Part 10
+`[P]`. legislation.gov.uk records section 202 as in force "for specified
+purposes" from 10 January 2024 (SI 2023/1420) and 7 April 2026 (SI
+2026/262) `[P]`. Which purposes, and whether it is now wholly in force, was
+not checked `[U]`.
+
+**Information notices, sections 100, 102, 109 and 113.** Ofcom may require
+a person to provide "any information that they require for the purpose of
+exercising, or deciding whether to exercise, any of their online safety
+functions" (section 100(1)) `[P]`. The person must "act in accordance with
+the requirements of the notice" and "ensure that the information provided is
+accurate in all material respects" (section 102(8)) `[P]`.
+
+For a notice about a user-to-user service given to its provider, it is an
+offence (section 109) `[P]`:
+
+- to fail to comply with a requirement of the notice. It is a defence that
+  compliance was not reasonably practicable in time and all reasonable steps
+  have since been taken;
+- to provide information that is false in a material respect, knowing it is
+  or reckless as to whether it is;
+- to provide encrypted information intending that Ofcom cannot understand
+  it;
+- to suppress, destroy or alter required information, intending to keep it
+  from Ofcom.
+
+Failing to comply carries a fine. The others carry up to two years'
+imprisonment on indictment, or a fine, or both (section 113) `[P]`.
+
+Failing to comply can be prosecuted only after a provisional notice, and a
+confirmation decision whose time for compliance has run out, and only if
+Ofcom has not imposed a penalty or obtained a service or access restriction
+order for that failure (section 199(1)) `[P]`. On a plain reading, a failure
+to answer a notice meets Ofcom's enforcement process before any prosecution
+`[U]`.
+
+Similar offences attach to audit notices and inspections under Schedule 12
+(section 111), and to interviews Ofcom requires (section 112) `[P]`.
+
+**The named senior manager, sections 103 and 110.** Where the provider is an
+entity, an information notice "may" require it to name "an individual who
+the provider considers to be a senior manager of the entity and who may
+reasonably be expected to be in a position to ensure compliance with the
+requirements of the notice" `[P]`. The provider must inform that individual
+`[P]`. A senior manager is someone who "plays a significant role in" deciding
+how the entity's compliance with the Act is managed or organised, or in
+actually managing or organising it `[P]`.
+
+The named individual commits an offence if the entity commits one of the
+section 109 offences and the individual "has failed to take all reasonable
+steps to prevent that offence being committed" (section 110) `[P]`. Defences
+include "no knowledge of being named", not being a senior manager when the
+act occurred, and having been one for too short a time after the notice to
+act `[P]`. Penalties follow section 113: a fine where the company failed to
+comply, up to two years for the rest `[P]`. Where Ofcom has imposed a penalty
+on the entity for the section 109 offence, the individual cannot be
+prosecuted under section 110 for failing to prevent it (section 199(4))
+`[P]`.
+
+On a plain reading, in a company of a few directors the person named will be
+a director `[U]`.
+
+**Confirmation decisions, section 138.** A person given a confirmation
+decision commits an offence if, "without reasonable excuse", it fails to
+comply with a requirement imposed for a failure of the children's online
+safety duties, or with a CSEA or intimate image content requirement `[P]`. Up
+to two years on indictment `[P]`. On a plain reading, section 202 can carry
+this offence to an officer `[U]`.
+
+**Who pays Ofcom's penalties, Schedules 13 and 15.** The maximum in 2.9
+applies "Where a penalty is imposed on a person in respect of a regulated
+service provided by that person" `[P]`. That is the provider.
+
+But where "an individual or individuals control" the provider, Ofcom may
+give a confirmation decision or penalty notice "jointly to E and to the
+individual or individuals who control E" (Schedule 15, paragraph 5) `[P]`.
+They are then "jointly and severally liable to comply with the requirements,
+or (as the case may be) pay the penalty" `[P]`. Ofcom must first let the
+individual make representations on the matters and on "whether joint and
+several liability would be appropriate" `[P]`. "Control" means meeting a
+condition in section 1162(2)(a), (b), (c) or (d) or (4)(a) of the Companies
+Act 2006, as if the individual were an undertaking `[P]`. Section 1162 was
+not read for this note `[U]`. On a plain reading, a director who holds most
+of the votes, or can appoint most of the board, may be such an individual,
+and a director without that control is not `[U]`. Ofcom's guidance on when
+it would act jointly (paragraph 6) was not read `[U]`.
+
+**Data protection, Data Protection Act 2018.** Where an offence under the
+Act by a company "is proved to have been committed with the consent or
+connivance of or to be attributable to neglect on the part of" a director,
+manager, secretary or similar officer, that person, "as well as the body
+corporate, is guilty of the offence" (section 198) `[P]`. Offences a service
+could meet include false statements in answer to an ICO information notice
+(section 144), destroying or falsifying what an information or assessment
+notice requires (section 148), and altering or erasing personal data to
+prevent its disclosure after a subject access request (section 173) `[P]`.
+Section 173 names "an officer of the controller" directly among those who can
+commit it `[P]`.
+
+An ICO penalty notice requires "the person" to pay (section 155(1)) `[P]`.
+The failures it covers in section 149(2) are where "a controller or processor
+has failed, or is failing" `[P]`. On a plain reading, the penalty falls on
+the company as controller. No provision read for this note makes a director
+liable for it `[U]`.
+
+**Company law: the general duties.** The general duties in sections 171 to
+177 of the Companies Act 2006 "are owed by a director of a company to the
+company" (section 170(1)) `[P]`:
+
+- to act within powers (171);
+- to promote the success of the company (172);
+- to exercise independent judgment (173);
+- to exercise reasonable care, skill and diligence (174);
+- to avoid conflicts of interest (175);
+- not to accept benefits from third parties (176);
+- to declare an interest in a proposed transaction or arrangement (177)
+  `[P]`.
+
+Care, skill and diligence are measured against a reasonably diligent person
+with the knowledge and experience expected of the role, and with the
+director's own (section 174(2)) `[P]`. Companies House: the duties still
+apply if "you're not active in your role as director" or "someone else tells
+you what to do" `[P]`. The civil consequences of breach (section 178) were
+not read `[U]`.
+
+**Limited liability.** GOV.UK: a limited company "is legally separate from
+the people who own it", and owners "are responsible for business debts only
+up to the value of their financial investment" `[P]`. That is about
+shareholders. For directors: "you're still legally responsible for your
+company's records, accounts and performance", and "You may be fined,
+prosecuted or disqualified from being a company director if you do not meet
+your responsibilities" `[P]`. On a plain reading, a penalty on the company
+is the company's debt, and a director answers personally for an offence the
+director commits, including through section 202 or 198, or for a joint
+penalty under Schedule 15 `[U]`. Personal liability on insolvency is not
+covered (section 13).
+
+**Identity verification.** A director must verify their identity for
+Companies House `[P]`. Through GOV.UK One Login "It is free of charge" `[P]`.
+An authorised agent can do it instead, and "may charge a fee" `[P]`. A new
+company gives each director's personal code in its registration filing; an
+existing director gives it in the company's next confirmation statement
+`[P]`. "Your company will be unable to file its confirmation statement
+unless all its directors are verified" `[P]`. "If you continue to act as a
+director after the deadline without complying with all verification
+requirements, you will be committing an offence. The company (or entity) and
+all directors may also be committing an offence" `[P]`. The statute behind
+this, the Economic Crime and Corporate Transparency Act 2023, was not read
+`[U]`.
+
+**What the register shows.** Made public: name, nationality, the month and
+year of birth (for directors appointed after 10 October 2015), and a service
+address `[P]`. The usual residential address
+must be given, but "will not be available on the public register" `[P]`. The
+full date of birth is on a private register `[P]`. Both can go to credit
+reference agencies and specified public authorities such as the police
+`[P]`. Officers' details stay public for the life of the company, including
+those who have resigned, and for 20 years after dissolution; that period is
+under review `[P]`. The page read does not mention occupation or country of
+residence. Companies Act section 163 could not be read in its current form
+`[U]`.
+
+**Costs and filing.** Incorporation: £100 online, £124 on paper `[P]`. The
+confirmation statement fee: £50 online, £110 on paper, paid with the first
+statement in each 12-month period `[P]`. A confirmation statement is due at
+least every 12 months, and "You can be fined up to £5,000 and your company
+may be struck off if you do not file your confirmation statement" `[P]`.
+Some fees are set by regulations and some by Companies House's own fees
+determination `[P]`.
 
 ## 10. Thresholds at a glance
 
@@ -649,6 +847,7 @@ operate nothing. Take advice before choosing.
 | £250 million worldwide and £10 million UK revenue | Ofcom fees | 2.7 |
 | First revenue | Trading rules | 8 |
 | Turnover over £632,000 and more than 10 staff | ICO fee tier 2 | 3.4 |
+| A company runs the service | Directors verify identity; £100 to incorporate online, £50 a year for the confirmation statement online | 9.1 |
 
 ## 11. Worked examples
 
@@ -671,6 +870,9 @@ of the documents; they are drafts and carry no authority.
 | CSEA reporting for search services | Commencement | 2.6 |
 | ICO fee | Amounts change by regulation | 3.4 |
 | Ofcom Codes of Practice | New or strengthened measures | 2.3 |
+| Ofcom guidance on joint liability | The factors for giving a decision or penalty jointly to individuals who control a provider (Online Safety Act Schedule 15, paragraph 6) | 9.1 |
+| Companies House identity verification | The note against unverified names, and verification for people who file | 9.1 |
+| Companies House fees | Amounts change by regulation or fees determination | 9.1 |
 
 ## 13. Not covered
 
@@ -683,6 +885,8 @@ of the documents; they are drafts and carry no authority.
 - Recording and transcribing calls.
 - Accessibility under the Equality Act 2010.
 - Differences in Scotland and Northern Ireland.
+- Directors' personal liability on insolvency, director disqualification,
+  and directors' and officers' insurance.
 - Any other jurisdiction. A service used by people in the EU brings the EU
   GDPR and the Digital Services Act into view.
 
@@ -695,6 +899,7 @@ of the documents; they are drafts and carry no authority.
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
 | 28 September 2026 | Ofcom's own words on "significant", decentralised services, groups on another platform and small services (2.1, 2.2, 2.9). 3.4: the not-for-profit exemption in full. New 6.1, what other people do with published software |
 | 28 September 2026 | 3.4: the fee is owed unless all processing is exempt, and what a publisher is usually left with |
+| 22 October 2026 | New 9.1, directors of the operating company. Section 9: identity verification now `[P]`. Rows in sections 1, 10, 12 and 13 |
 
 ## 15. Sources
 
@@ -718,6 +923,13 @@ Primary, read 28 September 2026:
 - GOV.UK: [export controls on dual-use items](https://www.gov.uk/guidance/export-controls-dual-use-items-software-and-technology-goods-for-torture-and-radioactive-sources)
 - [Electronic Commerce (EC Directive) Regulations 2002, regulation 6](https://www.legislation.gov.uk/uksi/2002/2013/regulation/6)
 - [Companies Act 2006, Part 41 Chapter 2](https://www.legislation.gov.uk/ukpga/2006/46/part/41/chapter/2)
+
+Primary, read 22 October 2026, for 9.1:
+
+- Online Safety Act 2023: [section 100](https://www.legislation.gov.uk/ukpga/2023/50/section/100), [section 102](https://www.legislation.gov.uk/ukpga/2023/50/section/102), [section 103](https://www.legislation.gov.uk/ukpga/2023/50/section/103), [section 109](https://www.legislation.gov.uk/ukpga/2023/50/section/109), [section 110](https://www.legislation.gov.uk/ukpga/2023/50/section/110), [section 111](https://www.legislation.gov.uk/ukpga/2023/50/section/111), [section 112](https://www.legislation.gov.uk/ukpga/2023/50/section/112), [section 113](https://www.legislation.gov.uk/ukpga/2023/50/section/113), [section 130](https://www.legislation.gov.uk/ukpga/2023/50/section/130), [section 137](https://www.legislation.gov.uk/ukpga/2023/50/section/137), [section 138](https://www.legislation.gov.uk/ukpga/2023/50/section/138), [section 199](https://www.legislation.gov.uk/ukpga/2023/50/section/199), [section 202](https://www.legislation.gov.uk/ukpga/2023/50/section/202), [Schedule 13](https://www.legislation.gov.uk/ukpga/2023/50/schedule/13), [Schedule 15](https://www.legislation.gov.uk/ukpga/2023/50/schedule/15)
+- Data Protection Act 2018: [section 144](https://www.legislation.gov.uk/ukpga/2018/12/section/144), [section 148](https://www.legislation.gov.uk/ukpga/2018/12/section/148), [section 149](https://www.legislation.gov.uk/ukpga/2018/12/section/149), [section 155](https://www.legislation.gov.uk/ukpga/2018/12/section/155), [section 173](https://www.legislation.gov.uk/ukpga/2018/12/section/173), [section 198](https://www.legislation.gov.uk/ukpga/2018/12/section/198)
+- [Companies Act 2006, Part 10 Chapter 2](https://www.legislation.gov.uk/ukpga/2006/46/part/10/chapter/2), sections 170 to 177
+- GOV.UK and Companies House: [verifying your identity](https://www.gov.uk/guidance/verifying-your-identity-for-companies-house), [when you need to verify](https://www.gov.uk/guidance/when-you-need-to-verify-your-identity-for-companies-house), [your personal information on the register](https://www.gov.uk/guidance/your-personal-information-on-the-companies-house-register), [being a company director](https://www.gov.uk/guidance/being-a-company-director), [set up a private limited company](https://www.gov.uk/limited-company-formation), [running a limited company](https://www.gov.uk/running-a-limited-company), [Companies House fees, updated 25 September 2026](https://www.gov.uk/government/publications/companies-house-fees/companies-house-fees)
 
 Secondary:
 

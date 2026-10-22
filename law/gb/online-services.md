@@ -691,7 +691,18 @@ This runs through every section above.
 None of these regimes makes room for running a regulated service under a
 pseudonym. The alternatives are to have a registered entity operate the
 service, which names its directors instead, or to publish software only and
-operate nothing. Take advice before choosing.
+operate nothing. Take advice before choosing, if the choice matters to you.
+
+That paragraph is about regulated services and trading. A website or
+deployment that is neither (visitors cannot post anything other visitors
+see, and nothing is sold) carries none of it. Only data protection applies,
+in proportion to what is collected. Article 13 asks a privacy notice for
+"the identity and the contact details of the controller" (3.2) `[P]`.
+Whether a consistent pseudonym with a working contact address meets
+"identity" was not found decided either way `[U]`. A site that keeps no
+access logs, sets no cookies, runs no analytics and takes no forms handles
+little beyond the address needed to answer each request, which leaves a
+notice little to say `[U]`.
 
 ### 9.1 Directors of the operating company
 
@@ -957,6 +968,7 @@ of the documents; they are drafts and carry no authority.
 | 28 September 2026 | 3.4: the fee is owed unless all processing is exempt, and what a publisher is usually left with |
 | 22 October 2026 | New 8.1, donations: whether they bring a free service within the trading rules, and the ICO fee. Pointers in 1, 3.4, 10 and 13. Only those sections were re-read |
 | 22 October 2026 | New 9.1, directors of the operating company. Section 9: identity verification now `[P]`. Rows in sections 1, 10, 12 and 13 |
+| 22 October 2026 | Section 9: the pseudonym paragraph is about regulated services and trading; what applies to a website that is neither. No new research; new statements marked `[U]` or tied to 3.2 |
 
 ## 15. Sources
 

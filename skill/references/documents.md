@@ -39,7 +39,7 @@ By position (see `SKILL.md`). Draft for the position the owner has chosen, and o
 - Leaves markers for what is not yours to decide:
   - `[DECISION: ...]` a choice for the owner;
   - `[INPUT: ...]` a fact only the owner has;
-  - `[LEGAL REVIEW: ...]` a point for a lawyer.
+  - `[LEGAL REVIEW: ...]` a point for a lawyer, only where the answer would change what the owner does. The banner already says no lawyer has read the document; do not add review markers for that alone.
 - Refers to roles, never to a named person.
 - Says plainly what the operator cannot do. Do not promise a capability the software lacks.
 

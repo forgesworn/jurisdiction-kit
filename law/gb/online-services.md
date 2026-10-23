@@ -993,9 +993,10 @@ determination `[P]`.
 Public projects that have written their position down. They show the shape
 of the documents; they are drafts and carry no authority.
 
-- **Runs default infrastructure, treats itself as in scope.** KithMoot:
-  [risk assessment, children's access assessment, terms, privacy notice and
-  report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal).
+- **Historical operated-infrastructure drafts.** KithMoot:
+  [archived assessments, terms, privacy notice and report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive).
+  Check the current deployment separately; an archived draft is not evidence
+  that the service still runs or that its position has been adopted.
 - **Static app, no defaults, position that it is software.** Wildbloom:
   [Online Safety Act position](https://github.com/forgesworn/wildbloom/tree/main/docs/legal).
 

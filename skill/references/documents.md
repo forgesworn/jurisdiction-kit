@@ -4,7 +4,7 @@ Write these in the project's own repository, by convention under `docs/legal/`, 
 
 Two public worked examples, both drafts:
 
-- A project that runs default infrastructure: <https://github.com/forgesworn/kithmoot/tree/main/docs/legal>
+- Historical drafts for operated infrastructure: <https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive>. Check a project's current position separately from these archived examples.
 - A static app with no defaults: <https://github.com/forgesworn/wildbloom/tree/main/docs/legal>
 
 Read the one closer to the project for shape. Do not copy its facts.
@@ -13,7 +13,7 @@ Read the one closer to the project for shape. Do not copy its facts.
 
 | Document | Needed when | Note sections (GB) |
 |---|---|---|
-| Position on scope | Always. One page on whether the project is a service, and why | 1, 2.1, 2.2 |
+| Position on scope | Always. One page on whether the project is a service, and why | 1, 2.1, 2.2, 2.11 |
 | Illegal content risk assessment | The project treats itself as a regulated service | 2.3, 2.4 |
 | Children's access assessment | Same | 2.5 |
 | Privacy notice | The operator handles any personal data, including IP addresses | 3, 4 |
@@ -29,6 +29,7 @@ By position (see `SKILL.md`). Draft for the position the owner has chosen, and o
 |---|---|---|
 | Publisher, with or without defaults | Position on scope. A short privacy notice: the site's logs, update checks, and every third party a default contacts. A report page that says who can act, since the project holds nothing to remove | 2.2, 3.1, 3.2 |
 | Closed operator | Position on scope, with the reasoning for the exemption, kept and not published | 2.10, 3.9 |
+| Infrastructure operator | Position separating transport from the underlying service, with unresolved classifications marked. Privacy information for data handled. Apply further duties only where their tests are met | 2.2, 2.11, 3, 5 |
 | Public operator | All of them | 2, 3, 4, 5 |
 
 ## Every document

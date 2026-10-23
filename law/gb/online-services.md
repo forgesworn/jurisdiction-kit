@@ -366,6 +366,25 @@ section 146 provides for court-ordered access restrictions `[P]`. Data
 protection and investigatory-powers questions remain separate (3 and 5).
 Do not describe an access facility as legally unregulated in every respect.
 
+**Identity-addressed discovery and mesh transit.** Publishing embedded
+networking code does not by itself make its publisher or every endpoint
+user a service provider. Distinguish ordinary private endpoints, forwarding
+for unrelated parties, public gateways and the underlying application
+service. Identify who controls application admission, transport resources
+and each encryption endpoint. Independent routing strengthens the publisher
+argument where it removes actual operational authority; it does not remove
+an application-service role the publisher retains `[U]`.
+
+A signed endpoint advertisement attributes a statement to a key and can
+support freshness checks under an expiry/replay policy. It does not itself
+grant access, establish the operator's legal identity, prove present
+reachability or provide an exemption. Classify any operated discovery,
+directory or signalling service separately; an address advert is not room
+membership authority `[U]`. A gateway's actual decryption and admission
+boundaries matter, not merely its use of encrypted links. Forwarding for
+unrelated users is a separate operating role even when voluntary or bundled
+with a client; do not assume every ordinary endpoint performs it `[U]`.
+
 ## 3. Data protection
 
 UK GDPR, Data Protection Act 2018, Data (Use and Access) Act 2025.
@@ -385,6 +404,12 @@ service that cannot read content, that is still usually `[U]`:
 - anything your logs keep.
 
 Holding little is a good position. It is not the same as holding nothing.
+
+Identity-addressed discovery and routing can process persistent public keys,
+network endpoint adverts, neighbour/routing state and connection metadata.
+Encrypted payloads do not establish anonymity or remove this processing.
+Check public-advert persistence, identity linkage, diagnostics and the
+actual scope of gateway decryption `[U]`.
 
 ### 3.2 The privacy notice
 
@@ -736,6 +761,12 @@ than assume that every telephone-provider duty applies, or that none does
 `[U]`. The overview is not a TURN-specific classification, and no complete
 General Conditions assessment of packet relays is recorded here.
 
+Public mesh transit, exits and gateways need that same separate
+classification. Being embedded in an application or operated voluntarily
+does not itself answer the service/public-provider tests. Ordinary endpoint
+users do not acquire operator obligations merely by communicating through
+such a network `[U]`.
+
 ## 8. Trading
 
 These rules attach to economic activity. A free project with no revenue is
@@ -1084,7 +1115,7 @@ of the documents; they are drafts and carry no authority.
 | Under-16 regulations | The text when laid, expected before Christmas 2026. Whether messaging services are excluded in terms, and how "stranger" contact is defined | 2.5 |
 | Section 121 | Accreditation of scanning technology; any first notice | 2.8 |
 | Ofcom guidance on software and decentralised services | Anything on who the provider is where nobody controls admission | 2.2 |
-| Transport infrastructure and bundled endpoints | A primary classification of TURN or similar relays under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
+| Transport infrastructure and bundled endpoints | A primary classification of packet relays, mesh transit, gateways and identity-addressed discovery under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
 | CSEA reporting for search services | Commencement | 2.6 |
 | ICO fee | Amounts change by regulation | 3.4 |
 | Ofcom Codes of Practice | New or strengthened measures | 2.3 |
@@ -1112,6 +1143,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Application-only update: 2.11 distinguishes embedded clients, identity-addressed discovery, unrelated transit and gateways; 3.1 records routing/advert metadata; 7 carries the separate operator tests to public mesh transport. Independent AI addendum reviewed. New interpretations remain unchecked, with no fresh statutory classification or overall verified/review date change. |
 | 23 October 2026 | Partial update after an independent AI review: 2.2 preserves the conditional provider test; 2.11 distinguishes dependence on transport from application-service admission, without creating a TURN exemption. New 4.1 covers conditional public-provider PECR security, breach and traffic-data rules, including the amended 72-hour wording. Primary regulations 5, 5A and 7 read; dates/commencement annotations checked. Overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: 2.11 distinguishes automatically supplied transport from underlying service admission without creating an exemption; 7 separates public packet forwarding from number-independent messaging and adds Ofcom's condition-specific scope guidance. Sections 32, 100, 146 and 226 read; no definitive TURN classification found. Scoping row includes 7; overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: new 2.11, access facilities under 226(12) and 146, information powers under 100, and the distinction between authentication and users under 227. Explanatory notes 927, 932–933 and 936 read. Scoping row and 2.2 qualified; no primary TURN classification found. Overall verified/review dates unchanged. |

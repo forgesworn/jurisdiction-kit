@@ -954,13 +954,11 @@ determination `[P]`.
 Public projects that have written their position down. They show the shape
 of the documents; they are drafts and carry no authority.
 
-- **Ran default infrastructure, then closed it to publish software only.**
+- **Deployment history and historical operated-infrastructure drafts.**
   KithMoot: a [closure record](https://github.com/forgesworn/kithmoot/blob/main/docs/legal/closure-record.md)
-  of what ran, what closed in October 2026 and what would bring it back into
-  scope, with the [assessments, terms, privacy notice and report
-  runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive)
-  written while it ran and never adopted. One default remains: STUN on its own
-  host, which this note does not cover.
+  and [archived assessments, terms, privacy notice and report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive).
+  Check the current deployment separately; an archived draft is not evidence
+  that the service still runs or that its position has been adopted.
 - **Static app, no defaults, position that it is software.** Wildbloom:
   [Online Safety Act position](https://github.com/forgesworn/wildbloom/tree/main/docs/legal).
 

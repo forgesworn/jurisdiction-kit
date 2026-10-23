@@ -45,9 +45,11 @@ Which duties attach depends on what the operator runs and for whom, far more tha
 | Publisher | Nothing a user's device is sent to, or a static site only | 1, 6, 6.1 |
 | Publisher with defaults | Nothing, and ships defaults that point at servers other people run | 2.2, 3.2 |
 | Closed operator | Servers for themselves, their household, or the people who work on the project | 2.10, 3.9 |
-| Public operator | Any server open to whoever loads the app or finds the address | 2, 3, 4, 5 |
+| Infrastructure operator | Transport or another access facility for an underlying service; classify both roles before assigning duties | 2.2, 2.11, 3, 5 |
+| Public operator | A public user-to-user or search service, after the service/provider and exemption tests | 2, 3, 4, 5 |
 
-- Say which position the code and the deployment put the project in **today**, with evidence. One open endpoint on the public site is enough for the last row.
+- Say which position the code and the deployment put the project in **today**, with evidence. An open endpoint is a fact to classify, not proof by itself of a regulated user-to-user service. Apply the access-facility distinction in 2.11 to raw transport infrastructure, and separately check any underlying service the same operator provides.
+- Bundling a server, counting logins, encrypting traffic or calling an installation personal does not itself settle provider status. Keep the note's unresolved applications marked `[U]`.
 - Then ask which position the owner **means** to be in, before drafting anything. Moving to a lighter position is often less work than meeting the duties of a heavier one, and it is the owner's choice.
 - If they differ, list what the move takes: each default, path and open endpoint that has to go or be closed. Documents are true only once that is done.
 - One project can be in two positions: a public site that runs nothing, and the owner's own closed deployment on another host. Take each deployment separately.

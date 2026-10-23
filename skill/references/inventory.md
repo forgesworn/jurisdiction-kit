@@ -45,6 +45,7 @@ Open the file at each `path:line` that matters and read around it before answeri
 - **Whose server a default is matters as much as that it is one.** A default that points at somebody else's server makes them the operator of it, and the project a publisher that names them.
 - **What the owner means to run is not in the code.** A kit in the repository, even one deployed today, may be there for the owner's own use and open to the public by oversight. Report what is open, and ask.
 - **Present is not deployed.** A deploy kit does not show the thing is running. Say "kit present, deployment not verified" unless it can be seen live.
+- **A server is not a legal classification.** Record what each endpoint does and who controls room or service admission. Raw transport and access facilities need the separate analysis in law note 2.11; an account allowlist or one installed copy does not settle who counts as a user.
 - **One exception defeats "never".** If five components cannot read content and one can, the answer to question 7 is yes.
 - **Do not stop at the first hit.** Section 1 lists every host. A lookup or an update check further down the list is as much a third party as the first default.
 - **Old links outlive new defaults.** A default that was removed may still be named in links already handed out.

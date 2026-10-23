@@ -28,6 +28,7 @@ software attracts almost none of them. Work out which you do.
 | Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | First classify the service and access facility under 2.2 and 2.11; then the applicable parts of 2, 3, 4, 5 and 7 |
 | Do you offer packet forwarding or other communications transport to general users? | Classify it under 7; if it is a public communications service or network, also check 4.1 separately from device storage |
 | Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
+| Do you run a server that accepts messages from strangers addressed only to you? | 2.12 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
 | Do you take money? | Section 8. For voluntary donations, 8.1 |
@@ -298,7 +299,9 @@ acting in the course of the provider's business.
 
 **Closed means closed.** Because a visitor counts as a user (2.1), keep a
 private deployment free of any public page that shows user content, open
-sign-up, or endpoint that takes content from whoever finds it `[U]`.
+sign-up, or endpoint that takes content from whoever finds it `[U]`. An inbox that
+accepts strangers' messages addressed only to the operator is a narrower case:
+see 2.12.
 
 If a closed service does turn out to be regulated, what it owes is in 2.3:
 assessments that are made, recorded and kept.
@@ -384,6 +387,76 @@ membership authority `[U]`. A gateway's actual decryption and admission
 boundaries matter, not merely its use of encrypted links. Forwarding for
 unrelated users is a separate operating role even when voluntary or bundled
 with a client; do not assume every ordinary endpoint performs it `[U]`.
+
+### 2.12 An inbox strangers can write to
+
+The shape: a server the operator runs that refuses everything from strangers
+except messages addressed to the operator. Strangers cannot read the server
+and cannot reach each other through it. A personal relay that accepts sealed
+direct messages addressed only to the operator's own keys is an example.
+
+**What the Act says.**
+
+- Section 3(1): a user-to-user service is one by which content generated,
+  uploaded or shared "by a user of the service ... may be encountered by
+  another user, or other users, of the service" `[P]`. Section 3(2)(a): "it
+  does not matter if content is actually shared with another user or users as
+  long as a service has a functionality that allows such sharing" `[P]`.
+- Section 233(2)(e) lists "sending direct messages to or speaking to other
+  users of the service" as a functionality `[P]`. Section 236: "content" is
+  anything communicated "whether publicly or privately, including written
+  material or messages"; to "encounter" is to "read, view, hear or otherwise
+  experience" `[P]`. A private message is content, and reading it is
+  encountering it.
+- Section 227(2): it "does not matter whether a person is registered to use a
+  service" `[P]`. A stranger who writes to the server is a user of it.
+- Section 227(3)(a): references to a user do not include, "where the provider
+  of the service is an individual or individuals, that individual or those
+  individuals", but only "when acting in the course of the provider's
+  business" `[P]`. Section 227(4) defines that as acting in the course of the
+  provider's business of providing the service, or of "a business, trade,
+  profession or other concern ... carried on (whether or not for profit) by
+  the provider of the service" and "for the purposes of which the service is
+  provided" `[P]`. Section 227(3)(c) and (d) extend the same exclusion to
+  "persons who work for the provider (including as employees or volunteers)"
+  and to contractors and consultants `[P]`.
+- The explanatory notes on section 227: an employee "would not count as a user
+  if uploading content to the service in the course of their employment ...
+  However, they would count as a user of the service if uploading content to
+  that service in a personal capacity" `[P]`.
+- Schedule 1 paragraph 1 exempts a service only where "emails are the only
+  user-generated content" `[P]`. Paragraph 7, internal business services,
+  needs the service to be "available only to a closed group of people" `[P]`.
+  Neither describes an inbox open to anybody on a protocol that is not email.
+
+**How it applies, by context.** None of this has been decided by Ofcom or a
+court for this shape; every row is a reading `[U]`.
+
+| Who reads what strangers send | Reading | Mark |
+|---|---|---|
+| Only the operator, and the inbox exists for the operator's project or other concern (contact for a project, its bug reports, its signing requests) | The operator is not a user while acting in the course of that concern (227(3)(a), (4)(b)). The stranger's content reaches nobody who counts as "another user", so section 3(1) is not met | `[U]` |
+| Only the operator, reading as a private person (friends and strangers writing socially) | The explanatory notes treat personal-capacity use as use by a user. If the operator is then "another user", the stranger's message to them meets section 3(1) on a plain reading, and no Schedule 1 exemption fits | `[U]` |
+| People who work on the operator's project, as well as the operator | Same as the first row only if they are acting for the provider in the course of the concern (227(3)(c), (d)). Their keys are users while they read in a personal capacity | `[U]` |
+| Anybody else whose address the server accepts mail for | Somebody else's inbox hosted for them. Strangers' content reaches another user; this is the core of section 3(1) | `[U]` |
+
+Points that follow:
+
+- **What the inbox is for decides the answer.** The same software is a project
+  contact point on one reading and a personal messaging service on another.
+  Record which, and keep the accepted addresses to the operator's own keys,
+  or to keys of people acting for the project.
+- **A machine reader counts the same way.** A signer, bot or agent the
+  operator runs, reading messages addressed to it, reads them for the
+  operator. Whether a bot is ever a "user" is not settled by the Act `[U]`.
+- **Nothing from one stranger may reach another.** Once that can happen, the
+  inbox reading falls away and 2.1 applies in full.
+- **Low priority, not nil.** Even on the less favourable rows, a service whose
+  only stranger content is messages to one person is the smallest and lowest
+  risk shape the Act can reach; see 2.9 for how Ofcom says it treats small,
+  low-risk services `[U]`.
+- **Data protection is separate.** Holding strangers' messages, even sealed,
+  makes the operator a controller of whatever personal data they carry, unless
+  the household exemption applies (3.1, 3.9).
 
 ## 3. Data protection
 
@@ -1115,6 +1188,7 @@ of the documents; they are drafts and carry no authority.
 | Under-16 regulations | The text when laid, expected before Christmas 2026. Whether messaging services are excluded in terms, and how "stranger" contact is defined | 2.5 |
 | Section 121 | Accreditation of scanning technology; any first notice | 2.8 |
 | Ofcom guidance on software and decentralised services | Anything on who the provider is where nobody controls admission | 2.2 |
+| Inboxes open to strangers | Any Ofcom statement or decision on a service whose only stranger content is messages to the operator, or on when an individual provider reads "in the course of" a concern | 2.12 |
 | Transport infrastructure and bundled endpoints | A primary classification of packet relays, mesh transit, gateways and identity-addressed discovery under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
 | CSEA reporting for search services | Commencement | 2.6 |
 | ICO fee | Amounts change by regulation | 3.4 |
@@ -1143,6 +1217,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Partial update: new 2.12, an inbox strangers can write to. Sections 3, 227 and 233, the 236 definitions of "content" and "encounter", Schedule 1 paragraphs 1 and 7, and the explanatory notes on section 227 read verbatim. Applications by context are unchecked. Scoping row added. Overall verified/review dates unchanged. |
 | 23 October 2026 | Application-only update: 2.11 distinguishes embedded clients, identity-addressed discovery, unrelated transit and gateways; 3.1 records routing/advert metadata; 7 carries the separate operator tests to public mesh transport. Independent AI addendum reviewed. New interpretations remain unchecked, with no fresh statutory classification or overall verified/review date change. |
 | 23 October 2026 | Partial update after an independent AI review: 2.2 preserves the conditional provider test; 2.11 distinguishes dependence on transport from application-service admission, without creating a TURN exemption. New 4.1 covers conditional public-provider PECR security, breach and traffic-data rules, including the amended 72-hour wording. Primary regulations 5, 5A and 7 read; dates/commencement annotations checked. Overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: 2.11 distinguishes automatically supplied transport from underlying service admission without creating an exemption; 7 separates public packet forwarding from number-independent messaging and adds Ofcom's condition-specific scope guidance. Sections 32, 100, 146 and 226 read; no definitive TURN classification found. Scoping row includes 7; overall verified/review dates unchanged. |
@@ -1167,6 +1242,11 @@ Primary, read 23 October 2026 for the packet-transport check in section 7:
 
 - [Communications Act 2003, section 32](https://www.legislation.gov.uk/ukpga/2003/21/section/32/data.xml).
 - Ofcom: [General Conditions of Entitlement, overview updated 8 April 2026](https://www.ofcom.org.uk/phones-and-broadband/accessibility/general-conditions-of-entitlement).
+
+Primary, read 23 October 2026 for section 2.12 only:
+
+- Online Safety Act 2023: [section 3](https://www.legislation.gov.uk/ukpga/2023/50/section/3/data.xml), [section 227](https://www.legislation.gov.uk/ukpga/2023/50/section/227/data.xml), [section 233](https://www.legislation.gov.uk/ukpga/2023/50/section/233/data.xml), [section 236](https://www.legislation.gov.uk/ukpga/2023/50/section/236/data.xml), [Schedule 1 paragraph 1](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1/paragraph/1/data.xml), [Schedule 1 paragraph 7](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1/paragraph/7/data.xml).
+- [The Act's explanatory notes on section 227](https://www.legislation.gov.uk/ukpga/2023/50/notes/division/6/index.htm).
 
 Primary, read 23 October 2026 for section 2.11 only:
 

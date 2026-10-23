@@ -49,6 +49,7 @@ Which duties attach depends on what the operator runs and for whom, far more tha
 | Public operator | A public user-to-user or search service, after the service/provider and exemption tests | 2, 3, 4, 5 |
 
 - Say which position the code and the deployment put the project in **today**, with evidence. An open endpoint is a fact to classify, not proof by itself of a regulated user-to-user service. Apply the access-facility distinction in 2.11 to raw transport infrastructure, and separately check any underlying service the same operator provides.
+- A closed server that still accepts messages from strangers addressed to the operator is classified under 2.12, not settled by "it is only my inbox". Record what the inbox is for (the project, or the operator as a private person) and list whose keys or addresses it accepts mail for. Any accepted address that is not the operator's, or a person acting for the project, makes it somebody else's inbox.
 - Bundling a server, counting logins, encrypting traffic or calling an installation personal does not itself settle provider status. Keep the note's unresolved applications marked `[U]`.
 - Then ask which position the owner **means** to be in, before drafting anything. Moving to a lighter position is often less work than meeting the duties of a heavier one, and it is the owner's choice.
 - If they differ, list what the move takes: each default, path and open endpoint that has to go or be closed. Documents are true only once that is done.

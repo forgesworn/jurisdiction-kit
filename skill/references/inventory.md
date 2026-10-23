@@ -46,6 +46,7 @@ Open the file at each `path:line` that matters and read around it before answeri
 - **What the owner means to run is not in the code.** A kit in the repository, even one deployed today, may be there for the owner's own use and open to the public by oversight. Report what is open, and ask.
 - **Present is not deployed.** A deploy kit does not show the thing is running. Say "kit present, deployment not verified" unless it can be seen live.
 - **A server is not a legal classification.** Record what each endpoint does and who controls room or service admission. Raw transport and access facilities need the separate analysis in law note 2.11; an account allowlist or one installed copy does not settle who counts as a user.
+- **Inbound exceptions to a closed server.** Where a closed server accepts writes from strangers for some addresses (sealed direct messages, signer requests, contact forms), list each accepted address with `path:line` and whose it is. Law note 2.12 turns on that list.
 - **One exception defeats "never".** If five components cannot read content and one can, the answer to question 7 is yes.
 - **Do not stop at the first hit.** Section 1 lists every host. A lookup or an update check further down the list is as much a third party as the first default.
 - **Old links outlive new defaults.** A default that was removed may still be named in links already handed out.

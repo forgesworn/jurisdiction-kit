@@ -25,8 +25,10 @@ software attracts almost none of them. Work out which you do.
 | Do you only use a service somebody else provides, as a member or as the person who runs a group on it? | 2.2. The duties are the provider's |
 | Do you host an app that talks only to servers the user names, with no defaults of yours? | 2.2, then section 3 for your web host's logs |
 | Do you ship defaults that point only at servers somebody else runs? | 2.2, then 3.2 for naming them |
-| Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | First classify the service and access facility under 2.2 and 2.11; then the applicable parts of 2, 3, 4 and 5 |
+| Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | First classify the service and access facility under 2.2 and 2.11; then the applicable parts of 2, 3, 4, 5 and 7 |
+| Do you offer packet forwarding or other communications transport to general users? | Classify it under 7; if it is a public communications service or network, also check 4.1 separately from device storage |
 | Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
+| Do you run a server that accepts messages from strangers addressed only to you? | 2.12 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
 | Do you take money? | Section 8. For voluntary donations, 8.1 |
@@ -75,8 +77,9 @@ Exemptions, Schedule 1 Part 1 `[P]`:
 | Internal business use | A closed group, for the purposes of the business. See 2.10 |
 | A service provided by a public body, or by an education or childcare provider | |
 
-A service with text chat, video, group calls or file sharing fits none of
-them.
+Text chat, video, group calls and file sharing do not qualify for the
+email/SMS/one-to-one-audio exemptions merely because they are private.
+Other exemptions, including internal business use, need their own tests.
 
 End-to-end encryption does not take a service out of scope. The duties apply
 to a provider that cannot read its own traffic, and that fact shapes which
@@ -99,8 +102,10 @@ media platform, Ofcom pointed to "the provider of the regulated service"
 Ofcom on decentralised services `[P]`: "services should approach it in the
 same way, whether they are decentralised or not", and "If a user operates a
 decentralised service, and the above applies, it is possible that they are
-the provider." So each deployment has its own provider: whoever runs it and
-controls who can use it.
+the provider." This is a conditional test, not a rule that every room
+creator or self-hoster is a regulated provider. Distinguish operating the
+underlying service from ordinary group administration on another service
+and from supplying an access facility `[U]`.
 
 **Open question: designs where nobody controls admission.** No Ofcom
 guidance on where publishing software ends and providing a service begins
@@ -114,9 +119,11 @@ law:
 - **An app whose defaults are servers other people run** sits between the
   two. The publisher chooses the defaults and controls nobody's admission
   to them, and section 226 turns on control over who can use the service.
-  Each server's own operator is the provider of that server. The publisher
-  still owes the privacy notice an account of the third parties its
-  defaults contact (3.2).
+  Each independent operator needs classification for the service and role
+  it actually provides; transport access is not automatically provision of
+  the underlying user-to-user service (2.11) `[U]`. The publisher still owes
+  the privacy notice an account of the third parties its defaults contact
+  (3.2).
 - **An operator that runs default infrastructure** treats itself as the
   provider, in respect of what it runs. This is a cautious provisional
   reading, not a rule that every transport server is a regulated
@@ -129,7 +136,11 @@ Whichever is taken, write the reasoning down and keep it. Revisit it before
 shipping a default, adding discovery, search, a feed, comments or presence,
 or starting to run a server.
 
-Somebody who self-hosts is the operator of their own deployment.
+Somebody who self-hosts operates their own deployment. Whether they provide
+a regulated user-to-user service needs the ordinary service, UK-links,
+exemption and control tests. Installing a client or selecting the guests in
+an ordinary conversation is not by itself enough `[U]`. Do not assign a
+publisher's possible duties to every ordinary room inviter by definition.
 
 ### 2.3 Duties on every regulated service
 
@@ -288,7 +299,9 @@ acting in the course of the provider's business.
 
 **Closed means closed.** Because a visitor counts as a user (2.1), keep a
 private deployment free of any public page that shows user content, open
-sign-up, or endpoint that takes content from whoever finds it `[U]`.
+sign-up, or endpoint that takes content from whoever finds it `[U]`. An inbox that
+accepts strangers' messages addressed only to the operator is a narrower case:
+see 2.12.
 
 If a closed service does turn out to be regulated, what it owes is in 2.3:
 assessments that are made, recorded and kept.
@@ -316,6 +329,27 @@ and the infrastructure role separately. A provider operating its own
 communications service cannot assume its transport component removes its
 separate role as that service's provider `[U]`.
 
+**Automatically supplied transport.** An app whose users control room
+membership, while an operator supplies a default packet relay and issues
+transport credentials, needs both roles examined. Absence of room keys,
+room identifiers or a member directory supports a factual distinction
+between transport access and room admission; it is not itself a statutory
+exemption `[U]`. Assess whether the operator also provides the underlying
+communications service, including the combined offering and the practical
+effect of refusing transport access. A separate hostname, a contractor,
+short-lived credentials or calling the service generic infrastructure does
+not by itself settle that question `[U]`.
+
+**Dependence is not itself admission control.** Section 146(10)'s
+access-facility test expressly includes the ability to impede access by
+withdrawing or changing the facility `[P]`. The fact that withholding
+transport can prevent a communication therefore cannot, on its own,
+distinguish an infrastructure provider from the underlying service
+provider `[U]`. Assess the actual application-service role. A default
+packet relay and automatic transport credentials are relevant facts, not
+automatic proof of that role. Absence of a TURN-specific ruling is
+uncertainty in the application, not a statutory prohibition `[U]`.
+
 An authenticated relay account is not necessarily the legal boundary of
 the user-to-user service. Registration is immaterial under 227(2), and the
 provider's exclusion under 227(3) applies only while acting in the course
@@ -334,6 +368,95 @@ expressly includes access-facility providers in Ofcom's information powers;
 section 146 provides for court-ordered access restrictions `[P]`. Data
 protection and investigatory-powers questions remain separate (3 and 5).
 Do not describe an access facility as legally unregulated in every respect.
+
+**Identity-addressed discovery and mesh transit.** Publishing embedded
+networking code does not by itself make its publisher or every endpoint
+user a service provider. Distinguish ordinary private endpoints, forwarding
+for unrelated parties, public gateways and the underlying application
+service. Identify who controls application admission, transport resources
+and each encryption endpoint. Independent routing strengthens the publisher
+argument where it removes actual operational authority; it does not remove
+an application-service role the publisher retains `[U]`.
+
+A signed endpoint advertisement attributes a statement to a key and can
+support freshness checks under an expiry/replay policy. It does not itself
+grant access, establish the operator's legal identity, prove present
+reachability or provide an exemption. Classify any operated discovery,
+directory or signalling service separately; an address advert is not room
+membership authority `[U]`. A gateway's actual decryption and admission
+boundaries matter, not merely its use of encrypted links. Forwarding for
+unrelated users is a separate operating role even when voluntary or bundled
+with a client; do not assume every ordinary endpoint performs it `[U]`.
+
+### 2.12 An inbox strangers can write to
+
+The shape: a server the operator runs that refuses everything from strangers
+except messages addressed to the operator. Strangers cannot read the server
+and cannot reach each other through it. A personal relay that accepts sealed
+direct messages addressed only to the operator's own keys is an example.
+
+**What the Act says.**
+
+- Section 3(1): a user-to-user service is one by which content generated,
+  uploaded or shared "by a user of the service ... may be encountered by
+  another user, or other users, of the service" `[P]`. Section 3(2)(a): "it
+  does not matter if content is actually shared with another user or users as
+  long as a service has a functionality that allows such sharing" `[P]`.
+- Section 233(2)(e) lists "sending direct messages to or speaking to other
+  users of the service" as a functionality `[P]`. Section 236: "content" is
+  anything communicated "whether publicly or privately, including written
+  material or messages"; to "encounter" is to "read, view, hear or otherwise
+  experience" `[P]`. A private message is content, and reading it is
+  encountering it.
+- Section 227(2): it "does not matter whether a person is registered to use a
+  service" `[P]`. A stranger who writes to the server is a user of it.
+- Section 227(3)(a): references to a user do not include, "where the provider
+  of the service is an individual or individuals, that individual or those
+  individuals", but only "when acting in the course of the provider's
+  business" `[P]`. Section 227(4) defines that as acting in the course of the
+  provider's business of providing the service, or of "a business, trade,
+  profession or other concern ... carried on (whether or not for profit) by
+  the provider of the service" and "for the purposes of which the service is
+  provided" `[P]`. Section 227(3)(c) and (d) extend the same exclusion to
+  "persons who work for the provider (including as employees or volunteers)"
+  and to contractors and consultants `[P]`.
+- The explanatory notes on section 227: an employee "would not count as a user
+  if uploading content to the service in the course of their employment ...
+  However, they would count as a user of the service if uploading content to
+  that service in a personal capacity" `[P]`.
+- Schedule 1 paragraph 1 exempts a service only where "emails are the only
+  user-generated content" `[P]`. Paragraph 7, internal business services,
+  needs the service to be "available only to a closed group of people" `[P]`.
+  Neither describes an inbox open to anybody on a protocol that is not email.
+
+**How it applies, by context.** None of this has been decided by Ofcom or a
+court for this shape; every row is a reading `[U]`.
+
+| Who reads what strangers send | Reading | Mark |
+|---|---|---|
+| Only the operator, and the inbox exists for the operator's project or other concern (contact for a project, its bug reports, its signing requests) | The operator is not a user while acting in the course of that concern (227(3)(a), (4)(b)). The stranger's content reaches nobody who counts as "another user", so section 3(1) is not met | `[U]` |
+| Only the operator, reading as a private person (friends and strangers writing socially) | The explanatory notes treat personal-capacity use as use by a user. If the operator is then "another user", the stranger's message to them meets section 3(1) on a plain reading, and no Schedule 1 exemption fits | `[U]` |
+| People who work on the operator's project, as well as the operator | Same as the first row only if they are acting for the provider in the course of the concern (227(3)(c), (d)). Their keys are users while they read in a personal capacity | `[U]` |
+| Anybody else whose address the server accepts mail for | Somebody else's inbox hosted for them. Strangers' content reaches another user; this is the core of section 3(1) | `[U]` |
+
+Points that follow:
+
+- **What the inbox is for decides the answer.** The same software is a project
+  contact point on one reading and a personal messaging service on another.
+  Record which, and keep the accepted addresses to the operator's own keys,
+  or to keys of people acting for the project.
+- **A machine reader counts the same way.** A signer, bot or agent the
+  operator runs, reading messages addressed to it, reads them for the
+  operator. Whether a bot is ever a "user" is not settled by the Act `[U]`.
+- **Nothing from one stranger may reach another.** Once that can happen, the
+  inbox reading falls away and 2.1 applies in full.
+- **Low priority, not nil.** Even on the less favourable rows, a service whose
+  only stranger content is messages to one person is the smallest and lowest
+  risk shape the Act can reach; see 2.9 for how Ofcom says it treats small,
+  low-risk services `[U]`.
+- **Data protection is separate.** Holding strangers' messages, even sealed,
+  makes the operator a controller of whatever personal data they carry, unless
+  the household exemption applies (3.1, 3.9).
 
 ## 3. Data protection
 
@@ -354,6 +477,12 @@ service that cannot read content, that is still usually `[U]`:
 - anything your logs keep.
 
 Holding little is a good position. It is not the same as holding nothing.
+
+Identity-addressed discovery and routing can process persistent public keys,
+network endpoint adverts, neighbour/routing state and connection metadata.
+Encrypted payloads do not establish anonymity or remove this processing.
+Check public-advert persistence, identity linkage, diagnostics and the
+actual scope of gateway decryption `[U]`.
 
 ### 3.2 The privacy notice
 
@@ -479,7 +608,7 @@ and their friends, as private life and nothing else, is outside both `[U]`.
 by the public are not a household activity, and section 3 applies to what
 they log `[U]`.
 
-## 4. Device storage and cookies
+## 4. Device storage, cookies and communications privacy
 
 Privacy and Electronic Communications Regulations 2003, regulation 6 and
 Schedule A1, as substituted with effect from 5 February 2026 `[P]`.
@@ -498,6 +627,35 @@ on a person's device. Exceptions:
 
 What an app keeps on the device in order to work needs no consent and no
 banner. Describe it in the privacy notice all the same `[U]`.
+
+### 4.1 Public communications providers
+
+PECR is not only a cookie rule. Where the relevant public communications
+provider definitions apply (classify the service separately under 7),
+regulations 5, 5A and 7 address service security, personal data breaches and
+traffic data `[P]` (current primary texts read 23 October 2026).
+
+- Regulation 5 requires appropriate technical and organisational measures
+  to safeguard a public electronic communications service and information
+  to subscribers about a remaining significant security risk `[P]`.
+- Regulation 5A(2) requires breach notification to the Information
+  Commission without undue delay and, where feasible, within 72 hours of
+  awareness; 5A(3) provides for notice to affected subscribers/users where
+  the adverse-effect test is met, and 5A(8) requires a breach inventory
+  `[P]`. The 72-hour wording took effect on 20 August 2025; the Commission
+  substitution on 30 September 2026. Do not reuse the former 24-hour limit.
+- Regulation 7 requires traffic data which are processed and stored to be
+  erased or modified so they cannot be associated with a subscriber/user
+  once no longer needed for transmission, subject to its stated exceptions
+  `[P]`. This is not a general requirement to create traffic logs.
+
+Whether a particular public TURN or other packet relay is a public
+communications provider for these rules remains an application question
+`[U]`. Encryption, private rooms and disabled application logs do not alone
+answer it. If it is within those definitions, check the other relevant PECR
+provisions too; this subsection is not a complete provider assessment.
+An available UK GDPR lawful basis does not by itself settle PECR's separate
+traffic-data purpose and retention restrictions `[U]`.
 
 ## 5. Investigatory powers
 
@@ -518,11 +676,31 @@ Investigatory Powers Act 2016, section 261 `[P]`.
 The definition is wide. Running a relay, a TURN server or a message or file
 store for people in the UK very probably meets it `[U]`.
 
+**Websites are included too.** The Home Office's Communications Data Code
+of Practice, paragraphs 2.3 and 2.5–2.8 (page updated 12 October 2026,
+read 23 October 2026), expressly includes website owners. Paragraph 2.8
+says a website need not have a chat function `[P]`. Do not promise that
+ordinary static hosting avoids this definition. This is a different test
+from the Communications Act service definition in section 7.
+
 ### 5.2 What follows from being one
+
+Section 66(1)–(3) imposes a duty to comply with a requirement imposed by
+notice under a communications-data authorisation, with data minimisation
+and a reasonably-practicable limitation `[P]` (read 23 October 2026).
+Section 87(1) permits a retention notice where the specified necessity,
+proportionality and Judicial Commissioner approval conditions are met;
+87(3) limits a required retention period to twelve months `[P]` (same date).
+These provisions do not themselves create a blanket twelve-month logging
+requirement merely because someone publishes a website `[U]`.
+
+Being within the definition and breaching a duty are separate questions.
+Minimising the data held is useful, but is not an exemption from a lawful
+notice. Do not equate having no keys today with immunity from future
+notices or a guarantee about what a notice may require `[U]`.
 
 - A warrant, authorisation or notice can be served on you, and you must
   give the assistance that is reasonably practicable `[U]`.
-- You can disclose only what you hold.
 - Notices commonly carry a duty not to reveal them `[U]`. If one arrives,
   the next step is a solicitor.
 
@@ -624,13 +802,43 @@ publisher answerable for the use. Licence compliance is not covered
 
 Communications Act 2003. Regulator: Ofcom.
 
+Section 32(2)–(2B) defines electronic communications services by reference
+to internet access, number-based interpersonal communications, or services
+whose principal feature is conveying signals, excluding the content-service
+part. Section 32(7) defines that content-service part `[P]` (current text
+read 23 October 2026). Keep this test separate from the wider investigatory-
+powers definition in section 5.1; the label in one Act does not settle the
+application of another `[U]`.
+
 A messaging or calling app is a number-independent interpersonal
 communications service. The UK did not bring these within Ofcom's General
 Conditions `[S]`. Micro-entities are exempt from the measures in the
 telecoms security code `[S]`.
 
-Nothing here for a small messaging service to do, on the secondary sources
-read.
+For a small number-independent messaging service, no additional duties were
+identified on those secondary sources. That conclusion does not classify
+a separate public packet-forwarding service `[U]`.
+
+A public TURN service or another encrypted packet relay needs a separate
+check against the signal-conveyance limb in section 32(2A)(c). Routing is
+included in section 32(8)'s references to conveying signals `[P]` (primary
+text read 23 October 2026). Whether a particular transport service falls
+within that limb remains an application question `[U]`; moving away from
+the Online Safety Act's user-to-user provider role does not answer it.
+
+Ofcom's General Conditions overview, updated 8 April 2026 and read
+23 October 2026, explains that each condition specifies the category of
+providers to which it applies `[P]`. If the service is an electronic
+communications service, check the relevant conditions individually rather
+than assume that every telephone-provider duty applies, or that none does
+`[U]`. The overview is not a TURN-specific classification, and no complete
+General Conditions assessment of packet relays is recorded here.
+
+Public mesh transit, exits and gateways need that same separate
+classification. Being embedded in an application or operated voluntarily
+does not itself answer the service/public-provider tests. Ordinary endpoint
+users do not acquire operator obligations merely by communicating through
+such a network `[U]`.
 
 ## 8. Trading
 
@@ -735,7 +943,18 @@ This runs through every section above.
 None of these regimes makes room for running a regulated service under a
 pseudonym. The alternatives are to have a registered entity operate the
 service, which names its directors instead, or to publish software only and
-operate nothing. Take advice before choosing.
+operate nothing. Take advice before choosing, if the choice matters to you.
+
+That paragraph is about regulated services and trading. A website or
+deployment that is neither (visitors cannot post anything other visitors
+see, and nothing is sold) carries none of it. Only data protection applies,
+in proportion to what is collected. Article 13 asks a privacy notice for
+"the identity and the contact details of the controller" (3.2) `[P]`.
+Whether a consistent pseudonym with a working contact address meets
+"identity" was not found decided either way `[U]`. A site that keeps no
+access logs, sets no cookies, runs no analytics and takes no forms handles
+little beyond the address needed to answer each request, which leaves a
+notice little to say `[U]`.
 
 ### 9.1 Directors of the operating company
 
@@ -969,7 +1188,8 @@ of the documents; they are drafts and carry no authority.
 | Under-16 regulations | The text when laid, expected before Christmas 2026. Whether messaging services are excluded in terms, and how "stranger" contact is defined | 2.5 |
 | Section 121 | Accreditation of scanning technology; any first notice | 2.8 |
 | Ofcom guidance on software and decentralised services | Anything on who the provider is where nobody controls admission | 2.2 |
-| Transport infrastructure and bundled endpoints | A primary classification of TURN or similar relays under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
+| Inboxes open to strangers | Any Ofcom statement or decision on a service whose only stranger content is messages to the operator, or on when an individual provider reads "in the course of" a concern | 2.12 |
+| Transport infrastructure and bundled endpoints | A primary classification of packet relays, mesh transit, gateways and identity-addressed discovery under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
 | CSEA reporting for search services | Commencement | 2.6 |
 | ICO fee | Amounts change by regulation | 3.4 |
 | Ofcom Codes of Practice | New or strengthened measures | 2.3 |
@@ -997,7 +1217,12 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Partial update: new 2.12, an inbox strangers can write to. Sections 3, 227 and 233, the 236 definitions of "content" and "encounter", Schedule 1 paragraphs 1 and 7, and the explanatory notes on section 227 read verbatim. Applications by context are unchecked. Scoping row added. Overall verified/review dates unchanged. |
+| 23 October 2026 | Application-only update: 2.11 distinguishes embedded clients, identity-addressed discovery, unrelated transit and gateways; 3.1 records routing/advert metadata; 7 carries the separate operator tests to public mesh transport. Independent AI addendum reviewed. New interpretations remain unchecked, with no fresh statutory classification or overall verified/review date change. |
+| 23 October 2026 | Partial update after an independent AI review: 2.2 preserves the conditional provider test; 2.11 distinguishes dependence on transport from application-service admission, without creating a TURN exemption. New 4.1 covers conditional public-provider PECR security, breach and traffic-data rules, including the amended 72-hour wording. Primary regulations 5, 5A and 7 read; dates/commencement annotations checked. Overall verified/review dates unchanged. |
+| 23 October 2026 | Partial update: 2.11 distinguishes automatically supplied transport from underlying service admission without creating an exemption; 7 separates public packet forwarding from number-independent messaging and adds Ofcom's condition-specific scope guidance. Sections 32, 100, 146 and 226 read; no definitive TURN classification found. Scoping row includes 7; overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: new 2.11, access facilities under 226(12) and 146, information powers under 100, and the distinction between authentication and users under 227. Explanatory notes 927, 932–933 and 936 read. Scoping row and 2.2 qualified; no primary TURN classification found. Overall verified/review dates unchanged. |
+| 23 October 2026 | Partial update: 5.1–5.2, Home Office website-owner scope and notice-based communications-data duties; 7, primary Communications Act definition. Sources read for these points only; overall verified/review dates unchanged. |
 | 28 September 2026 | First version |
 | 28 September 2026 | 2.3: the risk assessment is kept, not filed |
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
@@ -1005,8 +1230,23 @@ of the documents; they are drafts and carry no authority.
 | 28 September 2026 | 3.4: the fee is owed unless all processing is exempt, and what a publisher is usually left with |
 | 22 October 2026 | New 8.1, donations: whether they bring a free service within the trading rules, and the ICO fee. Pointers in 1, 3.4, 10 and 13. Only those sections were re-read |
 | 22 October 2026 | New 9.1, directors of the operating company. Section 9: identity verification now `[P]`. Rows in sections 1, 10, 12 and 13 |
+| 22 October 2026 | Section 9: the pseudonym paragraph is about regulated services and trading; what applies to a website that is neither. No new research; new statements marked `[U]` or tied to 3.2 |
 
 ## 15. Sources
+
+Primary, read 23 October 2026 for section 4.1:
+
+- Privacy and Electronic Communications Regulations 2003: [regulation 5](https://www.legislation.gov.uk/uksi/2003/2426/regulation/5/data.xml), [regulation 5A, including amendment annotations](https://www.legislation.gov.uk/uksi/2003/2426/regulation/5A/data.xml), [regulation 7](https://www.legislation.gov.uk/uksi/2003/2426/regulation/7/data.xml).
+
+Primary, read 23 October 2026 for the packet-transport check in section 7:
+
+- [Communications Act 2003, section 32](https://www.legislation.gov.uk/ukpga/2003/21/section/32/data.xml).
+- Ofcom: [General Conditions of Entitlement, overview updated 8 April 2026](https://www.ofcom.org.uk/phones-and-broadband/accessibility/general-conditions-of-entitlement).
+
+Primary, read 23 October 2026 for section 2.12 only:
+
+- Online Safety Act 2023: [section 3](https://www.legislation.gov.uk/ukpga/2023/50/section/3/data.xml), [section 227](https://www.legislation.gov.uk/ukpga/2023/50/section/227/data.xml), [section 233](https://www.legislation.gov.uk/ukpga/2023/50/section/233/data.xml), [section 236](https://www.legislation.gov.uk/ukpga/2023/50/section/236/data.xml), [Schedule 1 paragraph 1](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1/paragraph/1/data.xml), [Schedule 1 paragraph 7](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1/paragraph/7/data.xml).
+- [The Act's explanatory notes on section 227](https://www.legislation.gov.uk/ukpga/2023/50/notes/division/6/index.htm).
 
 Primary, read 23 October 2026 for section 2.11 only:
 
@@ -1026,6 +1266,10 @@ Primary, read 28 September 2026:
 - ICO: [fee exemptions](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/exemptions/), [information collected and published](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/information-we-will-collect-and-publish/), [registration questions](https://ico.org.uk/for-organisations/data-protection-fee/faqs-data-protection-fee-payment-and-online-registration/), [services covered by the Children's code](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/services-covered-by-this-code/)
 - Privacy and Electronic Communications Regulations 2003: [regulation 6](https://www.legislation.gov.uk/uksi/2003/2426/regulation/6), [Schedule A1](https://www.legislation.gov.uk/uksi/2003/2426/schedule/A1)
 - [Investigatory Powers Act 2016, section 261](https://www.legislation.gov.uk/ukpga/2016/25/section/261)
+- [Home Office Communications Data Code of Practice, paragraphs 2.3–2.8](https://www.gov.uk/government/publications/communications-data-code-of-practice/communications-data-code-of-practice-accessible--2)
+- [Investigatory Powers Act 2016, section 66](https://www.legislation.gov.uk/ukpga/2016/25/section/66/data.html)
+- [Investigatory Powers Act 2016, section 87](https://www.legislation.gov.uk/ukpga/2016/25/section/87/data.html)
+- [Communications Act 2003, section 32](https://www.legislation.gov.uk/ukpga/2003/21/section/32/data.html)
 - [Investigatory Powers (Technical Capability) Regulations 2018, SI 2018/353](https://www.legislation.gov.uk/uksi/2018/353/made)
 - [Investigatory Powers (Codes of Practice, Review of Notices and Technical Advisory Board) Regulations 2025, SI 2025/656](https://www.legislation.gov.uk/uksi/2025/656/made)
 - [Regulation of Investigatory Powers Act 2000, section 49](https://www.legislation.gov.uk/ukpga/2000/23/section/49)

@@ -49,10 +49,12 @@ Which duties attach depends on what the operator runs and for whom, far more tha
 | Public operator | A public user-to-user or search service, after the service/provider and exemption tests | 2, 3, 4, 5 |
 
 - Say which position the code and the deployment put the project in **today**, with evidence. An open endpoint is a fact to classify, not proof by itself of a regulated user-to-user service. Apply the access-facility distinction in 2.11 to raw transport infrastructure, and separately check any underlying service the same operator provides.
+- A closed server that still accepts messages from strangers addressed to the operator is classified under 2.12, not settled by "it is only my inbox". Record what the inbox is for (the project, or the operator as a private person) and list whose keys or addresses it accepts mail for. Any accepted address that is not the operator's, or a person acting for the project, makes it somebody else's inbox.
 - Bundling a server, counting logins, encrypting traffic or calling an installation personal does not itself settle provider status. Keep the note's unresolved applications marked `[U]`.
 - Then ask which position the owner **means** to be in, before drafting anything. Moving to a lighter position is often less work than meeting the duties of a heavier one, and it is the owner's choice.
 - If they differ, list what the move takes: each default, path and open endpoint that has to go or be closed. Documents are true only once that is done.
 - One project can be in two positions: a public site that runs nothing, and the owner's own closed deployment on another host. Take each deployment separately.
+- **An ordinary website is not a small regulated service.** A site where visitors cannot post anything other visitors see, and that sells nothing, is outside the Online Safety Act and the trading rules, and section 9's identity points do not reach it. Only data protection applies, in proportion to what the site collects (3.1, 3.2). Do not carry the duties or the identity questions of a regulated service or a business onto it.
 
 ## The check
 
@@ -83,7 +85,7 @@ If the host is a stronger model than that, it delegates and reviews. It does not
 
 The smallest tier is not enough. In trials it found the paperwork gaps, but it passed a claim that the operator "cannot read" content with the line naming the key holder in front of it. Do not use it for the check or the gap check.
 
-Go above medium only for an open question the note itself flags, such as who the provider is. Hand over the inventory and the question, nothing more. A solicitor is the other answer to those.
+Go above medium only for an open question the note itself flags, such as who the provider is. Hand over the inventory and the question, nothing more. A solicitor can settle such a question too, but suggest one only where the answer would change what the owner does, say first what designing the question away would take, and say that the advice is optional.
 
 Do not re-research a `[P]` claim that is inside its review date and not on the watch list. That is the work this skill exists to avoid.
 
@@ -93,6 +95,8 @@ Do not re-research a `[P]` claim that is inside its review date and not on the w
 - **Notes hold the law. Project documents hold facts and decisions.** Link to the note for the law; do not copy it across. Keep project facts out of the notes.
 - **Decisions belong to the owner.** Leave `[DECISION: ...]`, `[INPUT: ...]` and `[LEGAL REVIEW: ...]` markers where a choice, a fact or a lawyer is needed. Do not pick a minimum age, name a person or choose a legal basis on the owner's behalf.
 - **Roles, not names.** Refer to "the maintainer on call", never a natural person. If the law requires an identity the project has not published, flag it as a decision; do not supply one. If the project's documents leave a host or a person unnamed on purpose, leave it unnamed.
+- **Minimise before naming.** When a regime asks for an identity (a controller in a privacy notice, a provider), first set out how the owner can hold or run less so the question shrinks or goes: no access logs, no analytics, no cookies or forms, hosting somebody else runs, reports through a platform the owner does not run. Naming a person or forming a company is one option among these, never the default and never presented as the only safe answer. Publishing software and running ordinary websites under a consistent pseudonym is normal; do not treat it as something to fix.
+- **Keep proportion.** Separate what the law requires from what an unchecked reading suggests. Say how likely enforcement is where the note gives evidence (2.9), and never present a `[U]` reading as a requirement.
 - **Costs are listed, not acted on.** State the amount from the note and stop. Do not pay, register, incorporate or instruct anybody.
 - **Nothing leaves the machine unasked.** No publishing, pushing, deploying, or contact with a regulator without the owner saying so.
 - **If the note does not cover it, say so.** Do not fill a gap from memory. Name the gap and offer to extend the note.

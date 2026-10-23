@@ -25,7 +25,7 @@ software attracts almost none of them. Work out which you do.
 | Do you only use a service somebody else provides, as a member or as the person who runs a group on it? | 2.2. The duties are the provider's |
 | Do you host an app that talks only to servers the user names, with no defaults of yours? | 2.2, then section 3 for your web host's logs |
 | Do you ship defaults that point only at servers somebody else runs? | 2.2, then 3.2 for naming them |
-| Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | First classify the service and access facility under 2.2 and 2.11; then the applicable parts of 2, 3, 4 and 5 |
+| Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | First classify the service and access facility under 2.2 and 2.11; then the applicable parts of 2, 3, 4, 5 and 7 |
 | Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
@@ -315,6 +315,17 @@ QUIC relay or a bundled peer-to-peer endpoint under these provisions
 and the infrastructure role separately. A provider operating its own
 communications service cannot assume its transport component removes its
 separate role as that service's provider `[U]`.
+
+**Automatically supplied transport.** An app whose users control room
+membership, while an operator supplies a default packet relay and issues
+transport credentials, needs both roles examined. Absence of room keys,
+room identifiers or a member directory supports a factual distinction
+between transport access and room admission; it is not itself a statutory
+exemption `[U]`. Assess whether the operator also provides the underlying
+communications service, including the combined offering and the practical
+effect of refusing transport access. A separate hostname, a contractor,
+short-lived credentials or calling the service generic infrastructure does
+not by itself settle that question `[U]`.
 
 An authenticated relay account is not necessarily the legal boundary of
 the user-to-user service. Registration is immaterial under 227(2), and the
@@ -657,8 +668,24 @@ communications service. The UK did not bring these within Ofcom's General
 Conditions `[S]`. Micro-entities are exempt from the measures in the
 telecoms security code `[S]`.
 
-Nothing here for a small messaging service to do, on the secondary sources
-read.
+For a small number-independent messaging service, no additional duties were
+identified on those secondary sources. That conclusion does not classify
+a separate public packet-forwarding service `[U]`.
+
+A public TURN service or another encrypted packet relay needs a separate
+check against the signal-conveyance limb in section 32(2A)(c). Routing is
+included in section 32(8)'s references to conveying signals `[P]` (primary
+text read 23 October 2026). Whether a particular transport service falls
+within that limb remains an application question `[U]`; moving away from
+the Online Safety Act's user-to-user provider role does not answer it.
+
+Ofcom's General Conditions overview, updated 8 April 2026 and read
+23 October 2026, explains that each condition specifies the category of
+providers to which it applies `[P]`. If the service is an electronic
+communications service, check the relevant conditions individually rather
+than assume that every telephone-provider duty applies, or that none does
+`[U]`. The overview is not a TURN-specific classification, and no complete
+General Conditions assessment of packet relays is recorded here.
 
 ## 8. Trading
 
@@ -1036,6 +1063,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Partial update: 2.11 distinguishes automatically supplied transport from underlying service admission without creating an exemption; 7 separates public packet forwarding from number-independent messaging and adds Ofcom's condition-specific scope guidance. Sections 32, 100, 146 and 226 read; no definitive TURN classification found. Scoping row includes 7; overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: new 2.11, access facilities under 226(12) and 146, information powers under 100, and the distinction between authentication and users under 227. Explanatory notes 927, 932–933 and 936 read. Scoping row and 2.2 qualified; no primary TURN classification found. Overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: 5.1–5.2, Home Office website-owner scope and notice-based communications-data duties; 7, primary Communications Act definition. Sources read for these points only; overall verified/review dates unchanged. |
 | 28 September 2026 | First version |
@@ -1048,6 +1076,11 @@ of the documents; they are drafts and carry no authority.
 | 22 October 2026 | Section 9: the pseudonym paragraph is about regulated services and trading; what applies to a website that is neither. No new research; new statements marked `[U]` or tied to 3.2 |
 
 ## 15. Sources
+
+Primary, read 23 October 2026 for the packet-transport check in section 7:
+
+- [Communications Act 2003, section 32](https://www.legislation.gov.uk/ukpga/2003/21/section/32/data.xml).
+- Ofcom: [General Conditions of Entitlement, overview updated 8 April 2026](https://www.ofcom.org.uk/phones-and-broadband/accessibility/general-conditions-of-entitlement).
 
 Primary, read 23 October 2026 for section 2.11 only:
 

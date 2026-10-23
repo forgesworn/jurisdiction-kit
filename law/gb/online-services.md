@@ -910,9 +910,13 @@ determination `[P]`.
 Public projects that have written their position down. They show the shape
 of the documents; they are drafts and carry no authority.
 
-- **Runs default infrastructure, treats itself as in scope.** KithMoot:
-  [risk assessment, children's access assessment, terms, privacy notice and
-  report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal).
+- **Ran default infrastructure, then closed it to publish software only.**
+  KithMoot: a [closure record](https://github.com/forgesworn/kithmoot/blob/main/docs/legal/closure-record.md)
+  of what ran, what closed in October 2026 and what would bring it back into
+  scope, with the [assessments, terms, privacy notice and report
+  runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive)
+  written while it ran and never adopted. One default remains: STUN on its own
+  host, which this note does not cover.
 - **Static app, no defaults, position that it is software.** Wildbloom:
   [Online Safety Act position](https://github.com/forgesworn/wildbloom/tree/main/docs/legal).
 

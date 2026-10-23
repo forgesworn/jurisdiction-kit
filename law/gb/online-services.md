@@ -993,8 +993,9 @@ determination `[P]`.
 Public projects that have written their position down. They show the shape
 of the documents; they are drafts and carry no authority.
 
-- **Historical operated-infrastructure drafts.** KithMoot:
-  [archived assessments, terms, privacy notice and report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive).
+- **Deployment history and historical operated-infrastructure drafts.**
+  KithMoot: a [closure record](https://github.com/forgesworn/kithmoot/blob/main/docs/legal/closure-record.md)
+  and [archived assessments, terms, privacy notice and report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive).
   Check the current deployment separately; an archived draft is not evidence
   that the service still runs or that its position has been adopted.
 - **Static app, no defaults, position that it is software.** Wildbloom:

@@ -25,7 +25,7 @@ software attracts almost none of them. Work out which you do.
 | Do you only use a service somebody else provides, as a member or as the person who runs a group on it? | 2.2. The duties are the provider's |
 | Do you host an app that talks only to servers the user names, with no defaults of yours? | 2.2, then section 3 for your web host's logs |
 | Do you ship defaults that point only at servers somebody else runs? | 2.2, then 3.2 for naming them |
-| Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | Sections 2, 3, 4 and 5 |
+| Do you run, or ship as a default, any server through which one person's content reaches another? A relay, a TURN server, a file store, a forwarder, a chat server | First classify the service and access facility under 2.2 and 2.11; then the applicable parts of 2, 3, 4 and 5 |
 | Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
@@ -118,7 +118,9 @@ law:
   still owes the privacy notice an account of the third parties its
   defaults contact (3.2).
 - **An operator that runs default infrastructure** treats itself as the
-  provider, in respect of what it runs. This is the cautious reading.
+  provider, in respect of what it runs. This is a cautious provisional
+  reading, not a rule that every transport server is a regulated
+  user-to-user service. Apply the access-facility distinction in 2.11.
 
 - **An operator of a closed deployment** is the provider of it, and may be
   exempt or outside the Act. See 2.10.
@@ -290,6 +292,48 @@ sign-up, or endpoint that takes content from whoever finds it `[U]`.
 
 If a closed service does turn out to be regulated, what it owes is in 2.3:
 assessments that are made, recorded and kept.
+
+### 2.11 Transport infrastructure and personal endpoints
+
+**The access-facility distinction**, primary text read 23 October 2026.
+Section 226(12) excludes a person providing an access facility from being
+treated, by that role, as controlling admission to the underlying
+user-to-user service `[P]`. Section 146(10) tests whether the facility can
+be withdrawn or changed to impede UK users' access to that service, or a
+part of it; 146(12) includes infrastructure and apparatus `[P]`.
+
+The Act's explanatory notes, paragraphs 932–933, distinguish infrastructure
+supplied to other services on a business-to-business basis and give examples
+including hosting, content delivery networks and software-as-a-service
+`[P]`. These are explanatory notes, not a determination about every
+transport product.
+
+**Applying that distinction to packet relays remains open.** No primary
+source read for this update expressly classifies STUN, TURN, an encrypted
+QUIC relay or a bundled peer-to-peer endpoint under these provisions
+`[U]`. Check the underlying service, control of room or service admission,
+and the infrastructure role separately. A provider operating its own
+communications service cannot assume its transport component removes its
+separate role as that service's provider `[U]`.
+
+An authenticated relay account is not necessarily the legal boundary of
+the user-to-user service. Registration is immaterial under 227(2), and the
+provider's exclusion under 227(3) applies only while acting in the course
+of its business `[P]`. The explanatory notes, paragraph 936, distinguish
+personal use by the same person `[P]`. One installed copy or one relay
+login therefore does not establish a single-user exemption `[U]`.
+
+Bundling transport code does not itself answer who provides a service.
+An endpoint used only for its owner's communications is a different
+architecture from a node relaying unrelated third parties' traffic, but
+the exact legal consequences require applying the provisions to its facts
+`[U]`. Personal processing under UK GDPR is a separate test (3.9).
+
+**Infrastructure is not outside all legal process.** Section 100(5)(d)
+expressly includes access-facility providers in Ofcom's information powers;
+section 146 provides for court-ordered access restrictions `[P]`. Data
+protection and investigatory-powers questions remain separate (3 and 5).
+Do not describe an access facility as legally unregulated in every respect.
 
 ## 3. Data protection
 
@@ -910,13 +954,11 @@ determination `[P]`.
 Public projects that have written their position down. They show the shape
 of the documents; they are drafts and carry no authority.
 
-- **Ran default infrastructure, then closed it to publish software only.**
+- **Deployment history and historical operated-infrastructure drafts.**
   KithMoot: a [closure record](https://github.com/forgesworn/kithmoot/blob/main/docs/legal/closure-record.md)
-  of what ran, what closed in October 2026 and what would bring it back into
-  scope, with the [assessments, terms, privacy notice and report
-  runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive)
-  written while it ran and never adopted. One default remains: STUN on its own
-  host, which this note does not cover.
+  and [archived assessments, terms, privacy notice and report runbook](https://github.com/forgesworn/kithmoot/tree/main/docs/legal/archive).
+  Check the current deployment separately; an archived draft is not evidence
+  that the service still runs or that its position has been adopted.
 - **Static app, no defaults, position that it is software.** Wildbloom:
   [Online Safety Act position](https://github.com/forgesworn/wildbloom/tree/main/docs/legal).
 
@@ -927,6 +969,7 @@ of the documents; they are drafts and carry no authority.
 | Under-16 regulations | The text when laid, expected before Christmas 2026. Whether messaging services are excluded in terms, and how "stranger" contact is defined | 2.5 |
 | Section 121 | Accreditation of scanning technology; any first notice | 2.8 |
 | Ofcom guidance on software and decentralised services | Anything on who the provider is where nobody controls admission | 2.2 |
+| Transport infrastructure and bundled endpoints | A primary classification of TURN or similar relays under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
 | CSEA reporting for search services | Commencement | 2.6 |
 | ICO fee | Amounts change by regulation | 3.4 |
 | Ofcom Codes of Practice | New or strengthened measures | 2.3 |
@@ -954,6 +997,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Partial update: new 2.11, access facilities under 226(12) and 146, information powers under 100, and the distinction between authentication and users under 227. Explanatory notes 927, 932–933 and 936 read. Scoping row and 2.2 qualified; no primary TURN classification found. Overall verified/review dates unchanged. |
 | 28 September 2026 | First version |
 | 28 September 2026 | 2.3: the risk assessment is kept, not filed |
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
@@ -963,6 +1007,11 @@ of the documents; they are drafts and carry no authority.
 | 22 October 2026 | New 9.1, directors of the operating company. Section 9: identity verification now `[P]`. Rows in sections 1, 10, 12 and 13 |
 
 ## 15. Sources
+
+Primary, read 23 October 2026 for section 2.11 only:
+
+- Online Safety Act 2023: [section 226, including subsection 12](https://www.legislation.gov.uk/ukpga/2023/50/section/226/data.html), [section 146, including subsections 10–12](https://www.legislation.gov.uk/ukpga/2023/50/section/146/data.html), [section 100](https://www.legislation.gov.uk/ukpga/2023/50/section/100/data.html), [section 227](https://www.legislation.gov.uk/ukpga/2023/50/section/227/data.html).
+- [The Act's explanatory notes, paragraphs 927, 932–933 and 936](https://www.legislation.gov.uk/ukpga/2023/50/notes/division/6/index.htm).
 
 Primary, read 28 September 2026:
 

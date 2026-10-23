@@ -34,6 +34,7 @@ software attracts almost none of them. Work out which you do.
 | Do you take money? | Section 8. For voluntary donations, 8.1 |
 | Is the operator a project name and not a registered company? | Section 9 |
 | Will a company run the service? What its directors take on personally | 9.1 |
+| Does a company run or name itself on any website? | 9.2 |
 
 ## 2. Online Safety Act 2023
 
@@ -1152,6 +1153,37 @@ may be struck off if you do not file your confirmation statement" `[P]`.
 Some fees are set by regulations and some by Companies House's own fees
 determination `[P]`.
 
+### 9.2 What a company's website must show
+
+Every company must show these on "its websites", whatever the site does and
+whether or not it sells anything `[P]`:
+
+- its registered name (Company, Limited Liability Partnership and Business
+  (Names and Trading Disclosures) Regulations 2015, regulation 24(2));
+- "the part of the United Kingdom in which the company is registered", "the
+  company's registered number" and "the address of the company's registered
+  office" (regulation 25(1)(c) and (2)).
+
+It must also give the registered office address, in writing within five
+working days, to anyone it deals with in the course of business who asks in
+writing (regulation 27) `[P]`.
+
+Failing "without reasonable excuse" is an offence by the company and "every
+officer of the company who is in default", a fine up to level 3 on the
+standard scale plus a daily default fine (regulation 28) `[P]`.
+
+Readings:
+
+- A site the company operates, and names itself on as operator, is one of
+  "its websites" `[U]`. A link to the Companies House entry instead of
+  showing the address on the site is not what regulation 25 describes `[U]`.
+- The registered office is already public on the Companies House register,
+  and is often a registered agent or accountant rather than a home. Showing
+  it adds nothing that is not public.
+- An open-source project or a pseudonym that is not a company is outside
+  these regulations. Section 8's business-name rules for individuals are
+  separate.
+
 ## 10. Thresholds at a glance
 
 | Threshold | What it switches | Section |
@@ -1217,6 +1249,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Partial update: new 9.2, what a company website must show. Regulations 24, 25, 27 and 28 of SI 2015/17 read verbatim. Scoping row added. Overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: new 2.12, an inbox strangers can write to. Sections 3, 227 and 233, the 236 definitions of "content" and "encounter", Schedule 1 paragraphs 1 and 7, and the explanatory notes on section 227 read verbatim. Applications by context are unchecked. Scoping row added. Overall verified/review dates unchanged. |
 | 23 October 2026 | Application-only update: 2.11 distinguishes embedded clients, identity-addressed discovery, unrelated transit and gateways; 3.1 records routing/advert metadata; 7 carries the separate operator tests to public mesh transport. Independent AI addendum reviewed. New interpretations remain unchecked, with no fresh statutory classification or overall verified/review date change. |
 | 23 October 2026 | Partial update after an independent AI review: 2.2 preserves the conditional provider test; 2.11 distinguishes dependence on transport from application-service admission, without creating a TURN exemption. New 4.1 covers conditional public-provider PECR security, breach and traffic-data rules, including the amended 72-hour wording. Primary regulations 5, 5A and 7 read; dates/commencement annotations checked. Overall verified/review dates unchanged. |
@@ -1242,6 +1275,10 @@ Primary, read 23 October 2026 for the packet-transport check in section 7:
 
 - [Communications Act 2003, section 32](https://www.legislation.gov.uk/ukpga/2003/21/section/32/data.xml).
 - Ofcom: [General Conditions of Entitlement, overview updated 8 April 2026](https://www.ofcom.org.uk/phones-and-broadband/accessibility/general-conditions-of-entitlement).
+
+Primary, read 23 October 2026 for section 9.2 only:
+
+- Company, Limited Liability Partnership and Business (Names and Trading Disclosures) Regulations 2015, SI 2015/17: [regulation 24](https://www.legislation.gov.uk/uksi/2015/17/regulation/24), [regulation 25](https://www.legislation.gov.uk/uksi/2015/17/regulation/25), [regulation 27](https://www.legislation.gov.uk/uksi/2015/17/regulation/27), [regulation 28](https://www.legislation.gov.uk/uksi/2015/17/regulation/28).
 
 Primary, read 23 October 2026 for section 2.12 only:
 

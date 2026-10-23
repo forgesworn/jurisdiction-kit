@@ -474,11 +474,31 @@ Investigatory Powers Act 2016, section 261 `[P]`.
 The definition is wide. Running a relay, a TURN server or a message or file
 store for people in the UK very probably meets it `[U]`.
 
+**Websites are included too.** The Home Office's Communications Data Code
+of Practice, paragraphs 2.3 and 2.5–2.8 (page updated 12 October 2026,
+read 23 October 2026), expressly includes website owners. Paragraph 2.8
+says a website need not have a chat function `[P]`. Do not promise that
+ordinary static hosting avoids this definition. This is a different test
+from the Communications Act service definition in section 7.
+
 ### 5.2 What follows from being one
+
+Section 66(1)–(3) imposes a duty to comply with a requirement imposed by
+notice under a communications-data authorisation, with data minimisation
+and a reasonably-practicable limitation `[P]` (read 23 October 2026).
+Section 87(1) permits a retention notice where the specified necessity,
+proportionality and Judicial Commissioner approval conditions are met;
+87(3) limits a required retention period to twelve months `[P]` (same date).
+These provisions do not themselves create a blanket twelve-month logging
+requirement merely because someone publishes a website `[U]`.
+
+Being within the definition and breaching a duty are separate questions.
+Minimising the data held is useful, but is not an exemption from a lawful
+notice. Do not equate having no keys today with immunity from future
+notices or a guarantee about what a notice may require `[U]`.
 
 - A warrant, authorisation or notice can be served on you, and you must
   give the assistance that is reasonably practicable `[U]`.
-- You can disclose only what you hold.
 - Notices commonly carry a duty not to reveal them `[U]`. If one arrives,
   the next step is a solicitor.
 
@@ -579,6 +599,14 @@ publisher answerable for the use. Licence compliance is not covered
 ## 7. Telecoms regulation
 
 Communications Act 2003. Regulator: Ofcom.
+
+Section 32(2)–(2B) defines electronic communications services by reference
+to internet access, number-based interpersonal communications, or services
+whose principal feature is conveying signals, excluding the content-service
+part. Section 32(7) defines that content-service part `[P]` (current text
+read 23 October 2026). Keep this test separate from the wider investigatory-
+powers definition in section 5.1; the label in one Act does not settle the
+application of another `[U]`.
 
 A messaging or calling app is a number-independent interpersonal
 communications service. The UK did not bring these within Ofcom's General
@@ -961,6 +989,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 23 October 2026 | Partial update: 5.1–5.2, Home Office website-owner scope and notice-based communications-data duties; 7, primary Communications Act definition. Sources read for these points only; overall verified/review dates unchanged. |
 | 28 September 2026 | First version |
 | 28 September 2026 | 2.3: the risk assessment is kept, not filed |
 | 28 September 2026 | 2.1: what "significant" has meant. 2.2: defaults that are other people's servers. New 2.10, closed and personal services, and 3.9, personal and household use |
@@ -985,6 +1014,10 @@ Primary, read 28 September 2026:
 - ICO: [fee exemptions](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/exemptions/), [information collected and published](https://ico.org.uk/for-organisations/data-protection-fee/data-protection-fee/information-we-will-collect-and-publish/), [registration questions](https://ico.org.uk/for-organisations/data-protection-fee/faqs-data-protection-fee-payment-and-online-registration/), [services covered by the Children's code](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/services-covered-by-this-code/)
 - Privacy and Electronic Communications Regulations 2003: [regulation 6](https://www.legislation.gov.uk/uksi/2003/2426/regulation/6), [Schedule A1](https://www.legislation.gov.uk/uksi/2003/2426/schedule/A1)
 - [Investigatory Powers Act 2016, section 261](https://www.legislation.gov.uk/ukpga/2016/25/section/261)
+- [Home Office Communications Data Code of Practice, paragraphs 2.3–2.8](https://www.gov.uk/government/publications/communications-data-code-of-practice/communications-data-code-of-practice-accessible--2)
+- [Investigatory Powers Act 2016, section 66](https://www.legislation.gov.uk/ukpga/2016/25/section/66/data.html)
+- [Investigatory Powers Act 2016, section 87](https://www.legislation.gov.uk/ukpga/2016/25/section/87/data.html)
+- [Communications Act 2003, section 32](https://www.legislation.gov.uk/ukpga/2003/21/section/32/data.html)
 - [Investigatory Powers (Technical Capability) Regulations 2018, SI 2018/353](https://www.legislation.gov.uk/uksi/2018/353/made)
 - [Investigatory Powers (Codes of Practice, Review of Notices and Technical Advisory Board) Regulations 2025, SI 2025/656](https://www.legislation.gov.uk/uksi/2025/656/made)
 - [Regulation of Investigatory Powers Act 2000, section 49](https://www.legislation.gov.uk/ukpga/2000/23/section/49)

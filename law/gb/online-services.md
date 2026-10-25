@@ -29,6 +29,7 @@ software attracts almost none of them. Work out which you do.
 | Do you offer packet forwarding or other communications transport to general users? | Classify it under 7; if it is a public communications service or network, also check 4.1 separately from device storage |
 | Do you run servers only for yourself, your household, or the closed group that works on your project? | 2.10 and 3.9 |
 | Do you run a server that accepts messages from strangers addressed only to you? | 2.12 |
+| Do you publish, ship or run a way for clients to find other people's servers: adverts, defaults, a built-in list, a directory or an index? | 2.13 |
 | Could somebody under 18 plausibly use it? | 2.5 and 3.6 |
 | Do you hold a key to anybody's content? | 5.4 |
 | Do you take money? | Section 8. For voluntary donations, 8.1 |
@@ -134,8 +135,8 @@ law:
   exempt or outside the Act. See 2.10.
 
 Whichever is taken, write the reasoning down and keep it. Revisit it before
-shipping a default, adding discovery, search, a feed, comments or presence,
-or starting to run a server.
+shipping a default, adding discovery (2.13), search, a feed, comments or
+presence, or starting to run a server.
 
 Somebody who self-hosts operates their own deployment. Whether they provide
 a regulated user-to-user service needs the ordinary service, UK-links,
@@ -383,8 +384,8 @@ A signed endpoint advertisement attributes a statement to a key and can
 support freshness checks under an expiry/replay policy. It does not itself
 grant access, establish the operator's legal identity, prove present
 reachability or provide an exemption. Classify any operated discovery,
-directory or signalling service separately; an address advert is not room
-membership authority `[U]`. A gateway's actual decryption and admission
+directory or signalling service separately (2.13); an address advert is not
+room membership authority `[U]`. A gateway's actual decryption and admission
 boundaries matter, not merely its use of encrypted links. Forwarding for
 unrelated users is a separate operating role even when voluntary or bundled
 with a client; do not assume every ordinary endpoint performs it `[U]`.
@@ -458,6 +459,162 @@ Points that follow:
 - **Data protection is separate.** Holding strangers' messages, even sealed,
   makes the operator a controller of whatever personal data they carry, unless
   the household exemption applies (3.1, 3.9).
+
+### 2.13 Discovering transport servers: adverts, defaults, lists and directories
+
+The question: a client has to find relays or other transport servers run by
+independent operators. Four designs are common, from lightest to heaviest:
+
+- (a) operators publish their own signed adverts to servers they choose,
+  and clients read them from servers the user picks; the software publisher
+  runs nothing;
+- (b) as (a), but the client ships default read servers, run by others, on
+  which the adverts are found;
+- (c) the publisher ships a hand-picked list of operators inside the client;
+- (d) the publisher runs or curates a directory, listing or index of
+  operators.
+
+Primary text read 25 October 2026.
+
+**What the Act says.**
+
+- Section 3(1) defines a user-to-user service by content "generated directly
+  on the service by a user of the service, or uploaded to or shared on the
+  service by a user of the service" that "may be encountered by another
+  user, or other users, of the service" `[P]`. Section 3(4): a search service
+  is "an internet service that is, or includes, a search engine" `[P]`.
+  Section 3(5) to (7): a service of both kinds is a search service only if
+  its user content is all of the kinds Schedule 1 exempts (email, SMS, MMS,
+  one-to-one live aural, comments on provider content, internal business);
+  "Otherwise, it is a user-to-user service" `[P]`.
+- Section 228(1): an internet service is "a service that is made available
+  by means of the internet" `[P]`.
+- Section 55(3): user-generated content is content generated, uploaded or
+  shared "by a user of the service" that "may be encountered by another
+  user, or other users, of the service by means of the service" `[P]`.
+  Section 55(4)(a) includes content generated, uploaded or shared "by means
+  of software or an automated tool applied by the user"; 55(4)(b) treats a
+  bot as a user where its functions include interacting with user-generated
+  content and it "is not controlled by or on behalf of the provider" `[P]`.
+  The explanatory notes (paragraph 318): "content shared only between a user
+  and the service provider (such as through a customer service chat
+  function) would not fall under the definition of user-generated content"
+  `[P]`.
+- Section 236(1): "content" means "anything communicated by means of an
+  internet service, whether publicly or privately, including ... data of any
+  description" `[P]`. "Identifying content" is content "the function of
+  which is to identify a user of an internet service (for example, a user
+  name or profile picture)" `[P]`. Section 236(7): user-generated content
+  "does not cease to be such content" when published or displayed by means
+  of "software or an automated tool or algorithm applied by the provider"
+  `[P]`.
+- Provider content. Section 55(7) and Schedule 1 paragraph 4(2): "content
+  published on a service by the provider of the service or by a person
+  acting on behalf of the provider"; content that is user-generated content
+  "is not to be regarded as provider content" `[P]`. Schedule 1 paragraph
+  4(1) exempts a service whose users can communicate only by comments or
+  reviews on provider content, sharing them elsewhere, likes, emoji, yes/no
+  votes, or "rating or scoring the content ... in any way (including giving
+  star or numerical ratings)", with identifying content `[P]`. The
+  explanatory notes on section 55 (paragraph 320): the exemption "does not
+  exclude comments or reviews on user-generated content, such as content
+  posted by third party sellers offering goods or services on online
+  marketplaces" `[P]`.
+- Section 229(1): a search engine "includes a service or functionality which
+  enables a person to search some websites or databases" and "does not
+  include a service which enables a person to search just one website or
+  database" `[P]`. 229(2): a search engine is not "included" in a service
+  "if the search engine is controlled by a person who does not control other
+  parts of the service" `[P]`. The explanatory notes (paragraph 940): this
+  ensures "search engines and vertical search engines are both included",
+  and that "websites which only have a search tool internal to the website
+  are not considered search services" `[P]`.
+- Section 57(3): search results are "content presented to a user of the
+  service by operation of the search engine in response to a search request
+  made by the user"; 57(4): "search by any means" `[P]`.
+- Ofcom's Illegal content Codes of Practice for search services (issued 24
+  February 2025) define a general search service as one that "derives search
+  results from an underlying search index and presents search results using
+  algorithms that rank based on relevance to a search request", and a
+  vertical search service as one that "enables users to search for specific
+  topics, or products or services offered by third parties with which the
+  provider has a relevant arrangement (which may be contractual)" and that
+  uses "an API or equivalent technical means to directly query selected
+  websites or databases" `[P]`. These are definitions for the Codes'
+  measures, not the Act's definition of a search engine.
+- Who the provider is. Section 226(2): for a user-to-user service, "the
+  entity that has control over who can use the user-to-user part of the
+  service (and that entity alone)" `[P]`. 226(4) and (13): for a search
+  service, the entity that "has control over the operations of the search
+  engine", meaning operations which "enable users ... to make search
+  requests" and "generate responses to those requests" `[P]`. The
+  explanatory notes (paragraphs 927 and 928): duties fall on whoever
+  "directly controls users' access to the functionality that enables users
+  to interact or share user-generated content", and for search on whoever
+  "controls which search results appear to users and how they appear" `[P]`.
+  226(8): for any other internet service, the entity "that has control over
+  which content is published or displayed on the service" `[P]`; the notes
+  (paragraph 930) say this "is relevant for determining which entities have
+  duties under Part 5" `[P]`.
+- Access facilities. 226(12) and 146(10) to (12), as in 2.11 `[P]`. Section
+  146(11)(b) names "app stores through which a mobile app for a regulated
+  service may be downloaded or otherwise accessed" as an example `[P]`.
+- Scope still needs UK links and no exemption (section 4, 2.1) `[P]`.
+
+**How it applies, by design.** No Ofcom statement or court decision on
+discovery of transport servers was found; every row is a reading `[U]`.
+
+| Design | Reading | Who is the provider | Mark |
+|---|---|---|---|
+| (a) Operators' own adverts on servers others run; the publisher runs nothing | The advert is content: "data of any description" covers an endpoint address, and an operator's node publishing it is a user acting "by means of software". The service by means of which it is encountered is the server that stores and serves it. On a plain reading the client is software on the user's device, not an internet service the publisher makes available; whether a client-side query across several servers is a search "functionality" under 229(1)(a), and if so whose, is an open question. Signing settles nothing either way (2.11) | Whoever controls who can use each storing server, under 2.2 and 2.11. The advertising operator is a user of that server, and separately the provider of whatever it runs. The publisher provides nothing | `[U]` |
+| (b) As (a), with default read servers run by others | As (a). Choosing defaults decides where adverts are looked for, not who can use those servers. This is the publisher-with-defaults position in 2.2; the privacy notice still owes an account of the defaults (3.2) | The operators of the default servers, each for its own server. Not the publisher | `[U]` |
+| (c) A hand-picked list built into the client | The list is the publisher's own statement shipped in software. No user generates, uploads or shares it, and it is not encountered by means of an internet service, so it is neither user-to-user nor search. This is publication (section 6) and defaults (2.2, 3.2). If the client fetches the list from a server the publisher runs, the design is (d) | None under the Act for the list. Each listed operator for what it runs | `[U]` |
+| (d1) A directory the publisher writes and serves, every entry written by the publisher | Entries are provider content, not user-generated content (55(7)). With nothing users can post that others see, it is not user-to-user. One list or database searched in one place is outside "search engine" (229(1)(b), notes paragraph 940). It is at most an "other" internet service under 226(8), which matters for Part 5 only. If visitors may only rate, review or vote on the publisher's entries, Schedule 1 paragraph 4 is the exemption to test | The publisher, as the one controlling what is published or displayed (226(8)), with no Part 3 duties on this reading | `[U]` |
+| (d2) A directory operators submit their own entries to, which others see | A submitted entry is content uploaded by a user and encountered by other users by means of the directory: user-generated content and a user-to-user service on a plain reading (55(3), 3(1)). An endpoint listing is not taken out by being technical data, and "identifying content" is not an exemption on its own. Ratings or reviews on submitted entries are not on provider content, so Schedule 1 paragraph 4 does not reach them (notes paragraph 320) | The directory's operator, as controller of who can submit and use it (226(2)). Not, by listing a server, the provider of that server (226(12)) | `[U]` |
+| (d3) An index that gathers adverts from many servers and answers queries | Content gathered from several servers or databases and returned in response to a search request is close to a search engine under 229(1)(a) and 57(3), and close to Ofcom's general search description where results come from the operator's own index, or its vertical one where it queries operators' servers live. The single-database carve-out is about a site's internal search; whether an index built from many sources counts as "just one ... database" is an open question. If it also lets users post content others see, 3(5) to (7) make it user-to-user, and a combined service only if one controller runs both parts (4(7), notes paragraph 941) | Whoever controls the operations that take search requests and generate responses (226(4), (13)). Each indexed operator for what it runs | `[U]` |
+
+**Approving and ranking.**
+
+- **Approving who is listed** in a directory of submitted entries is control
+  over who can use the user-to-user part (226(2)). On a plain reading it
+  confirms the directory operator as provider; it does not turn submitted
+  entries into provider content (55(7) last sentence) `[U]`.
+- **Ranking** user-generated entries by the operator's own algorithm
+  leaves them user-generated on a plain reading: 236(7) says such content
+  "does not cease to be such content" when published or displayed by the
+  provider's algorithm `[P]`, and ranking is one way of displaying it `[U]`.
+  For a search service, deciding "which
+  search results appear to users and how they appear" is what makes an
+  entity the provider (notes paragraph 928) `[P]`. Ranking therefore never
+  lightens the classification, and in (d3) it is the provider test itself
+  `[U]`.
+- **Ranking or picking in a built-in list (c)**, or in a directory the
+  publisher writes (d1), is the publisher's own content; on a plain reading
+  it does not by itself create a user-to-user or search service `[U]`.
+  Recommending named operators may raise questions outside the Act, such as
+  misdescription or trading rules if money is involved (section 8); this
+  note does not cover them.
+- **Delisting is not admission to the listed server.** Section 146(11)(b)
+  gives "app stores through which a mobile app for a regulated service may
+  be downloaded or otherwise accessed" as an example of an access facility
+  `[P]`. A directory that can stop users finding a server resembles that
+  pattern `[U]`. Whether a directory is an access facility for the servers it lists is an open
+  question; either way, listing or delisting a server does not make the
+  directory's operator that server's provider (226(12)) `[U]`.
+
+Points that follow:
+
+- **The line is whether the publisher runs anything that stores, lists or
+  serves other people's entries.** (a) to (c) run nothing; (d) is always a
+  service to classify on its own, separately from the servers it lists
+  `[U]`.
+- **Who writes the entries decides (d).** Entries the publisher writes are
+  its own content; entries operators submit are user content `[U]`.
+- **A query across many sources is where search begins.** A fixed list with
+  no search request is not search results (57(3)) `[U]`.
+- **Data protection is separate.** An entry naming an operator, or a key
+  linked to one, can be personal data; holding or publishing it brings in
+  section 3 (3.1, 3.2) `[U]`.
 
 ## 3. Data protection
 
@@ -1222,6 +1379,7 @@ of the documents; they are drafts and carry no authority.
 | Ofcom guidance on software and decentralised services | Anything on who the provider is where nobody controls admission | 2.2 |
 | Inboxes open to strangers | Any Ofcom statement or decision on a service whose only stranger content is messages to the operator, or on when an individual provider reads "in the course of" a concern | 2.12 |
 | Transport infrastructure and bundled endpoints | A primary classification of packet relays, mesh transit, gateways and identity-addressed discovery under the access-facility distinction, and treatment of personal communicating endpoints | 2.11 |
+| Discovery of transport servers | Any Ofcom statement or decision on directories, listings or indexes of servers, on whether an index built from many sources is "just one ... database" under section 229(1)(b), or on whether a directory is an access facility | 2.13 |
 | CSEA reporting for search services | Commencement | 2.6 |
 | ICO fee | Amounts change by regulation | 3.4 |
 | Ofcom Codes of Practice | New or strengthened measures | 2.3 |
@@ -1249,6 +1407,7 @@ of the documents; they are drafts and carry no authority.
 
 | Date | Change |
 |---|---|
+| 25 October 2026 | Partial update: new 2.13, discovering transport servers: operators' own adverts, default read servers, built-in lists, and directories or indexes, with approving and ranking. Sections 3, 4, 55, 57, 146(10)–(12), 226, 228, 229 and 236, Schedule 1 paragraphs 1 to 7, explanatory notes paragraphs 52–53, 318, 320, 927–933 and 939–941, and the definitions in Ofcom's Illegal content Codes of Practice for search services read verbatim. Applications by design are unchecked. Pointers to 2.13 added in 2.2 and 2.11. Scoping row and watch list row added. Overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: new 9.2, what a company website must show. Regulations 24, 25, 27 and 28 of SI 2015/17 read verbatim. Scoping row added. Overall verified/review dates unchanged. |
 | 23 October 2026 | Partial update: new 2.12, an inbox strangers can write to. Sections 3, 227 and 233, the 236 definitions of "content" and "encounter", Schedule 1 paragraphs 1 and 7, and the explanatory notes on section 227 read verbatim. Applications by context are unchecked. Scoping row added. Overall verified/review dates unchanged. |
 | 23 October 2026 | Application-only update: 2.11 distinguishes embedded clients, identity-addressed discovery, unrelated transit and gateways; 3.1 records routing/advert metadata; 7 carries the separate operator tests to public mesh transport. Independent AI addendum reviewed. New interpretations remain unchecked, with no fresh statutory classification or overall verified/review date change. |
@@ -1266,6 +1425,12 @@ of the documents; they are drafts and carry no authority.
 | 22 October 2026 | Section 9: the pseudonym paragraph is about regulated services and trading; what applies to a website that is neither. No new research; new statements marked `[U]` or tied to 3.2 |
 
 ## 15. Sources
+
+Primary, read 25 October 2026 for section 2.13 only:
+
+- Online Safety Act 2023: [section 3](https://www.legislation.gov.uk/ukpga/2023/50/section/3/data.xml), [section 4](https://www.legislation.gov.uk/ukpga/2023/50/section/4/data.xml), [section 55](https://www.legislation.gov.uk/ukpga/2023/50/section/55/data.xml), [section 57](https://www.legislation.gov.uk/ukpga/2023/50/section/57/data.xml), [section 146](https://www.legislation.gov.uk/ukpga/2023/50/section/146/data.xml), [section 226](https://www.legislation.gov.uk/ukpga/2023/50/section/226/data.xml), [section 228](https://www.legislation.gov.uk/ukpga/2023/50/section/228/data.xml), [section 229](https://www.legislation.gov.uk/ukpga/2023/50/section/229/data.xml), [section 236](https://www.legislation.gov.uk/ukpga/2023/50/section/236/data.xml), [Schedule 1, paragraphs 1 to 7](https://www.legislation.gov.uk/ukpga/2023/50/schedule/1/data.xml).
+- [The Act's explanatory notes, paragraphs 52–53, 318, 320, 927–933 and 939–941](https://www.legislation.gov.uk/ukpga/2023/50/notes/division/6/index.htm).
+- Ofcom: [Illegal content Codes of Practice for search services, issued 24 February 2025](https://www.ofcom.org.uk/siteassets/resources/documents/online-safety/information-for-industry/illegal-harms/illegal-content-codes-of-practice-for-search-services-24-feb.pdf?v=391888), definitions in section 5.
 
 Primary, read 23 October 2026 for section 4.1:
 

@@ -2,6 +2,12 @@
 
 > Zero-dependency TypeScript library providing professional body registries, data protection law details, and jurisdiction intelligence for 28 countries. Look up compliance rules, look up the recorded cross-border data transfer mechanism, find regulated professions, and rank jurisdictions by confidence score.
 
+## ForgeSworn ecosystem
+
+- [ForgeSworn library guide](https://forgesworn.dev/llms.txt): Find related libraries, tools and integration guides by task and runtime.
+- [ForgeSworn on GitHub](https://github.com/forgesworn): Browse the organisation’s public repositories.
+- [Project source](https://github.com/forgesworn/jurisdiction-kit): Canonical source repository, documentation and release information.
+
 ## What it does
 
 jurisdiction-kit is a static, curated dataset of jurisdiction metadata — professional bodies, data protection laws, child protection rules, mutual recognition agreements, and e-signature status — exposed through a typed query API. No network requests, no external dependencies.
